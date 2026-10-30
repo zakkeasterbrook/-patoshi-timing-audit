@@ -1,52 +1,58 @@
-# Patoshi Timing Audit v1.0.0 candidate
+# Patoshi Timing Audit v1.0.0-rc.1
 
-A reproducible correction to the three-block timing test linked from Jameson
-Lopp's 2022 article, *Was Satoshi a Greedy Miner?*
+Candidate for technical review, pinned to
+[`59d150f9d95c572f539705561f71f1e248ef2a36`](https://github.com/zakkeasterbrook/-patoshi-timing-audit/commit/59d150f9d95c572f539705561f71f1e248ef2a36)
+and the existing `v1.0.0-rc.1` tag. Later documentation updates on `main` do not
+change this frozen snapshot.
 
-The original PHP code assigns the first block's time to the second block's
-variable. This defeats the time filter and measures C-minus-A instead of
-C-minus-B. Separate run-tracking behavior omits eligible sequences.
+The script linked from Jameson Lopp's 2022 article
+[“Was Satoshi a Greedy Miner?”](https://blog.lopp.net/was-satoshi-a-greedy-miner/)
+reads the first block's timestamp into the second block's variable. This
+defeats the intended time filter and measures C−A instead of C−B. Separate
+run-tracking behavior omits eligible sequences.
 
-For blocks 263–265, the preceding difference is 559 seconds and the intended
-following difference is 71 seconds. The original implementation emits 630.
+At heights **263–265**, the preceding gap is **559 seconds**, the intended
+following gap **71 seconds**, and the original output **630 seconds**.
 
-| Version | Cases | Negative | All differences <300 seconds |
+Using the same 50,000 frozen mainnet headers and 21,953 original labels:
+
+| Calculation | Cases | Negative | All differences <300 s |
 |---|---:|---:|---:|
-| Original | 1,881 | 1 | 5 (0.27%) |
-| One assignment repaired | 400 | 10 | 144 (36.00%) |
-| Direct stated rule | 754 | 30 | 276 (36.60%) |
+| Published implementation | 1,881 | 1 | 5 — 0.27% |
+| One assignment repaired | 400 | 10 | 144 — 36.00% |
+| Direct stated rule | 754 | 30 | 276 — 36.60% |
 
-The samples have different denominators. The below-300 counts include negative
-values. These are block-header timestamp differences, not independently
-measured elapsed mining times.
+**Below-300 counts include negatives; each sample has its own denominator.**
 
-The candidate contains frozen inputs, complete per-case outputs, pinned
-provenance, one-command offline Python reproduction, a separate direct
-calculation, native PHP comparison, regression tests and generated figures.
-The follow-up exports complete original-label comparison sequences, adjacent
-pairs, era/gap adjustment cells and nonce-byte diagnostics.
+**Fixed-sample diagnostic:** retaining the original 1,881 cases and changing
+only the measured interval raises the below-300 count from **5 to 713
+(37.91%)**, including 121 negatives rather than one. This isolates the interval
+error. It retains legacy selection and eligibility; **276/754 remains the main
+result for the fully implemented stated test**.
 
-Fresh PHP 8.4.27 execution with the offline RPC adapter matches every Python
-CSV byte for the unchanged source, one-assignment repair and direct rule.
-Archived PHP 8.3.6 records are retained separately. Neither run reconstructs
-the author's complete 2022 environment.
+## Verification and reproduction
 
-From the repository root:
+[CI passed for this exact commit](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/runs/41086244756),
+including Linux on Python 3.10/3.12/3.14, Windows, native PHP and portable
+archive construction. Fresh local PHP 8.4.27 execution matches every core
+Python CSV byte and row order. The local suite passes all **68 tests** with
+PHP; without it, **60 pass and eight native tests skip**.
+
+From the extracted `patoshi-timing-audit/` directory:
 
 ```sh
+python3 scripts/verify_manifest.py
 python3 reproduce.py
-python3 scripts/check_direct.py
-python3 -m unittest discover -s tests -v
 ```
 
-See [verification status](docs/verification.md) for actual current command logs,
-native-test setup, hosted-CI state and missing follow-up inputs. The Bitquery
-classification-sensitivity input remains unavailable. The cited three-label
-sensitivity now reproduces 753 cases, 30 negatives and 276 below 300 seconds
-(36.65%, including negatives); its denominator differs from the main sample.
-The main labels remain unchanged. A configured workflow is not a passing hosted run, and this
-candidate file does not establish that a public release exists.
+Assets: `Patoshi_Timing_Audit_v1.0.0-rc.1.zip`, `SHA256SUMS.txt` and
+`release.json`. The archive includes frozen inputs, complete rows, code,
+documentation and a top-level `RELEASE_MANIFEST.json` recording file digests
+and the exact commit.
 
-The correction concerns one published timing test. It does not disprove the
-broader Patoshi pattern, identify Satoshi or determine whether a miner paused.
-External human review remains pending.
+## Scope
+
+These are miner-supplied header timestamp differences, not observed mining
+durations. The error belongs to a 2022 analysis script, not Bitcoin's original
+software. The correction does not identify Satoshi or determine whether a
+miner paused. Bitquery sensitivity and external human review remain pending.

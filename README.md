@@ -1,20 +1,27 @@
 # Patoshi Timing Audit
 
-**Zakk Easterbrook · Release candidate 1.0.0 · 30 October 2026**
+**Zakk Easterbrook · Reproducing and correcting a published Patoshi timing test**
 
 [![Verify audit](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/workflows/verify.yml)
 
-A reproducible correction to the timing test linked from Jameson Lopp’s 2022 article, [*Was Satoshi a Greedy Miner?*](https://blog.lopp.net/was-satoshi-a-greedy-miner/).
+The script linked from Jameson Lopp’s 2022 article [“Was Satoshi a Greedy Miner?”](https://blog.lopp.net/was-satoshi-a-greedy-miner/) reads the wrong block’s timestamp. This repository reproduces the original output, isolates that assignment error, and independently implements the stated selection rule using the same frozen labels and 50,000 Bitcoin headers.
 
-**The published program measures the wrong interval and omits eligible sequences. Implementing the stated test produces 276 timestamp gaps below 300 seconds among 754 cases (36.60%), compared with 5 among 1,881 cases (0.27%) from the original program.** The samples differ because the correction changes eligibility as well as the measured interval.
+**Candidate:** [`v1.0.0-rc.1`](https://github.com/zakkeasterbrook/-patoshi-timing-audit/tree/v1.0.0-rc.1), commit [`59d150f`](https://github.com/zakkeasterbrook/-patoshi-timing-audit/commit/59d150f9d95c572f539705561f71f1e248ef2a36) · [Candidate CI passed](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/runs/41086244756) · [Current publication status](docs/verification.md)
 
-[Understand the finding](docs/plain-english.md) · [Inspect the correction](docs/technical-note.md) · [Verify the evidence](docs/verification.md) · [Review the limitations](docs/context.md)
+## The published question and the error
 
-**Review paths:** [Start with the reviewer guide](docs/reviewer-guide.md) · [Inspect the field-by-field evidence index](docs/evidence-index.md) · [Build a portable verified candidate](docs/release-artifacts.md)
+For consecutive blocks A, B, C labelled **P→P→N**, require `tB − tA < 600 seconds` and measure `tC − tB`. P means membership in the supplied label list; N means nonmembership. Neither establishes a miner’s identity.
 
-## See the error in 30 seconds
+The source fetches B, then reads A’s response into B’s time variable:
 
-Three consecutive heights illustrate it:
+```diff
+-$patoshiBlock2Time = $patoshiBlock1->get('time');
++$patoshiBlock2Time = $patoshiBlock2->get('time');
+```
+
+That makes the intended timing filter automatically true and reports **C−A instead of C−B**. Separate run-tracking behavior also omits qualifying sequences. The [technical note](docs/technical-note.md) separates these effects.
+
+## A three-block example
 
 | Block | Supplied label | Header timestamp (UTC) |
 |---|---|---|
@@ -22,131 +29,58 @@ Three consecutive heights illustrate it:
 | 264 — B | P | 2009-01-13 00:19:40 |
 | 265 — C | N | 2009-01-13 00:20:51 |
 
-A→B is **559 seconds**, so the sequence qualifies. B→C is **71 seconds**. The original program reports **630 seconds**, because it accidentally measures A→C.
+A→B is **559 seconds**, so the sequence qualifies. The intended B→C measurement is **71 seconds**. The original program reports **630 seconds**: 559 + 71.
 
-The source fetches block B, then reads block A’s time into B’s variable:
+[Inspect the actual headers, hashes and integer timestamps](results/reproduced/example_263_265.json), or run `python3 scripts/demo.py`. This demonstrates an error in a **2022 analysis program**, not a defect in Bitcoin’s original software.
 
-```diff
--$patoshiBlock2Time = $patoshiBlock1->get('time');
-+$patoshiBlock2Time = $patoshiBlock2->get('time');
-```
+## Reproduced results
 
-This also makes the original time filter always true. Two separate run-tracking behaviors omit qualifying sequences, which is why the one-line repair and the complete stated rule have different sample sizes. [See the full explanation.](docs/technical-note.md)
+All three calculations use mainnet heights **0–49,999** and the same **21,953 original labels**.
 
-P means “in the supplied classification list”; N means “outside it.” Neither label establishes a person’s identity. This example concerns a 2022 analysis error, not Bitcoin’s original software.
-
-![Computed A–B, B–C and A–C intervals, in seconds; positions are schematic.](docs/figures/interval_example.png)
-
-[Complete example evidence](results/reproduced/example_263_265.json) includes computed block hashes, raw headers and integer timestamps.
-
-## The result
-
-All variants use the same **50,000 Bitcoin headers**, heights **0–49,999**, and the same **21,953 published classifications**.
-
-| Calculation | Selected cases | Negative gaps | All gaps <300 s | Share <300 s |
+| Calculation | Selected cases | Negative differences | All differences <300 s | Share |
 |---|---:|---:|---:|---:|
 | Published implementation | 1,881 | 1 | 5 | **0.27%** |
 | One timestamp assignment repaired | 400 | 10 | 144 | **36.00%** |
-| Stated sequence rule implemented | 754 | 30 | 276 | **36.60%** |
+| Direct stated rule | 754 | 30 | 276 | **36.60%** |
 
-Negative values are included in “All gaps <300 s.” The columns overlap. Each row has its own denominator because eligibility changes. These are differences between miner-supplied header timestamps, not independently measured elapsed mining times. For the original program the emitted interval is C−A; for the corrected variants it is C−B.
+**Below-300 counts include negative values. Each row has its own denominator because eligibility changes.** The original emits C−A; the corrected modes emit C−B. These are miner-supplied timestamp differences, not independently observed mining durations.
 
-![Three versions of the timing test, each with its own denominator and disjoint negative, zero-to-299 and at-least-300-second categories.](docs/figures/timing_test_comparison.png)
+### Hold the sample constant
 
-The original **1,881 / 1 / 5** counts reproduce the article. Its stated test yields a substantially different result. The separate Patoshi timing and nonce fingerprints remain observable in these inputs; [the context note](docs/context.md) gives checks and their limits.
+Keeping the **same original 1,881 cases** and changing only the measured interval raises the below-300 count from **5 to 713 — 37.91%**. The 713 include **121 negative differences**.
 
-![Full-data empirical gap distributions, including negatives, with sample sizes, thresholds and a disclosed zoom.](docs/figures/timing_gap_distributions.png)
+This [fixed-sample diagnostic](results/reproduced/diagnostics.json) isolates the measurement error while retaining legacy selection and eligibility. It is separate from the fully implemented stated test, whose main result remains **276 out of 754**.
 
-## Reproduce it
+![Computed proportions of negative, nonnegative-below-300, and at-least-300-second differences, with each sample size.](docs/figures/timing_test_comparison.png)
 
-The one-command offline calculation is `python3 reproduce.py`. It also regenerates all original-label follow-up comparisons and complete row exports.
+## What follows
 
-Requires **Python 3.10+**. The numerical audit uses the standard library and runs offline.
+The published near-absence of short following-block timestamp differences **does not survive a correct implementation of the stated test**.
 
-```sh
-python scripts/verify_manifest.py
-python reproduce.py
-python scripts/check_direct.py
-python -m unittest discover -s tests -v
-```
+This correction does not identify Satoshi, independently validate the labels, or settle whether a miner paused or manipulated timestamps. Other miners can find a block during one miner’s pause. Broader timing and nonce structure remains observable; the [follow-up note](docs/context.md) preserves those findings and the separately cited disputed-label sensitivity.
 
-Use `python3` if that is your Python command. Run without `-O` or `PYTHONOPTIMIZE`; disabling validation is explicitly rejected. For the three-block example alone:
+## Reproduce offline
+
+Requires **Python 3.10+** and its standard library. From the project root:
 
 ```sh
-python scripts/demo.py
+python3 reproduce.py
 ```
 
-`reproduce.py` validates the input hashes and all 50,000 headers, then compares **every output row and CSV byte** against the recorded native-PHP results. `check_direct.py` uses a second raw-byte implementation without importing the audit calculations. Fresh outputs are written to `build/`. Every retained original-label follow-up row and the separately cited three-label sensitivity are regenerated too. The command requires the complete [frozen evidence inventory](results/reproduced/); missing references fail visibly. It stages and checks results before publishing files, rejects linked output paths, and preserves unrelated source files and logs. Zero, positive-below-300 and at-least-300 counts are explicit in the summary.
+The command validates the frozen inputs and header chain, regenerates every retained result row, and compares complete evidence with the saved references. It needs no Bitcoin node, RPC credentials, live explorer, or plotting packages. Run without Python optimization flags.
 
-| Output | Contents |
-|---|---|
-| `build/summary.json` | Header checks, exact totals and output hashes |
-| `build/events.json` | Every selected triple and its intervals |
-| `build/original.csv` | Original program’s 1,881 outputs |
-| `build/timestamp_only.csv` | One-line repair’s 400 outputs |
-| `build/literal_rule.csv` | Stated rule’s 754 outputs |
-| `build/direct_check.json` | Second implementation and context checks |
-| `build/diagnostics.json` | Fixed-sample and selection decompositions |
-| `build/mode_membership.csv` | All selected triples and membership in each mode |
-| `build/example_263_265.json` | Verified hashes, serialized headers and minimal-example arithmetic |
-| `build/followup/` | Complete comparison triples, all adjacent pairs, adjustment cells and summaries |
-| `build/disputed_labels/` | Separately cited three-label sensitivity and every retained triple |
+The candidate’s [verification record](results/current-verification/quality-pass/run.json) reports **68 local tests with no skips** using PHP. Without PHP, eight native tests explicitly skip. [Hosted checks](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/runs/41086244756) passed Linux, Windows, Python 3.10/3.12/3.14, native PHP, and candidate archive construction.
 
-The checksum verifier requires exact coverage of the project files: an empty manifest, an omitted file, a duplicate path, or a changed digest is an error. It establishes integrity against the recorded manifest, not an independent digital signature or endorsement.
+## Review the evidence
 
-### Run the actual PHP
+- [Reviewer guide](docs/reviewer-guide.md): source inspection, independent questions and reproduction commands.
+- [Evidence index](docs/evidence-index.md): complete case tables, schemas, units and sample definitions.
+- [Technical note](docs/technical-note.md) and [methodology](docs/methodology.md): exact algorithms and validation scope.
+- [Verification and publication status](docs/verification.md): tested snapshot, candidate tag, current limitations and dated history.
+- [Provenance](docs/provenance.md) and [prior-art log](docs/prior-art.md): pinned sources, hashes, attribution and bounded priority claims.
+- [Portable archives](docs/release-artifacts.md): verified downloads and packaging instructions.
+- [Contributing](CONTRIBUTING.md): reproduce a discrepancy or submit an outside review.
 
-With a PHP 8 CLI installed:
+**External human review remains pending.** The frozen Bitquery comparison dataset is still unavailable, so that sensitivity is unverified. Header validation does not revalidate transactions or reconstruct historical receiving-node clocks.
 
-```sh
-python scripts/fetch_original_source.py build/original.php
-python scripts/verify_source_labels.py --source build/original.php
-python scripts/run_native.py --php php --source build/original.php
-```
-
-The fetch verifies the pinned source’s size and SHA-256. The native harness executes the original source, the one-line repair and the stated-rule implementation against offline header data. It compares every output byte with Python. [Native fixture instructions](docs/regression-tests.md) cover additional sequence and threshold tests.
-
-For Debian 13 amd64, `bash scripts/setup_php.sh /workspace/tools/php` prepares a signature/checksum-verified rootless runtime; substitute `/workspace/tools/php/bin/php` for `php`. Run all native fixtures with:
-
-```sh
-PATOSHI_TEST_PHP=php PATOSHI_TEST_SOURCE="$PWD/build/original.php" \
-  python3 -m unittest discover -s tests -v
-```
-
-The complete upstream PHP program is fetched separately; it is not relicensed by this project. See [THIRD_PARTY.md](THIRD_PARTY.md).
-
-### Verify the source data again
-
-```sh
-python scripts/verify_live_headers.py
-```
-
-This optional network check compares a fresh prefix from Electrum’s header archive with all 4,000,000 bundled header bytes. Charts can be rebuilt with `python scripts/plot_results.py` after installing the optional `requirements-figures.txt`. Use `MPLCONFIGDIR=build/matplotlib` if your home directory is read-only.
-
-## What this establishes
-
-The published implementation does not compute the test described in the article. Correcting it removes the reported near-absence of short following-block timestamp gaps from that test.
-
-The result does **not** settle whether a miner paused, manipulated timestamps, or was Satoshi. Other miners can find a block while one miner pauses. This audit does not reconstruct the original extranonce slopes or independently validate the supplied classifications. [Interpretation and context](docs/context.md) explain what survives and what remains open.
-
-As a separate classification sensitivity, removing the historically disputed labels **24,504; 35,573; and 35,599** gives **753 cases, 30 negative, and 276 below 300 seconds (36.65%)**. Negatives are included; its denominator differs from the main 754-case sample. Only child height 24,505 disappears, with no cases added. [Primary citations](provenance/disputed_labels.json) and [complete sensitivity rows](results/reproduced/disputed_labels/) are provided. The main calculation keeps every original label.
-
-## Evidence and review
-
-**Verification:** the core calculations have [passed hosted Linux, Windows and native PHP checks](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/runs/41081482159). [Current records](results/current-verification/) distinguish each inspected snapshot. The workflow also checks Python 3.10, 3.12 and 3.14, and builds the portable candidate only after offline/native jobs pass; inspect the live badge and run for the current commit's state. A CI artifact is distinct from a tagged GitHub release. The separate frozen Bitquery CSV remains unavailable, so its classification sensitivity is explicitly unverified.
-
-The [quality-expansion acceptance](results/current-verification/quality-pass/run.json) passed **68 local tests with zero skips**, including native fixtures, contextual header rules, missing-evidence rejection, linked-output protection and deterministic packaging. Every original case CSV remains unchanged.
-
-- [Technical note](docs/technical-note.md): exact predicate, source patch and sample differences.
-- [Input provenance](docs/provenance.md): source commit, input hashes, archives and anchors.
-- [Verification status](docs/verification.md): recorded execution, fresh checks and hosted-CI status.
-- [Prior-art search](docs/prior-art.md): sources searched and limits on priority claims.
-- [Complete reproduced evidence](results/reproduced/): full events, diagnostics and follow-up rows.
-- [Methodology](docs/methodology.md): header validation and descriptive comparison definitions.
-- [Expected result tables](results/expected/): complete outputs, ready for inspection.
-- [Contributing](CONTRIBUTING.md): report a discrepancy with commands and block heights.
-- [Citation](CITATION.cff): author and software metadata; cite the exact commit reviewed.
-
-**External human review and author confirmation are pending.** Separately written implementations are computational cross-checks, not independent peer review. A configured GitHub workflow becomes evidence only after its actual run passes.
-
-Credit: Jameson Lopp for the published article, source and classifications; Sergio Demian Lerner and earlier researchers for the Patoshi research this audit builds on. Newly authored audit code and documentation use the [MIT license](LICENSE), with [third-party scope](THIRD_PARTY.md) stated separately.
+Credit: Jameson Lopp for the article, source and classifications; Sergio Demian Lerner and earlier Patoshi researchers for the work this audit builds on. [MIT license](LICENSE) for newly authored material; [third-party scope](THIRD_PARTY.md) and [citation metadata](CITATION.cff) are retained.

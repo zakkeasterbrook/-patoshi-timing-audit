@@ -1,0 +1,96 @@
+{
+  "record_type": "latest_inspected_candidate_status",
+  "observed_utc": "2026-10-30T16:21:17.192632+00:00",
+  "candidate": {
+    "version": "1.0.0-rc.1",
+    "tag": "v1.0.0-rc.1",
+    "tag_url": "https://github.com/zakkeasterbrook/-patoshi-timing-audit/tree/v1.0.0-rc.1",
+    "commit": "59d150f9d95c572f539705561f71f1e248ef2a36",
+    "scope": "Immutable reviewed source snapshot; later main-branch documentation commits do not move this tag"
+  },
+  "hosted_verification": {
+    "url": "https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/runs/41086244756",
+    "commit": "59d150f9d95c572f539705561f71f1e248ef2a36",
+    "conclusion": "success",
+    "coverage": [
+      "Linux Python 3.10",
+      "Linux Python 3.12",
+      "Linux Python 3.14",
+      "Windows Python 3.12",
+      "Fresh native PHP",
+      "Portable candidate archive"
+    ],
+    "manual_online_header_acquisition": "skipped in this push-triggered run"
+  },
+  "recorded_local_acceptance": {
+    "record": "current-verification/quality-pass/run.json",
+    "tests": {
+      "run": 68,
+      "passed": 68,
+      "failed": 0,
+      "skipped": 0
+    },
+    "native_php": "8.4.27 with configuration disabled by -n; all core CSV bytes and row order agree with Python",
+    "scope": "Source-hash-identified local run before the final Windows archive-fixture correction; exact-commit hosted verification covers that correction",
+    "without_php_environment": "Eight native-dependent tests skip; this does not establish fresh PHP execution"
+  },
+  "source_supported_three_label_sensitivity": {
+    "status": "reproduced",
+    "source_record": "../provenance/disputed_labels.json",
+    "removed_positive_labels": [
+      24504,
+      35573,
+      35599
+    ],
+    "main_labels_unchanged": true,
+    "cases": 753,
+    "negative": 30,
+    "below_300_including_negative": 276,
+    "removed_case_child_heights": [
+      24505
+    ],
+    "added_case_child_heights": []
+  },
+  "formal_github_prerelease": {
+    "status": "not_published_api_request_denied",
+    "url": null,
+    "tag_exists": true,
+    "ci_candidate_artifact_exists": true,
+    "release_asset_upload_confirmed": false,
+    "public_releases_page": "https://github.com/zakkeasterbrook/-patoshi-timing-audit/releases",
+    "public_page_observation": "No releases listed",
+    "last_attempt": "gh release create with --verify-tag --prerelease and all three verified assets: API request denied",
+    "prepared_archive": {
+      "name": "Patoshi_Timing_Audit_v1.0.0-rc.1.zip",
+      "git_commit": "59d150f9d95c572f539705561f71f1e248ef2a36",
+      "sha256": "de3aa15ba3144916bc6e6c20c08d857e6a2c58c6f4c9714e01410ff69d315ef8"
+    }
+  },
+  "remaining_limits": [
+    "Frozen Bitquery classification CSV unavailable; its sensitivity is not reproduced",
+    "External human review and original-author confirmation pending",
+    "Recorded explorer anchors match offline; no fresh explorer recheck or historical receiving-clock validation claimed",
+    "Worldwide priority not independently established"
+  ],
+  "historical_records": [
+    "current-verification/publication.json",
+    "current-verification/run.json",
+    "local-verification/",
+    "release-verification/"
+  ],
+  "history_policy": "Historical dates, runtime results, counts and access observations remain unchanged; this record indexes the latest inspected candidate instead of rewriting prior observations",
+  "repository_metadata": {
+    "status": "update_request_denied",
+    "description": "Reproducible correction to the 2022 Patoshi timing test, with frozen Bitcoin headers, complete results, and Python/PHP verification.",
+    "topics_to_add": [
+      "bitcoin",
+      "patoshi",
+      "reproducible-research",
+      "blockchain-analysis",
+      "timestamp-analysis",
+      "python",
+      "php",
+      "research-audit"
+    ]
+  }
+}

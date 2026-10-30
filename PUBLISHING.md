@@ -4,6 +4,40 @@ Use the existing repository:
 
 **https://github.com/zakkeasterbrook/-patoshi-timing-audit**
 
+## Existing candidate: preserve the reviewed snapshot
+
+`v1.0.0-rc.1` already points to
+`59d150f9d95c572f539705561f71f1e248ef2a36`. Its
+[hosted verification passed](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/runs/41086244756).
+Publish this existing tag as a **prerelease**; do not move it to a later
+documentation commit or replace its archive with a build of current `main`.
+
+The verified archive is `Patoshi_Timing_Audit_v1.0.0-rc.1.zip`, SHA-256:
+
+```text
+de3aa15ba3144916bc6e6c20c08d857e6a2c58c6f4c9714e01410ff69d315ef8
+```
+
+If assets need rebuilding, use a clean checkout of that exact tag and run
+`python3 scripts/build_release.py --version 1.0.0-rc.1` there. Check both the
+commit in `release.json` and the archive digest above. Use the current
+`RELEASE_NOTES.md` for the release body. From the maintained repository, with
+the tag's verified assets retained in `build/release/`:
+
+```sh
+gh release create v1.0.0-rc.1 \
+  build/release/Patoshi_Timing_Audit_v1.0.0-rc.1.zip \
+  build/release/SHA256SUMS.txt build/release/release.json \
+  --repo zakkeasterbrook/-patoshi-timing-audit --verify-tag --prerelease \
+  --title "Patoshi Timing Audit v1.0.0-rc.1" --notes-file RELEASE_NOTES.md
+```
+
+Recheck whether a release already exists before retrying publication; preserve
+published assets rather than overwriting them blindly. The
+[current status](results/status.json) distinguishes a source tag, CI artifact,
+formal release and confirmed asset upload. Current-main CI artifacts identify
+their own commit and must not be substituted for the pinned tag's assets.
+
 The leading hyphen is part of its name. Do not create or rename a repository.
 Use the existing checkout and authorized Git/GitHub authentication. Inspect the
 remote and current branch, preserve existing work, and respect branch protection

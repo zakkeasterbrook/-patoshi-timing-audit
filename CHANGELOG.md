@@ -1,5 +1,14 @@
 # Changelog
 
+## Documentation follow-up to v1.0.0-rc.1
+
+- Shorten the README and foreground the 713/1,881 fixed-sample diagnostic
+  separately from the main 276/754 result.
+- Index the latest inspected candidate, exact successful CI and existing tag;
+  retain earlier dated records unchanged as history.
+- Prepare concise prerelease notes and publication instructions for the
+  immutable reviewed snapshot, without asserting an uncompleted upload.
+
 ## Unreleased — v1.0.0 candidate
 
 - Require exact manifest and reference-file coverage; reject empty manifests,
