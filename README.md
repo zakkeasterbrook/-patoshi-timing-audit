@@ -4,7 +4,7 @@
 
 [![Verify audit](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/workflows/verify.yml)
 
-Bitcoin’s early blocks left a record of numbers, mining fingerprints and clock times. Researchers have studied those records for years, asking whether many early blocks came from one mining operation—and whether it could have been connected to Satoshi Nakamoto, the name used by Bitcoin’s creator.
+Bitcoin’s early blocks left a record of numbers, mining fingerprints and clock times. Researchers have studied those records for years, asking whether many early blocks came from one mining operation and whether it could have been connected to Satoshi Nakamoto, the name used by Bitcoin’s creator.
 
 That is the background to the **Patoshi hypothesis**. This project follows one later timing test back to its source code, finds a concrete mistake, and reproduces what happens when it is corrected.
 
