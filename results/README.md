@@ -17,5 +17,11 @@ Every original-label adjacent pair is in
 guessing excluded cases. Comparison triples and all fifteen adjustment cells
 are exported separately. Negative values remain in strict below-300 counts.
 
-The separate Bitquery CSV and exact three disputed-label identities/citation
-were not supplied. Their sensitivities are not represented as reproduced data.
+`reproduced/disputed_labels/` contains the source-supported sensitivity removing
+24,504; 35,573; and 35,599. Its 753 rows are a separate sample; the original
+labels and main outputs remain unchanged. The source record distinguishes
+historical criticisms from independently verified header arithmetic.
+
+The separate Bitquery CSV is still unavailable; its sensitivity is not
+represented as reproduced data. Reference comparisons require every declared
+file and reject missing or unexpected reference artifacts.

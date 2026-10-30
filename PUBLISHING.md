@@ -35,6 +35,10 @@ manifest only after final edits; do not change expected data to hide a mismatch.
 The [verification note](docs/verification.md) records current outcomes and
 outstanding evidence.
 
+After reviewing intentional changes, `python3 scripts/update_manifest.py`
+refreshes the complete file inventory. Review its diff; an unexplained
+checksum mismatch must be investigated before refreshing expected evidence.
+
 ## Commit through the existing repository workflow
 
 Review the complete diff and verify that generated evidence belongs to the
@@ -58,6 +62,13 @@ local run or archived log is not hosted CI evidence. Diagnose network-provenance
 failures separately from numerical mismatches.
 
 ## Tag and verify the release
+
+Build the portable candidate from a clean committed tree with
+`python3 scripts/build_release.py --version 1.0.0-rc.1`. The output archive,
+checksum and report are in `build/release/`; see
+[artifact contracts](docs/release-artifacts.md). The CI candidate job builds the
+same artifacts only after required offline/native jobs pass. A version argument
+does not create a tag or public release.
 
 Check whether `v1.0.0` already exists. Use it only if available and appropriate;
 never retarget a published version. Once the exact commit and its required

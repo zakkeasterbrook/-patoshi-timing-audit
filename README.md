@@ -2,11 +2,15 @@
 
 **Zakk Easterbrook · Release candidate 1.0.0 · 30 October 2026**
 
+[![Verify audit](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/workflows/verify.yml)
+
 A reproducible correction to the timing test linked from Jameson Lopp’s 2022 article, [*Was Satoshi a Greedy Miner?*](https://blog.lopp.net/was-satoshi-a-greedy-miner/).
 
 **The published program measures the wrong interval and omits eligible sequences. Implementing the stated test produces 276 timestamp gaps below 300 seconds among 754 cases (36.60%), compared with 5 among 1,881 cases (0.27%) from the original program.** The samples differ because the correction changes eligibility as well as the measured interval.
 
 [Understand the finding](docs/plain-english.md) · [Inspect the correction](docs/technical-note.md) · [Verify the evidence](docs/verification.md) · [Review the limitations](docs/context.md)
+
+**Review paths:** [Start with the reviewer guide](docs/reviewer-guide.md) · [Inspect the field-by-field evidence index](docs/evidence-index.md) · [Build a portable verified candidate](docs/release-artifacts.md)
 
 ## See the error in 30 seconds
 
@@ -72,7 +76,7 @@ Use `python3` if that is your Python command. Run without `-O` or `PYTHONOPTIMIZ
 python scripts/demo.py
 ```
 
-`reproduce.py` validates the input hashes and all 50,000 headers, then compares **every output row and CSV byte** against the recorded native-PHP results. `check_direct.py` uses a second raw-byte implementation without importing the audit calculations. Fresh outputs are written to `build/`. Every retained original-label follow-up row is regenerated too. The command compares complete evidence with [results/reproduced/](results/reproduced/) and refuses to overwrite frozen project files. Zero, positive-below-300 and at-least-300 counts are explicit in the summary.
+`reproduce.py` validates the input hashes and all 50,000 headers, then compares **every output row and CSV byte** against the recorded native-PHP results. `check_direct.py` uses a second raw-byte implementation without importing the audit calculations. Fresh outputs are written to `build/`. Every retained original-label follow-up row and the separately cited three-label sensitivity are regenerated too. The command requires the complete [frozen evidence inventory](results/reproduced/); missing references fail visibly. It stages and checks results before publishing files, rejects linked output paths, and preserves unrelated source files and logs. Zero, positive-below-300 and at-least-300 counts are explicit in the summary.
 
 | Output | Contents |
 |---|---|
@@ -86,6 +90,9 @@ python scripts/demo.py
 | `build/mode_membership.csv` | All selected triples and membership in each mode |
 | `build/example_263_265.json` | Verified hashes, serialized headers and minimal-example arithmetic |
 | `build/followup/` | Complete comparison triples, all adjacent pairs, adjustment cells and summaries |
+| `build/disputed_labels/` | Separately cited three-label sensitivity and every retained triple |
+
+The checksum verifier requires exact coverage of the project files: an empty manifest, an omitted file, a duplicate path, or a changed digest is an error. It establishes integrity against the recorded manifest, not an independent digital signature or endorsement.
 
 ### Run the actual PHP
 
@@ -122,9 +129,13 @@ The published implementation does not compute the test described in the article.
 
 The result does **not** settle whether a miner paused, manipulated timestamps, or was Satoshi. Other miners can find a block while one miner pauses. This audit does not reconstruct the original extranonce slopes or independently validate the supplied classifications. [Interpretation and context](docs/context.md) explain what survives and what remains open.
 
+As a separate classification sensitivity, removing the historically disputed labels **24,504; 35,573; and 35,599** gives **753 cases, 30 negative, and 276 below 300 seconds (36.65%)**. Negatives are included; its denominator differs from the main 754-case sample. Only child height 24,505 disappears, with no cases added. [Primary citations](provenance/disputed_labels.json) and [complete sensitivity rows](results/reproduced/disputed_labels/) are provided. The main calculation keeps every original label.
+
 ## Evidence and review
 
-**Current status:** the three core modes and original-label follow-ups pass local checks, including fresh native PHP 8.4.27 execution. [Hosted Linux, Windows and native PHP checks passed](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/runs/41080882699) for implementation commit `dcd4a581041763daa970095a91fc3caa6fac5b6c`, now published on `main`. [Current records](results/current-verification/) are separate from archived package records. A tagged GitHub release is still pending. The package lacks the separate frozen Bitquery CSV and the exact three disputed labels/citation, so those sensitivities remain unverified.
+**Verification:** the core calculations have [passed hosted Linux, Windows and native PHP checks](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/runs/41081482159). [Current records](results/current-verification/) distinguish each inspected snapshot. The workflow also checks Python 3.10, 3.12 and 3.14, and builds the portable candidate only after offline/native jobs pass; inspect the live badge and run for the current commit's state. A CI artifact is distinct from a tagged GitHub release. The separate frozen Bitquery CSV remains unavailable, so its classification sensitivity is explicitly unverified.
+
+The [quality-expansion acceptance](results/current-verification/quality-pass/run.json) passed **68 local tests with zero skips**, including native fixtures, contextual header rules, missing-evidence rejection, linked-output protection and deterministic packaging. Every original case CSV remains unchanged.
 
 - [Technical note](docs/technical-note.md): exact predicate, source patch and sample differences.
 - [Input provenance](docs/provenance.md): source commit, input hashes, archives and anchors.

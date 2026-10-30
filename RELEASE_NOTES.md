@@ -41,8 +41,10 @@ python3 -m unittest discover -s tests -v
 
 See [verification status](docs/verification.md) for actual current command logs,
 native-test setup, hosted-CI state and missing follow-up inputs. The Bitquery
-classification-sensitivity input and the exact three-disputed-label experiment
-remain unverified. A configured workflow is not a passing hosted run, and this
+classification-sensitivity input remains unavailable. The cited three-label
+sensitivity now reproduces 753 cases, 30 negatives and 276 below 300 seconds
+(36.65%, including negatives); its denominator differs from the main sample.
+The main labels remain unchanged. A configured workflow is not a passing hosted run, and this
 candidate file does not establish that a public release exists.
 
 The correction concerns one published timing test. It does not disprove the

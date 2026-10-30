@@ -2,6 +2,17 @@
 
 ## Unreleased — v1.0.0 candidate
 
+- Require exact manifest and reference-file coverage; reject empty manifests,
+  omitted files, duplicates, malformed paths and redirected outputs.
+- Stage calculations before publishing outputs so failed verification preserves
+  earlier results and unrelated source files.
+- Recover primary citations for labels 24,504; 35,573; and 35,599 and reproduce
+  the separate 753-case sensitivity with complete rows; retain all main labels.
+- Add reviewer guidance, explicit evidence schemas, contextual header-rule
+  tests and deterministic candidate archives from clean Git commits.
+- Configure Python 3.10/3.12/3.14 verification plus Windows and native PHP, with
+  candidate artifact generation dependent on successful required jobs.
+
 - Reproduce the original 2022 timing output from the pinned source and 50,000
   frozen mainnet headers while holding the 21,953 labels fixed.
 - Separate the wrong timestamp assignment from sequence-selection omissions,

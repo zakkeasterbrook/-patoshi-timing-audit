@@ -1,0 +1,52 @@
+{
+  "original_label_count": 21953,
+  "sensitivity_label_count": 21950,
+  "removed_positive_heights": [
+    24504,
+    35573,
+    35599
+  ],
+  "original_stated_rule": {
+    "cases": 754,
+    "negative": 30,
+    "zero": 0,
+    "positive_below_300": 246,
+    "zero_to_299": 246,
+    "below_300_including_negative": 276,
+    "at_300": 1,
+    "at_least_300": 478,
+    "below_300_percent": 36.60477453580902,
+    "median_seconds": 429.5
+  },
+  "sensitivity": {
+    "cases": 753,
+    "negative": 30,
+    "zero": 0,
+    "positive_below_300": 246,
+    "zero_to_299": 246,
+    "below_300_including_negative": 276,
+    "at_300": 1,
+    "at_least_300": 477,
+    "below_300_percent": 36.65338645418327,
+    "median_seconds": 428
+  },
+  "removed_case_child_heights": [
+    24505
+  ],
+  "added_case_child_heights": [],
+  "source_record": "provenance/disputed_labels.json",
+  "definitions": {
+    "P_primary": "Membership in the unchanged frozen published list",
+    "P_sensitivity": "Membership after removing only the named positive heights",
+    "N_sensitivity": "Nonmembership in the revised list, including removed positives",
+    "selection": "Consecutive PPN heights with timestamp(B)-timestamp(A) <600 seconds; no nonnegative lower bound",
+    "outcome": "timestamp(C)-timestamp(B), in seconds; strict below300 includes negatives and excludes exactly300",
+    "scope": "Classification sensitivity; not independent validation of historical label criticisms or miner identity"
+  },
+  "input_sha256": {
+    "headers": "b9e200ba15c904e05283461469d5582a9580df15ff842436576a7490454b03ec",
+    "canonical_primary_labels": "33c9927845ccd3016fb37bc2b860cfe7a3fea22522c67649d72c6dc50e9ae8e1"
+  },
+  "status": "pass",
+  "csv_sha256": "d2bf4a02d5c3cf61470de708b431febe795c5db136f4beac11323224179a721b"
+}

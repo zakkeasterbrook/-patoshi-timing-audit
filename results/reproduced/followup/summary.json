@@ -278,8 +278,7 @@
     "canonical_labels": "33c9927845ccd3016fb37bc2b860cfe7a3fea22522c67649d72c6dc50e9ae8e1"
   },
   "not_reproduced_here": {
-    "Bitquery_classification_sensitivity": "Requires the separate frozen Bitquery CSV; not supplied in the recovered release package",
-    "three_disputed_label_removal": "Exact three heights and historical source were not supplied; no guessed removals applied"
+    "Bitquery_classification_sensitivity": "Requires the separate frozen Bitquery CSV; not supplied in the recovered release package"
   },
   "csv_sha256": {
     "NPN_ab_300_to_599.csv": "686593c2e45b46f4a4343996dbb64eb0f4646652242cc714743ffd30c2ef04e3",

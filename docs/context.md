@@ -132,7 +132,26 @@ recursive minimum timestamp-spacing rule have different consequences. The audit
 does not select among these mechanisms. A stronger causal project would need
 specified competing models and held-out validation.
 
-## Follow-up inputs still required
+## Sensitivity to historically disputed labels
+
+The [retained prior-art notes](prior-art.md) and the primary public discussion
+identify **24,504; 35,573; and 35,599**. The
+[source record](../provenance/disputed_labels.json) gives the exact posts and
+dates; the historical attribution criticisms remain source assertions.
+
+Removing just those three positive labels and independently enumerating the
+direct rule yields **753 cases, 30 negative differences, and 276 below 300
+seconds (36.65%)**, compared with 754 / 30 / 276 (36.60%) for the original list.
+The below-300 counts include negatives and the samples have different
+denominators. Only child height **24,505** is removed; no cases are added.
+Every selected triple, its hashes and both label definitions are exported in
+[`disputed_labels/`](../results/reproduced/disputed_labels/).
+
+The original classification list is unchanged in every main calculation.
+This sensitivity does not independently establish that a disputed attribution
+is false, and the historical objections are not new discoveries here.
+
+## Follow-up input still required
 
 The separately published
 [Bitquery investigation](https://www.bitquery.io/investigations/satoshi-nakamoto-net-worth)
@@ -144,7 +163,5 @@ analysis, medium/low positives must remain unknown, not be recoded as negative;
 genesis is unclassified. Using its published labels would not independently
 validate or rerun its classifier.
 
-The separate experiment removing three disputed labels also requires their
-exact identities and historical citation before inclusion. No labels have
-been removed from the main calculation. See [verification status](verification.md)
-for the current completion limits.
+See [verification status](verification.md) for current execution and publication
+limits. None of these sensitivity choices change the main fixed-label result.

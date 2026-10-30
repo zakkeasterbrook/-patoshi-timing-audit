@@ -1,0 +1,89 @@
+{
+  "verified_utc": "2026-10-30T15:55:40.893613+00:00",
+  "scope": "Local quality-expansion acceptance; hosted results must be inspected separately for the final commit",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "test_result": {
+    "run": 68,
+    "passed": 68,
+    "failed": 0,
+    "skipped": 0
+  },
+  "commands": [
+    {
+      "name": "reproduction",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "reproduce.py"
+      ],
+      "exit_code": 0,
+      "log": "reproduction.log"
+    },
+    {
+      "name": "independent_direct",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "scripts/check_direct.py"
+      ],
+      "exit_code": 0,
+      "log": "independent_direct.log"
+    },
+    {
+      "name": "native",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "scripts/run_native.py",
+        "--php",
+        "/workspace/tools/php/bin/php",
+        "--source",
+        "build/original.php"
+      ],
+      "exit_code": 0,
+      "log": "native.log"
+    },
+    {
+      "name": "tests",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "tests.log"
+    }
+  ],
+  "source_file_sha256": {
+    "reproduce.py": "723b3be73ea0677e241606e6d3efc579375d1242e8b99c2b82f00e0d9fd17ddd",
+    "scripts/artifacts.py": "4a431b4617ec5d44d63884663129b287144fdf26f2e305ae13a23318b096790b",
+    "scripts/reporting.py": "8a82219d670898366ff14b44af4213345dd05dd07e5cba737617556092f6836a",
+    "scripts/verify_manifest.py": "5e49af3980cb049d1ba252dcd6d12072d207b922bb356c152612f7e32595d477",
+    "scripts/followup.py": "7abad121540bcf38b0ed1e4820a83d671c5dd0806cf409ad5e27395bacc209c9",
+    "scripts/disputed_labels.py": "9793ca1aaa3d730bbd5de009e5ea6175cd54ab3548eb4fb1666e3a4563913538",
+    "scripts/build_release.py": "0a550c89f004a2cea107ec1571fda9028105b3ee06bb1c1429e8438993d05a00",
+    "scripts/verify_headers.py": "ee760f0f517e5115ad458b1938ddd622d7ca4d3806f6ea4d367192c8c0b25db7"
+  },
+  "fresh_native_php": "PHP8.4.27 -n; every core CSV byte and order agrees with Python",
+  "source_supported_sensitivity": {
+    "removed_labels": [
+      24504,
+      35573,
+      35599
+    ],
+    "cases": 753,
+    "negative": 30,
+    "below_300_including_negative": 276,
+    "removed_case_child_heights": [
+      24505
+    ],
+    "added_cases": 0
+  },
+  "primary_case_csvs_unchanged": true,
+  "limitations": [
+    "Bitquery frozen CSV absent and its download blocked by active network policy",
+    "No external human peer review claimed",
+    "No tagged GitHub Release established by this local run"
+  ]
+}

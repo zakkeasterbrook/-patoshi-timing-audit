@@ -1,0 +1,51 @@
+{
+  "status": "pass",
+  "implementation": "raw-byte enumeration; no imports from audit modules",
+  "stated_rule": {
+    "cases": 754,
+    "negative": 30,
+    "below_300_including_negative": 276
+  },
+  "NPN_preceding_gap_below_600": {
+    "cases": 2780,
+    "negative": 55,
+    "below_300_including_negative": 1042
+  },
+  "all_adjacent_pairs": {
+    "PP": {
+      "cases": 13053,
+      "negative": 0,
+      "below_300_including_negative": 139
+    },
+    "PN": {
+      "cases": 8900,
+      "negative": 398,
+      "below_300_including_negative": 3215
+    },
+    "NP": {
+      "cases": 8900,
+      "negative": 72,
+      "below_300_including_negative": 2497
+    },
+    "NN": {
+      "cases": 19146,
+      "negative": 224,
+      "below_300_including_negative": 8238
+    }
+  },
+  "later_PP_pairs": 12240,
+  "later_PP_below_312": [
+    [
+      24504,
+      65
+    ]
+  ],
+  "listed_inside_coarse_nonce_band": 21953,
+  "all_inside_coarse_nonce_band": 27608,
+  "example_263_264_265": {
+    "preceding_gap": 559,
+    "following_gap": 71,
+    "incorrect_combined_gap": 630
+  },
+  "scope": "Fixed historical labels; descriptive checks only; header timestamps are not observed elapsed times"
+}

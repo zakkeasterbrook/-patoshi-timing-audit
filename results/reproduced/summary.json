@@ -63,9 +63,10 @@
   "no_final_flush_effect_on_this_dataset": true,
   "followup_status": "pass",
   "followup_summary": "followup/summary.json",
+  "disputed_label_sensitivity_status": "pass",
+  "disputed_label_sensitivity_summary": "disputed_labels/summary.json",
   "unverified_followups": {
-    "Bitquery_classification_sensitivity": "Requires the separate frozen Bitquery CSV; not supplied in the recovered release package",
-    "three_disputed_label_removal": "Exact three heights and historical source were not supplied; no guessed removals applied"
+    "Bitquery_classification_sensitivity": "Requires the separate frozen Bitquery CSV; not supplied in the recovered release package"
   },
   "scope": "Fixed published labels; no independent attribution of miner identity"
 }

@@ -33,6 +33,10 @@ lookup behavior, stable response objects and missing-data failures. This is
 not a reconstruction of the author's complete 2022 Composer/node environment.
 
 Current command records belong in [current verification](../results/current-verification/).
+The [quality-expansion record](../results/current-verification/quality-pass/run.json)
+records 68 passing local tests with zero skips, a fresh complete native-PHP run,
+and unchanged original case CSVs. It identifies the checked source-file hashes;
+hosted execution must still be inspected for the final published commit.
 The [reproduced evidence](../results/reproduced/) contains deterministic
 summaries, all event rows, mode differences, minimal-example evidence and the
 original-label follow-up tables. The test log records the actual method count,
@@ -49,6 +53,11 @@ failures and skips; do not substitute an older package's test count.
 - All three output CSVs against archived rows and exact bytes.
 - Original-label follow-up comparisons, complete adjacent pairs, sensitivity
   exclusions, nonce-byte diagnostics and descriptive standardization.
+- The separately cited three-label sensitivity, with every selected row and
+  an unchanged main classification list.
+- Complete frozen-reference inventories. Missing evidence cannot silently
+  disable comparison. Outputs are staged and checked before publication;
+  existing linked paths are rejected and unrelated build files are preserved.
 
 The second direct calculation independently decodes raw timestamps and
 compares every stated-rule row. Regression tests cover sequence selection,
@@ -98,10 +107,18 @@ provenance check.
 ## Outstanding evidence and limits
 
 The Bitquery CSV and its follow-up scripts are not in the supplied package;
-that classification-sensitivity calculation has not been reproduced. Neither
-has the separate three-disputed-label experiment: the exact labels and source
-citation still need recovery. Their reported numbers are not presented as
-fresh results. The original list remains unchanged throughout the main audit.
+that classification-sensitivity calculation has not been reproduced. Its
+reported numbers are not presented as fresh results. The separate three-label
+experiment is now source-supported and reproduced: 753 cases, 30 negative and
+276 below 300 seconds, with only child 24,505 removed. The original list remains
+unchanged throughout the main audit.
+
+The robustness expansion adds direct contextual MTP/difficulty rejection
+tests, exact manifest/reference coverage, output failure/link regressions,
+and deterministic archive identity tests. See
+[`tests/test_header_rules.py`](../tests/test_header_rules.py) for the explicit
+one-header hash stand-in used solely to isolate contextual unit-test branches;
+the genuine 50,000-header validation always hashes the actual bytes.
 
 Header validation and recorded chain anchoring do not revalidate transactions,
 script execution or historical receiving-node clocks. Contemporaneous

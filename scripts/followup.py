@@ -12,7 +12,8 @@ from pathlib import Path
 import statistics
 
 from inputs import HEADER_SHA256, LABEL_SHA256, ROOT, load_inputs, require
-from reporting import compare_saved_evidence
+from reporting import compare_saved_evidence, FOLLOWUP_EVIDENCE_FILES
+from artifacts import output_transaction, atomic_open, write_text
 
 NONCE_BAND = frozenset(range(10)) | frozenset(range(19, 59))
 PAIR_FIELDS = (
@@ -227,7 +228,7 @@ def verify_regression_targets(summary):
 
 
 def write_csv(path, rows, fields):
-    with path.open("w", encoding="utf-8", newline="") as handle:
+    with atomic_open(path, encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
@@ -235,42 +236,39 @@ def write_csv(path, rows, fields):
 
 def run(output_dir=None):
     """Validate frozen inputs, reproduce complete rows, then check recovered totals."""
-    output_dir = (Path(output_dir) if output_dir is not None else ROOT / "build/followup").resolve()
-    require(output_dir != ROOT and (ROOT not in output_dir.parents or output_dir.is_relative_to(ROOT / 'build')),
-            'Write outputs to build/ or outside the checkout; frozen project files must not be overwritten')
-    output_dir.mkdir(parents=True, exist_ok=True)
-    records, labels, _, _ = load_inputs()
-    payload = (ROOT / "data/headers_0_49999.bin").read_bytes()
-    summary, pair_rows, groups = analyze(records, labels, payload)
-    adjustment, cells = standardize(groups["PPN_ab_300_to_599"], groups["NPN_ab_300_to_599"])
-    summary["common_range_standardization"] = adjustment
-    summary["input_sha256"] = {"headers": HEADER_SHA256, "canonical_labels": LABEL_SHA256}
-    summary["not_reproduced_here"] = {
-        "Bitquery_classification_sensitivity": "Requires the separate frozen Bitquery CSV; not supplied in the recovered release package",
-        "three_disputed_label_removal": "Exact three heights and historical source were not supplied; no guessed removals applied",
-    }
-    write_csv(output_dir / "all_adjacent_pairs.csv", pair_rows, PAIR_FIELDS)
-    for name, rows in groups.items():
-        write_csv(output_dir / (name + ".csv"), rows, TRIPLE_FIELDS)
-    write_csv(output_dir / "common_range_adjustment_cells.csv", cells, tuple(cells[0]))
-    generated_csv = ["all_adjacent_pairs.csv", "common_range_adjustment_cells.csv"]
-    generated_csv.extend(name + ".csv" for name in groups)
-    summary["csv_sha256"] = {
-        name: hashlib.sha256((output_dir / name).read_bytes()).hexdigest()
-        for name in sorted(generated_csv)
-    }
-    # Preserve genuine computed evidence even when a recovered report disagrees.
-    try:
-        verify_regression_targets(summary)
-    except ValueError as exc:
-        summary["status"] = "regression_mismatch"
-        summary["regression_error"] = str(exc)
-        (output_dir / "summary.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8", newline='\n')
-        raise
-    summary["status"] = "pass"
-    (output_dir / "summary.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8", newline='\n')
-    compare_saved_evidence(output_dir, ROOT / 'results/reproduced/followup')
-    return summary
+    destination = Path(output_dir) if output_dir is not None else ROOT / "build/followup"
+    with output_transaction(destination, root=ROOT) as output_dir:
+        records, labels, _, _ = load_inputs()
+        payload = (ROOT / "data/headers_0_49999.bin").read_bytes()
+        summary, pair_rows, groups = analyze(records, labels, payload)
+        adjustment, cells = standardize(groups["PPN_ab_300_to_599"], groups["NPN_ab_300_to_599"])
+        summary["common_range_standardization"] = adjustment
+        summary["input_sha256"] = {"headers": HEADER_SHA256, "canonical_labels": LABEL_SHA256}
+        summary["not_reproduced_here"] = {
+            "Bitquery_classification_sensitivity": "Requires the separate frozen Bitquery CSV; not supplied in the recovered release package",
+        }
+        write_csv(output_dir / "all_adjacent_pairs.csv", pair_rows, PAIR_FIELDS)
+        for name, rows in groups.items():
+            write_csv(output_dir / (name + ".csv"), rows, TRIPLE_FIELDS)
+        write_csv(output_dir / "common_range_adjustment_cells.csv", cells, tuple(cells[0]))
+        generated_csv = ["all_adjacent_pairs.csv", "common_range_adjustment_cells.csv"]
+        generated_csv.extend(name + ".csv" for name in groups)
+        summary["csv_sha256"] = {
+            name: hashlib.sha256((output_dir / name).read_bytes()).hexdigest()
+            for name in sorted(generated_csv)
+        }
+        # Preserve genuine computed evidence even when a recovered report disagrees.
+        try:
+            verify_regression_targets(summary)
+        except ValueError as exc:
+            summary["status"] = "regression_mismatch"
+            summary["regression_error"] = str(exc)
+            write_text(output_dir / "summary.json",json.dumps(summary, indent=2) + "\n", encoding="utf-8")
+            raise
+        summary["status"] = "pass"
+        write_text(output_dir / "summary.json",json.dumps(summary, indent=2) + "\n", encoding="utf-8")
+        compare_saved_evidence(output_dir, ROOT / 'results/reproduced/followup', expected_files=FOLLOWUP_EVIDENCE_FILES)
+        return summary
 
 
 if __name__ == "__main__":

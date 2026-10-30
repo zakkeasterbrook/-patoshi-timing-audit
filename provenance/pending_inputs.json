@@ -11,7 +11,8 @@
     "limitation": "Using published labels does not rerun or independently validate the classifier"
   },
   "three_disputed_labels": {
-    "required": "Exact three heights and historical source citation",
-    "current_status": "Not supplied; no removals guessed or applied"
+    "current_status": "Recovered and independently reproduced as a separate sensitivity; primary labels unchanged",
+    "source_record": "provenance/disputed_labels.json",
+    "disputed_heights": [24504, 35573, 35599]
   }
 }

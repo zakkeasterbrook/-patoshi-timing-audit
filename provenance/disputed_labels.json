@@ -1,0 +1,48 @@
+{
+  "retrieved_utc": "2026-10-30T15:44:47.644994+00:00",
+  "source_url": "https://github.com/janoside/btc-rpc-explorer/discussions/465",
+  "source_title": "Doubts on the attribution of two blocks to miner Patoshi",
+  "retrieved_html_sha256": "a8285e4cd06a740a78758251e17686cd74493ea906cb406fa26809ab7aa446f4",
+  "disputed_heights": [
+    24504,
+    35573,
+    35599
+  ],
+  "observations": [
+    {
+      "heights": [
+        35573,
+        35599
+      ],
+      "author_login": "cricktor",
+      "posted_utc": "2022-08-27T22:30:13Z",
+      "url": "https://github.com/janoside/btc-rpc-explorer/discussions/465#discussion-4339796",
+      "statement": "The discussion opener disputes attribution of both heights based on a proposed co-spend/common-control inference.",
+      "scope": "The spending inference is an author assertion; this recovery does not independently revalidate transactions."
+    },
+    {
+      "heights": [
+        35599
+      ],
+      "author_login": "SergioDemianLerner",
+      "posted_utc": "2022-08-29T12:27:53Z",
+      "url": "https://github.com/janoside/btc-rpc-explorer/discussions/465#discussioncomment-3499972",
+      "statement": "The reply considers false positives of the slope-finding algorithm and notes another line crossing the Patoshi slope at 35599.",
+      "scope": "A classification concern, not a newly verified miner attribution."
+    },
+    {
+      "heights": [
+        24504
+      ],
+      "author_login": "jlopp",
+      "posted_utc": "2022-09-13T22:23:21Z",
+      "url": "https://github.com/janoside/btc-rpc-explorer/discussions/465#discussioncomment-3639457",
+      "statement": "The comment disputes height 24504 because its timestamp is 65 seconds after its parent and it intersects another miner extraNonce slope.",
+      "scope": "The 65-second header difference is independently reproduced; the historical extraNonce-slope assertion was not rerun here."
+    }
+  ],
+  "sensitivity_definition": "Remove exactly these three heights from the positive list and treat them as N under original-list nonmembership semantics. Keep original labels unchanged for all primary results.",
+  "recovery_method": "Inspected the cited original public GitHub discussion; heights were chosen from statements before computing sensitivity, not selected to reproduce a target.",
+  "prior_repository_reference": "docs/prior-art.md already identified all three heights in its discussion 465 source entry.",
+  "frozen_Bitquery_snapshot": "Absent from the supplied release ZIP and local attachment inventory; no blocked-domain bypass attempted."
+}
