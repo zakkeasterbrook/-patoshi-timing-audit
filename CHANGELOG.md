@@ -2,6 +2,10 @@
 
 ## Documentation follow-up to v1.0.0-rc.1
 
+- Lead the README with the visual three-method comparison and explain exactly
+  how each calculation differs from Lopp's published script.
+- Add a data-derived same-sample comparison figure and restore the visual
+  263–265 example while retaining all original figures and numerical evidence.
 - Shorten the README and foreground the 713/1,881 fixed-sample diagnostic
   separately from the main 276/754 result.
 - Index the latest inspected candidate, exact successful CI and existing tag;

@@ -1,65 +1,69 @@
 # Patoshi Timing Audit
 
-**Zakk Easterbrook · Reproducing and correcting a published Patoshi timing test**
+**Zakk Easterbrook · Reproducing and correcting a published Bitcoin timing test**
 
 [![Verify audit](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/workflows/verify.yml)
 
-The script linked from Jameson Lopp’s 2022 article [“Was Satoshi a Greedy Miner?”](https://blog.lopp.net/was-satoshi-a-greedy-miner/) reads the wrong block’s timestamp. This repository reproduces the original output, isolates that assignment error, and independently implements the stated selection rule using the same frozen labels and 50,000 Bitcoin headers.
+The timing script linked from Jameson Lopp’s 2022 article [“Was Satoshi a Greedy Miner?”](https://blog.lopp.net/was-satoshi-a-greedy-miner/) reads the wrong block’s timestamp. This audit reproduces its output, isolates the measurement error, and implements the test described in the article.
 
-**Candidate:** [`v1.0.0-rc.1`](https://github.com/zakkeasterbrook/-patoshi-timing-audit/tree/v1.0.0-rc.1), commit [`59d150f`](https://github.com/zakkeasterbrook/-patoshi-timing-audit/commit/59d150f9d95c572f539705561f71f1e248ef2a36) · [Candidate CI passed](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/runs/41086244756) · [Current publication status](docs/verification.md)
+**Lopp’s published script reports 5 differences below 300 seconds out of 1,881 cases (0.27%). Implementing the stated test gives 276 out of 754 (36.60%).**
 
-## The published question and the error
+Both use the **same 50,000 Bitcoin headers and 21,953 original labels**. Below-300 counts include negative values; the selected samples have different denominators.
 
-For consecutive blocks A, B, C labelled **P→P→N**, require `tB − tA < 600 seconds` and measure `tC − tB`. P means membership in the supplied label list; N means nonmembership. Neither establishes a miner’s identity.
+![Published script: 5 of 1,881 below 300 seconds; one assignment repaired: 144 of 400; direct stated rule: 276 of 754. Bars separate negative, nonnegative-below-300 and at-least-300-second differences.](docs/figures/timing_test_comparison.png)
 
-The source fetches B, then reads A’s response into B’s time variable:
+## How this differs from the published script
+
+The article’s test concerns three consecutive blocks: two in the supplied Patoshi label set (**P**), followed by one outside it (**N**). Require the second timestamp minus the first to be **<600 seconds**, then measure the difference from the **second block to the third**.
+
+This repository keeps the labels fixed and separates three calculations:
+
+| Calculation | What it does | Differences below 300 s |
+|---|---|---:|
+| **Published script** | Preserves the wrong timestamp assignment and original sequence tracker. | **5 / 1,881 — 0.27%** |
+| **One assignment repaired** | Reads the second block’s time, restoring the intended interval and timing filter; keeps the original sequence tracker. | **144 / 400 — 36.00%** |
+| **Direct stated rule** | Enumerates every adjacent P→P→N triple, applies the stated timing filter, and measures the second-to-third interval. | **276 / 754 — 36.60%** |
+
+The below-300 totals include **1, 10 and 30 negative differences**, respectively. The samples change because eligibility and sequence selection change. These are miner-supplied **header timestamp differences**, not independently measured mining durations.
+
+[Inspect the exact algorithms and complete per-case differences.](docs/technical-note.md)
+
+## See the mistake: 71 seconds reported as 630
+
+Blocks **263→264→265** give a small, directly checkable example. The first two are labelled P; the third is N.
+
+The preceding gap is **559 seconds**, so the example passes the under-600-second condition. The intended following gap is **71 seconds**. The published program instead adds the preceding gap and reports **630 seconds**.
+
+![Real headers at heights 263, 264 and 265: the intended second-to-third difference is 71 seconds, while the published first-to-third difference is 630 seconds.](docs/figures/interval_example.png)
+
+The script fetches the second block, B, then reads the first block, A, into B’s time variable:
 
 ```diff
 -$patoshiBlock2Time = $patoshiBlock1->get('time');
 +$patoshiBlock2Time = $patoshiBlock2->get('time');
 ```
 
-That makes the intended timing filter automatically true and reports **C−A instead of C−B**. Separate run-tracking behavior also omits qualifying sequences. The [technical note](docs/technical-note.md) separates these effects.
+The original assignment makes the timing filter automatically true and reports **C−A in place of the intended C−B**. Separate tracker behavior also omits eligible sequences, explaining the difference between the one-line repair and the direct rule.
 
-## A three-block example
+[Check the actual headers, hashes and integer timestamps](results/reproduced/example_263_265.json), or run `python3 scripts/demo.py`. The defect is in a **2022 analysis program**, not Bitcoin’s original software.
 
-| Block | Supplied label | Header timestamp (UTC) |
-|---|---|---|
-| 263 — A | P | 2009-01-13 00:10:21 |
-| 264 — B | P | 2009-01-13 00:19:40 |
-| 265 — C | N | 2009-01-13 00:20:51 |
+## The same cases, measured two ways
 
-A→B is **559 seconds**, so the sequence qualifies. The intended B→C measurement is **71 seconds**. The original program reports **630 seconds**: 559 + 71.
+The interval error can also be isolated on an **unchanged sample**.
 
-[Inspect the actual headers, hashes and integer timestamps](results/reproduced/example_263_265.json), or run `python3 scripts/demo.py`. This demonstrates an error in a **2022 analysis program**, not a defect in Bitcoin’s original software.
+Keep all **1,881 cases** selected by the published script and change only the measured interval from C−A to C−B. The below-300 count changes from **5 to 713 — 37.91%**. The 713 include **121 negative differences**.
 
-## Reproduced results
+![The same 1,881 original cases measured two ways: published C-minus-A gives 5 below 300 seconds; intended C-minus-B gives 713. Original selection and eligibility stay fixed.](docs/figures/same_sample_comparison.png)
 
-All three calculations use mainnet heights **0–49,999** and the same **21,953 original labels**.
+This [fixed-sample diagnostic](results/reproduced/diagnostics.json) retains the original selection and eligibility. It isolates the measurement error; **276/754 remains the main result for the fully implemented stated test**.
 
-| Calculation | Selected cases | Negative differences | All differences <300 s | Share |
-|---|---:|---:|---:|---:|
-| Published implementation | 1,881 | 1 | 5 | **0.27%** |
-| One timestamp assignment repaired | 400 | 10 | 144 | **36.00%** |
-| Direct stated rule | 754 | 30 | 276 | **36.60%** |
+## What this establishes
 
-**Below-300 counts include negative values. Each row has its own denominator because eligibility changes.** The original emits C−A; the corrected modes emit C−B. These are miner-supplied timestamp differences, not independently observed mining durations.
+**The published near-absence of short following-block timestamp differences does not survive a correct implementation of the stated test.**
 
-### Hold the sample constant
+The broader Patoshi question remains separate. This correction does not identify Satoshi, independently validate the labels, or establish whether a miner paused or manipulated timestamps. Other miners can find a block during one miner’s pause. The [follow-up analysis](docs/context.md) preserves the timing, nonce and classification-sensitivity findings that remain observable.
 
-Keeping the **same original 1,881 cases** and changing only the measured interval raises the below-300 count from **5 to 713 — 37.91%**. The 713 include **121 negative differences**.
-
-This [fixed-sample diagnostic](results/reproduced/diagnostics.json) isolates the measurement error while retaining legacy selection and eligibility. It is separate from the fully implemented stated test, whose main result remains **276 out of 754**.
-
-![Computed proportions of negative, nonnegative-below-300, and at-least-300-second differences, with each sample size.](docs/figures/timing_test_comparison.png)
-
-## What follows
-
-The published near-absence of short following-block timestamp differences **does not survive a correct implementation of the stated test**.
-
-This correction does not identify Satoshi, independently validate the labels, or settle whether a miner paused or manipulated timestamps. Other miners can find a block during one miner’s pause. Broader timing and nonce structure remains observable; the [follow-up note](docs/context.md) preserves those findings and the separately cited disputed-label sensitivity.
-
-## Reproduce offline
+## Reproduce it
 
 Requires **Python 3.10+** and its standard library. From the project root:
 
@@ -67,20 +71,19 @@ Requires **Python 3.10+** and its standard library. From the project root:
 python3 reproduce.py
 ```
 
-The command validates the frozen inputs and header chain, regenerates every retained result row, and compares complete evidence with the saved references. It needs no Bitcoin node, RPC credentials, live explorer, or plotting packages. Run without Python optimization flags.
+The command validates the frozen inputs and header chain, regenerates every retained result row, and compares the complete evidence. No Bitcoin node, RPC credentials, live explorer or plotting packages are needed. Run without Python optimization flags.
 
-The candidate’s [verification record](results/current-verification/quality-pass/run.json) reports **68 local tests with no skips** using PHP. Without PHP, eight native tests explicitly skip. [Hosted checks](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/runs/41086244756) passed Linux, Windows, Python 3.10/3.12/3.14, native PHP, and candidate archive construction.
+## Inspect and review
 
-## Review the evidence
-
-- [Reviewer guide](docs/reviewer-guide.md): source inspection, independent questions and reproduction commands.
-- [Evidence index](docs/evidence-index.md): complete case tables, schemas, units and sample definitions.
-- [Technical note](docs/technical-note.md) and [methodology](docs/methodology.md): exact algorithms and validation scope.
-- [Verification and publication status](docs/verification.md): tested snapshot, candidate tag, current limitations and dated history.
-- [Provenance](docs/provenance.md) and [prior-art log](docs/prior-art.md): pinned sources, hashes, attribution and bounded priority claims.
-- [Portable archives](docs/release-artifacts.md): verified downloads and packaging instructions.
+- [Reviewer guide](docs/reviewer-guide.md): independent checks and fresh native-PHP reproduction.
+- [Evidence index](docs/evidence-index.md): every case table, field, unit and sample definition.
+- [Technical note](docs/technical-note.md) and [methodology](docs/methodology.md): the source error, selection effects and validation rules.
+- [Provenance](docs/provenance.md) and [prior-art log](docs/prior-art.md): pinned inputs, attribution and bounded priority claims.
+- [Verification and publication status](docs/verification.md): exact tested commits, CI, runtime records and remaining limits.
 - [Contributing](CONTRIBUTING.md): reproduce a discrepancy or submit an outside review.
 
-**External human review remains pending.** The frozen Bitquery comparison dataset is still unavailable, so that sensitivity is unverified. Header validation does not revalidate transactions or reconstruct historical receiving-node clocks.
+**Verified candidate:** [`v1.0.0-rc.1`](https://github.com/zakkeasterbrook/-patoshi-timing-audit/tree/v1.0.0-rc.1) · [Candidate CI passed](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/runs/41086244756) · [Archive instructions](docs/release-artifacts.md). The recorded local suite passed 68 tests with PHP supplied; without it, eight native tests explicitly skip. Later README and figure updates on `main` do not move the candidate tag.
 
-Credit: Jameson Lopp for the article, source and classifications; Sergio Demian Lerner and earlier Patoshi researchers for the work this audit builds on. [MIT license](LICENSE) for newly authored material; [third-party scope](THIRD_PARTY.md) and [citation metadata](CITATION.cff) are retained.
+External human review remains pending. The separate frozen Bitquery dataset is unavailable, so that sensitivity is unverified. Header checks do not revalidate transactions or reconstruct historical receiving-node clocks.
+
+Credit: Jameson Lopp for the article, source and classifications; Sergio Demian Lerner and earlier Patoshi researchers for the work this audit builds on. [MIT license](LICENSE) for newly authored material; [third-party scope](THIRD_PARTY.md) and [citation metadata](CITATION.cff).

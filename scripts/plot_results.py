@@ -66,6 +66,61 @@ def plot_comparison(counts, output):
                 "Computed selected-case proportions. Original fixed labels; negative timestamp gaps are included.")
 
 
+def plot_same_sample(events, output):
+    """Isolate the measured interval while retaining every legacy-selected case."""
+    rows = events["original"]
+    if not rows:
+        raise ValueError("The fixed-sample diagnostic requires original selected cases")
+    n = len(rows)
+    specifications = [
+        ("Published interval: C − A", "published_delta"),
+        ("Intended interval: C − B", "child_delta"),
+    ]
+    colors = ["#b6533c", "#098486", "#d9e1ea"]
+    summaries = []
+    fig, ax = plt.subplots(figsize=(12.8, 5.0))
+    for y, (name, key) in enumerate(specifications):
+        values = [row[key] for row in rows]
+        negative = sum(value < 0 for value in values)
+        below = sum(value < 300 for value in values)
+        summaries.append((negative, below))
+        left = 0
+        for count, color in zip((negative, below-negative, n-below), colors):
+            width = 100 * count / n
+            ax.barh(y, width, left=left, height=0.43, color=color)
+            left += width
+        ax.text(101, y, f"{below:,}/{n:,} below 300 s\n{100*below/n:.2f}% · {negative:,} negative",
+                va="center", fontsize=11, color=TEXT)
+    ax.set_yticks(range(2), [f"{name}\nN = {n:,}" for name, _ in specifications])
+    ax.set_xlim(0, 100)
+    ax.set_ylim(1.6, -0.6)
+    ax.set_xlabel("Share of the same original selected cases (%)", fontsize=11)
+    ax.tick_params(axis="y", length=0, pad=12, labelsize=11)
+    for side in ("top", "right", "left"):
+        ax.spines[side].set_visible(False)
+    ax.spines["bottom"].set_color("#cbd5e1")
+    fig.subplots_adjust(left=0.30, right=0.79, top=0.74, bottom=0.33)
+    fig.text(0.035, 0.94, "Hold the sample fixed: correct the measured interval",
+             fontsize=18, fontweight="bold", color=TEXT)
+    fig.text(0.035, 0.865,
+             f"Both rows use all {n:,} original cases. Only the reported timestamp difference changes.",
+             fontsize=11, color=TEXT)
+    fig.legend(handles=[Patch(color=color, label=label) for color, label in zip(colors,
+               ["Negative", "0 to <300 seconds", "300 seconds or more"])],
+               loc="lower left", bbox_to_anchor=(0.29, 0.16), ncol=3,
+               frameon=False, fontsize=9.5)
+    fig.text(0.035, 0.10,
+             "Below-300 counts include negatives. Original selection and eligibility are retained in both rows.",
+             fontsize=10, color=TEXT)
+    fig.text(0.035, 0.045,
+             "This diagnostic isolates the interval error; it is separate from the fully implemented stated test.",
+             fontsize=10, color=TEXT)
+    save_figure(fig, output, "same_sample_comparison", "The measured interval changes the result on the same cases",
+                f"Every one of the {n} original selected cases is retained. Published C-minus-A has "
+                f"{summaries[0][1]} differences below 300 seconds; intended C-minus-B has {summaries[1][1]}, "
+                f"including {summaries[1][0]} negatives. Legacy selection and eligibility remain unchanged.")
+
+
 def plot_interval_example(records, labels, output):
     heights = [263, 264, 265]
     timestamps = [records[h]["timestamp"] for h in heights]
@@ -180,9 +235,10 @@ def main():
     output = ROOT / "docs/figures"
     output.mkdir(parents=True, exist_ok=True)
     plot_comparison(counts, output)
+    plot_same_sample(result["events"], output)
     plot_interval_example(records, labels, output)
     plot_distributions(result["events"], counts, output)
-    print("Wrote PNG and SVG comparison, interval and distribution figures from freshly reproduced data.")
+    print("Wrote PNG and SVG comparison, fixed-sample, interval and distribution figures from freshly reproduced data.")
 
 
 if __name__ == "__main__":
