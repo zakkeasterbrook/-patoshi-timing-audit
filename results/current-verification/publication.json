@@ -1,0 +1,23 @@
+{
+  "observed_utc": "2026-10-30T15:31:03.404670+00:00",
+  "repository": "https://github.com/zakkeasterbrook/-patoshi-timing-audit",
+  "implementation_commit": "dcd4a581041763daa970095a91fc3caa6fac5b6c",
+  "published_branches": [
+    "main",
+    "codex/finish-patoshi-audit"
+  ],
+  "publication_method": "Normal Git pushes; default branch advanced by fast-forward without force or protection bypass",
+  "pull_request": "Not required by the accepted normal main push; none created",
+  "hosted_ci": {
+    "url": "https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/runs/41080882699",
+    "outcome": "success",
+    "commit": "dcd4a581041763daa970095a91fc3caa6fac5b6c",
+    "observed_via": "Public GitHub Actions HTML",
+    "required_jobs": "Offline Ubuntu 24.04, offline Windows 2025, native PHP",
+    "optional_online_provenance": "Skipped because this was a push, not workflow_dispatch"
+  },
+  "github_api": "Request to api.github.com/graphql still Forbidden; custom host allowlist not active",
+  "tagged_release": null,
+  "published_release_assets": [],
+  "remaining_evidence": "Bitquery frozen CSV and exact three disputed labels/citation remain missing; live header and explorer rechecks not performed"
+}

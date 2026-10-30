@@ -82,12 +82,18 @@ The GitHub repository is
 [`zakkeasterbrook/-patoshi-timing-audit`](https://github.com/zakkeasterbrook/-patoshi-timing-audit).
 The leading hyphen is part of its name. The
 [workflow](../.github/workflows/verify.yml) configures offline Linux/Windows
-reproduction and native PHP checks. **Hosted execution has not yet been
-observed for the completed commit.** A workflow file or local pass is not a
-passing Actions run. Publication instructions are in [PUBLISHING.md](../PUBLISHING.md).
+reproduction and native PHP checks. **The hosted run passed for implementation
+commit `dcd4a581041763daa970095a91fc3caa6fac5b6c`, published on `main`.**
+[Actions run 41080882699](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/runs/41080882699)
+reports success, including both offline matrix targets and native PHP. The
+optional manual-trigger header-acquisition job was skipped. The result was
+observed through GitHub's public Actions page; API access remains unavailable.
+See the [publication record](../results/current-verification/publication.json).
+Publication instructions are in [PUBLISHING.md](../PUBLISHING.md).
 
-No release URL or passing badge is asserted here before the actual remote
-commit, CI result and release assets are observed.
+No tagged release or release asset upload has been observed. Hosted CI success
+does not establish either a release or fresh execution of the optional online
+provenance check.
 
 ## Outstanding evidence and limits
 

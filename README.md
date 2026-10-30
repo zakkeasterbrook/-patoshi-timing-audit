@@ -124,7 +124,7 @@ The result does **not** settle whether a miner paused, manipulated timestamps, o
 
 ## Evidence and review
 
-**Current status:** the three core modes and original-label follow-ups pass local checks, including fresh native PHP 8.4.27 execution. [Current records](results/current-verification/) are separate from archived package records. Hosted CI and a tagged GitHub release are not yet verified. The package lacks the separate frozen Bitquery CSV and the exact three disputed labels/citation, so those sensitivities remain unverified.
+**Current status:** the three core modes and original-label follow-ups pass local checks, including fresh native PHP 8.4.27 execution. [Hosted Linux, Windows and native PHP checks passed](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/runs/41080882699) for implementation commit `dcd4a581041763daa970095a91fc3caa6fac5b6c`, now published on `main`. [Current records](results/current-verification/) are separate from archived package records. A tagged GitHub release is still pending. The package lacks the separate frozen Bitquery CSV and the exact three disputed labels/citation, so those sensitivities remain unverified.
 
 - [Technical note](docs/technical-note.md): exact predicate, source patch and sample differences.
 - [Input provenance](docs/provenance.md): source commit, input hashes, archives and anchors.
