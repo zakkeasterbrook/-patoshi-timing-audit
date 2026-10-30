@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a byte-reproducible candidate archive from a clean, verified Git commit.
+"""Build a byte-reproducible research archive from a clean, verified Git commit.
 
 This verifies artifact identity, not a new scientific or native-PHP execution.
 The CI packaging job requires the offline and native verification jobs first.
@@ -28,7 +28,7 @@ def git(root, *arguments):
 def build(version, output_dir=None, *, root=ROOT):
     """Archive exactly the committed, manifested files with stable ZIP metadata."""
     if not isinstance(version, str) or VERSION.fullmatch(version) is None:
-        raise ValueError('Version must be a safe semantic version, such as 1.0.0-rc.1')
+        raise ValueError('Version must be a safe semantic version, such as 1.0.0')
     root = Path(root).resolve()
     output_dir = Path(output_dir) if output_dir is not None else root / 'build/release'
     top = Path(git(root, 'rev-parse', '--show-toplevel').decode().strip()).resolve()
@@ -85,7 +85,7 @@ def build(version, output_dir=None, *, root=ROOT):
         'status': 'pass', 'version': version, 'git_commit': commit,
         'archive': filename, 'bytes': len(archive_bytes), 'sha256': digest,
         'source_files': len(expected), 'generated_metadata': EXTRA_MANIFEST,
-        'github_release_created': False,
+        'artifact_type': 'reproducible_source_archive',
     }
     with output_transaction(output_dir, root=root) as staged:
         write_bytes(staged / filename, archive_bytes)
@@ -96,7 +96,7 @@ def build(version, output_dir=None, *, root=ROOT):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--version', default='1.0.0-rc.1')
+    parser.add_argument('--version', default='1.0.0')
     parser.add_argument('--output-dir', type=Path, default=ROOT / 'build/release')
     args = parser.parse_args()
     print(json.dumps(build(args.version, args.output_dir), indent=2))

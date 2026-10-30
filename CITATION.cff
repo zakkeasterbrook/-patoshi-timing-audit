@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "Please cite this repository and the exact commit used. A public release date and DOI are not asserted by this candidate."
+message: "Please cite this release and the exact source commit recorded in its archive manifest."
 type: software
 title: "Patoshi Timing Audit: A Reproducible Correction to the 2022 Timing Test"
 authors:
@@ -17,5 +17,7 @@ keywords:
   - reproducibility
   - block timestamps
   - Patoshi
-version: 1.0.0-rc.1
+version: 1.0.0
+date-released: 2026-10-30
+url: "https://github.com/zakkeasterbrook/-patoshi-timing-audit/releases/tag/v1.0.0"
 license: MIT

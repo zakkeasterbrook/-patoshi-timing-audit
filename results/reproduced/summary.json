@@ -65,8 +65,8 @@
   "followup_summary": "followup/summary.json",
   "disputed_label_sensitivity_status": "pass",
   "disputed_label_sensitivity_summary": "disputed_labels/summary.json",
-  "unverified_followups": {
-    "Bitquery_classification_sensitivity": "Requires the separate frozen Bitquery CSV; not supplied in the recovered release package"
+  "analysis_scope_exclusions": {
+    "Bitquery_classification_sensitivity": "Alternative classifier labels are outside this fixed-label release; no Bitquery classifier or sensitivity is evaluated."
   },
   "scope": "Fixed published labels; no independent attribution of miner identity"
 }

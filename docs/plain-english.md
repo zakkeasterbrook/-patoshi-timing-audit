@@ -2,7 +2,7 @@
 
 The published test was supposed to ask: after two consecutive blocks labelled Patoshi, how quickly does a block outside that list follow?
 
-Think of three time stamps on a stopwatch. The test needs the time between the second and third marks. The program accidentally subtracts the first mark from the third. That adds an extra interval and makes the reported wait look longer.
+Consider three timestamped entries in a logbook. The test needs the difference between the second and third entries. The program accidentally subtracts the first entry's time from the third. That includes an extra recorded interval; it does not measure how long mining actually took.
 
 There is a second consequence: the rule for choosing examples checks whether the second mark is less than ten minutes after the first. Because both variables contain the first time, that check always passes. Separate sequence-tracking mistakes also leave out eligible examples.
 
@@ -16,13 +16,13 @@ You can reproduce the example with `python scripts/demo.py`.
 
 ## Why it matters
 
-The article reported only five short gaps among 1,881 selected cases. Implementing its stated selection and measurement rules produces 276 among 754 cases. Short gaps are common in the corrected test.
+The article reported only five short gaps among 1,881 selected cases. Implementing its stated selection and measurement rules produces 276 among 754 cases. Both counts include negative timestamp differences. Short recorded gaps are common in the corrected test.
 
 The denominator changes because fixing the selection changes which examples qualify. This is not a claim that 271 observations were simply added to the same sample.
 
-## What we can say publicly
+## The finding
 
-“A reproducible audit finds implementation errors in a published 2022 Patoshi timing test. The reported scarcity of short following-block timestamp gaps does not survive correction.”
+The published program does not compute its stated timing statistic. The reported scarcity of short following-block timestamp gaps does not survive a correct implementation of that test.
 
 That is a concrete, checkable finding. It does not establish who mined the blocks, how much bitcoin anyone owns, or whether the miner slept between blocks. The wider Patoshi pattern has several kinds of evidence; correcting this one test does not erase them.
 

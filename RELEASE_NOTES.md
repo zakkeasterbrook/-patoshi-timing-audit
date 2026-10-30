@@ -1,58 +1,42 @@
-# Patoshi Timing Audit v1.0.0-rc.1
+# Patoshi Timing Audit v1.0.0
 
-Candidate for technical review, pinned to
-[`59d150f9d95c572f539705561f71f1e248ef2a36`](https://github.com/zakkeasterbrook/-patoshi-timing-audit/commit/59d150f9d95c572f539705561f71f1e248ef2a36)
-and the existing `v1.0.0-rc.1` tag. Later documentation updates on `main` do not
-change this frozen snapshot.
+A reproducible correction to the timing script linked from Jameson Lopp's 2022 article [“Was Satoshi a Greedy Miner?”](https://blog.lopp.net/was-satoshi-a-greedy-miner/).
 
-The script linked from Jameson Lopp's 2022 article
-[“Was Satoshi a Greedy Miner?”](https://blog.lopp.net/was-satoshi-a-greedy-miner/)
-reads the first block's timestamp into the second block's variable. This
-defeats the intended time filter and measures C−A instead of C−B. Separate
-run-tracking behavior omits eligible sequences.
+For consecutive blocks 263, 264 and 265, the intended following timestamp difference is **71 seconds**. The published program reports **630 seconds** because it reads the first block's timestamp into the variable meant for the second. The same assignment also defeats the intended eligibility filter.
 
-At heights **263–265**, the preceding gap is **559 seconds**, the intended
-following gap **71 seconds**, and the original output **630 seconds**.
+Using 50,000 frozen mainnet headers and the same 21,953 published labels:
 
-Using the same 50,000 frozen mainnet headers and 21,953 original labels:
-
-| Calculation | Cases | Negative | All differences <300 s |
+| Calculation | Cases | Negative | All differences <300 seconds |
 |---|---:|---:|---:|
 | Published implementation | 1,881 | 1 | 5 — 0.27% |
 | One assignment repaired | 400 | 10 | 144 — 36.00% |
 | Direct stated rule | 754 | 30 | 276 — 36.60% |
 
-**Below-300 counts include negatives; each sample has its own denominator.**
+**The below-300 totals include negative values. Each row has its own denominator.**
 
-**Fixed-sample diagnostic:** retaining the original 1,881 cases and changing
-only the measured interval raises the below-300 count from **5 to 713
-(37.91%)**, including 121 negatives rather than one. This isolates the interval
-error. It retains legacy selection and eligibility; **276/754 remains the main
-result for the fully implemented stated test**.
+Holding all 1,881 original cases fixed and changing only the interval gives **713 below 300 seconds, including 121 negatives**. This diagnostic isolates the interval error; it is separate from the main 276/754 result.
 
-## Verification and reproduction
+## Included evidence
 
-[CI passed for this exact commit](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/runs/41086244756),
-including Linux on Python 3.10/3.12/3.14, Windows, native PHP and portable
-archive construction. Fresh local PHP 8.4.27 execution matches every core
-Python CSV byte and row order. The local suite passes all **68 tests** with
-PHP; without it, **60 pass and eight native tests skip**.
+The release contains the frozen inputs, complete selected rows and comparisons, pinned-source metadata, technical documentation, reader-facing figures, original-label follow-ups and the separately cited three-label sensitivity. The main classifications remain unchanged.
 
-From the extracted `patoshi-timing-audit/` directory:
+Native PHP and Python are compared byte for byte. Automated checks cover Linux, Windows, Python 3.10/3.12/3.14, header validation, strict numerical boundaries and artifact integrity. Tagged publication verifies the uploaded assets by downloading and comparing them again.
+
+## Download and reproduce
+
+Assets:
+
+- `Patoshi_Timing_Audit_v1.0.0.zip`
+- `SHA256SUMS.txt`
+- `release.json`
+
+After checking the archive digest, extract it and run from `patoshi-timing-audit/`:
 
 ```sh
 python3 scripts/verify_manifest.py
 python3 reproduce.py
 ```
 
-Assets: `Patoshi_Timing_Audit_v1.0.0-rc.1.zip`, `SHA256SUMS.txt` and
-`release.json`. The archive includes frozen inputs, complete rows, code,
-documentation and a top-level `RELEASE_MANIFEST.json` recording file digests
-and the exact commit.
+The top-level `RELEASE_MANIFEST.json` records the exact source commit and source-file digests.
 
-## Scope
-
-These are miner-supplied header timestamp differences, not observed mining
-durations. The error belongs to a 2022 analysis script, not Bitcoin's original
-software. The correction does not identify Satoshi or determine whether a
-miner paused. Bitquery sensitivity and external human review remain pending.
+The finding concerns one published calculation. It does not identify Satoshi, independently validate the supplied classifications, establish a mining pause or timestamp mechanism, or reconstruct full transaction validation. Computational agreement is not an external peer-review endorsement.

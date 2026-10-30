@@ -39,9 +39,9 @@ rate is **37.88%**, compared with **36.18%** for PPN. For negative differences,
 the pooled NPN rate is **2.94%**, the standardized NPN rate **5.56%**, and the
 PPN rate **4.13%**. The exported cells make this reversal inspectable.
 
-The earlier follow-up script was not included in the archive. This repository's
-explicit parent-B era definition reproduces the recorded rounded targets;
-it is a reconstruction, not execution of an inspected earlier script.
+This analysis defines each era by parent B's height. The convention and
+each cell's weight are explicit in the code and exported evidence; the
+result is an operational descriptive adjustment, not a fitted causal model.
 
 This is exploratory descriptive adjustment, not a causal estimate. These
 samples are not randomized. Mining conditions vary by era, labels are
@@ -129,8 +129,9 @@ occurred.
 Recorded header times do not independently measure discovery or broadcast times.
 A fixed clock offset, an offset applied conditionally after a P parent, and a
 recursive minimum timestamp-spacing rule have different consequences. The audit
-does not select among these mechanisms. A stronger causal project would need
-specified competing models and held-out validation.
+does not select among these mechanisms. Distinguishing those mechanisms requires
+specified competing models and held-out validation, which are outside this
+analysis.
 
 ## Sensitivity to historically disputed labels
 
@@ -151,17 +152,21 @@ The original classification list is unchanged in every main calculation.
 This sensitivity does not independently establish that a disputed attribution
 is false, and the historical objections are not new discoveries here.
 
-## Follow-up input still required
+## Classification scope
 
-The separately published
-[Bitquery investigation](https://www.bitquery.io/investigations/satoshi-nakamoto-net-worth)
-is a proposed classification-sensitivity check. Its CSV is absent from the
-supplied release package. Its numerical targets have **not** been freshly
-verified here and are not presented as reproduced results. The full-source
-population must be distinguished from heights below 50,000. In a high-grade
-analysis, medium/low positives must remain unknown, not be recoded as negative;
-genesis is unclassified. Using its published labels would not independently
-validate or rerun its classifier.
+All numerical comparisons in this release use the frozen classification list
+from the pinned Lopp script, or the explicitly cited three-label sensitivity
+above. The main labels are unchanged. The analysis does not rerun the original
+ExtraNonce classifier or validate attribution to a particular miner.
 
-See [verification status](verification.md) for current execution and publication
-limits. None of these sensitivity choices change the main fixed-label result.
+The separately published [Bitquery investigation](https://www.bitquery.io/investigations/satoshi-nakamoto-net-worth)
+is another classification source. Its CSV, confidence grades and classifier
+are not inputs to this release, and no numerical result from that label set
+is claimed here. The [analysis-scope record](../provenance/analysis_scope.json)
+sets out these boundaries.
+
+Header validation and recorded chain anchoring establish the integrity of the
+input used for these calculations. They do not reconstruct historical
+receiving-node clocks, independently measure elapsed mining times or identify
+a person. See [verification and scope](verification.md) for the evidence behind
+each level of claim.

@@ -1,0 +1,29 @@
+{
+  "release": "1.0.0",
+  "audit_question": "Does the pinned published PHP implementation calculate its stated PPN timing statistic, and how do explicit corrections change it?",
+  "fixed_inputs": {
+    "height_range_inclusive": [
+      0,
+      49999
+    ],
+    "header_count": 50000,
+    "published_positive_labels": 21953,
+    "source_commit": "66ee906b28ca13269d6f71d63f848973a1b747a2"
+  },
+  "included_analyses": [
+    "Original implementation, one-assignment repair and independent direct stated rule",
+    "Fixed-original-sample interval diagnostic",
+    "Original-label sequence comparisons and descriptive era/gap adjustment",
+    "All adjacent-pair timing and serialized nonce-byte checks",
+    "Separately cited removal of labels 24504, 35573 and 35599; main labels unchanged"
+  ],
+  "excluded_analyses": {
+    "alternative_classification_models": "No Bitquery or other independently supplied classifier is evaluated; the principal audit holds the published labels fixed.",
+    "full_extranonce_reconstruction": "Headers do not contain the complete mining-reward transaction data used by earlier ExtraNonce analyses.",
+    "miner_identity_and_causal_mechanisms": "No miner identity, mining pause or timestamp-manipulation mechanism is independently established.",
+    "full_transaction_validation": "Header-chain validation does not revalidate every transaction or script.",
+    "historical_receiving_clocks": "The historical receiving-node clocks required to reconstruct future-time acceptance are not available."
+  },
+  "review_scope": "Computational verification; no external human peer-review endorsement or original-author confirmation is claimed.",
+  "priority_scope": "The retained prior-art search is bounded and does not establish worldwide priority."
+}

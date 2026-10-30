@@ -6,8 +6,8 @@ correction from questions about miner classification or historical behavior.
 
 ## Start with a clean checkout
 
-Record the full commit being reviewed, then run from the repository root with
-Python 3.10 or newer:
+Use the versioned source tag or record the full commit being reviewed. From
+the repository root with Python 3.10 or newer, run:
 
 ```sh
 git rev-parse HEAD
@@ -91,7 +91,7 @@ aggregate totals happen to agree.
 
 ## Trace the disputed-label sensitivity separately
 
-The existing prior-art log and a fresh inspection of
+The prior-art log and the cited public
 [discussion 465](https://github.com/janoside/btc-rpc-explorer/discussions/465)
 identify disputed positive labels **24,504, 35,573 and 35,599**. Review the exact
 comments and their inference limits in
@@ -142,10 +142,9 @@ Header validation does not revalidate transactions, scripts, or historical
 receiving-node clocks. Header timestamps are not independently measured mining
 durations. Short following gaps can coexist with a miner's pause.
 
-The separate Bitquery frozen CSV is still required for that pending
-classification sensitivity. See
-[`pending_inputs.json`](../provenance/pending_inputs.json). Its reported
-targets are not fresh results in this repository.
+Alternative Bitquery classifications and their classifier are outside this
+release analysis. No result using that label set is claimed. See
+[analysis scope](../provenance/analysis_scope.json) for the exact boundaries.
 
 For execution freshness and publication, consult [verification status](verification.md)
 and the actual hosted run for the commit reviewed. Archived package logs,
@@ -153,12 +152,12 @@ current local execution, hosted CI, and a tagged release establish different
 things. Report a discrepancy with its commit, command, runtime, case heights,
 expected predicate and observed result as described in [CONTRIBUTING.md](../CONTRIBUTING.md).
 
-## Inspect a portable candidate
+## Inspect the release archive
 
-From a clean, committed checkout, build a candidate with:
+From a clean checkout of the versioned release tag, rebuild its archive with:
 
 ```sh
-python3 scripts/build_release.py --version 1.0.0-rc.1
+python3 scripts/build_release.py --version 1.0.0
 ```
 
 The builder requires the complete source-file inventory and SHA-256 manifest
@@ -169,8 +168,8 @@ checksum file and packaging report under `build/release/`; the archive contains
 Changing the version or commit changes the artifact identity.
 
 The configured CI matrix covers Python 3.10, 3.12 and 3.14 on Linux and Python
-3.12 on Windows. Its candidate-packaging job depends on both offline and native
-verification jobs. Inspect the actual outcome for the reviewed commit; workflow
-configuration alone does not establish that these new jobs have run. Building
+3.12 on Windows. Its portable-archive job depends on both offline and native
+verification jobs. The release is published from a version tag after those
+checks. Inspect the actual outcome for the reviewed commit. Building
 an archive verifies artifact identity and does not independently rerun the
 scientific analysis or create a GitHub Release.

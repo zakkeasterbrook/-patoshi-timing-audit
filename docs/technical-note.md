@@ -148,4 +148,4 @@ The verified conclusion is that **the published counts do not measure the test d
 
 The correction leaves the supplied classifications unchanged. It does not determine the physical cause of the timestamp distribution. Other miners can find blocks while one miner pauses, and header timestamps can differ from actual event times. Distinguishing those possibilities would require a specified model and further evidence. The earlier [timestamp analysis by Sergio Demian Lerner](https://bitslog.com/2020/06/22/a-new-mystery-in-patoshi-timestamps/) already discussed multiple explanations.
 
-External human review remains pending. Agreement between implementations and passing tests are computational checks, not a peer-review endorsement. Reproducible corrections to the analysis are welcome through the [review process](../CONTRIBUTING.md).
+Agreement between implementations and passing tests are computational checks, not a peer-review endorsement. No external human review or original-author confirmation is claimed. Reproducible corrections to the analysis are welcome through [CONTRIBUTING.md](../CONTRIBUTING.md).

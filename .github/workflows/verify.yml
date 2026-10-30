@@ -50,8 +50,8 @@ jobs:
             build/disputed_labels/
           if-no-files-found: error
 
-  candidate:
-    name: Verified portable candidate archive
+  package:
+    name: Verified portable research archive
     needs: [offline, native]
     runs-on: ubuntu-24.04
     timeout-minutes: 5
@@ -63,12 +63,68 @@ jobs:
         with:
           python-version: '3.12'
       - name: Build complete archive from the exact verified Git tree
-        run: python scripts/build_release.py --version 1.0.0-rc.1
+        shell: bash
+        run: |
+          if [[ "$GITHUB_REF_TYPE" == tag && "$GITHUB_REF_NAME" =~ ^v([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+            version="${BASH_REMATCH[1]}"
+          else
+            version="1.0.0-dev.${GITHUB_SHA}"
+          fi
+          python scripts/build_release.py --version "$version"
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: Patoshi-Timing-Audit-candidate
+          name: Patoshi-Timing-Audit-package
           path: build/release/
           if-no-files-found: error
+
+  release:
+    name: Publish and verify the tagged release
+    if: startsWith(github.ref, 'refs/tags/v') && !contains(github.ref_name, '-')
+    needs: [offline, native, package]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+      - name: Build, verify and publish the immutable assets
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          [[ "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          version="${RELEASE_TAG#v}"
+          python scripts/build_release.py --version "$version"
+          archive="Patoshi_Timing_Audit_v${version}.zip"
+          if ! gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            gh release create "$RELEASE_TAG" \
+              "build/release/$archive" build/release/SHA256SUMS.txt build/release/release.json \
+              --verify-tag --draft --title "Patoshi Timing Audit $RELEASE_TAG" \
+              --notes-file RELEASE_NOTES.md
+          fi
+          gh release download "$RELEASE_TAG" --dir build/published-assets \
+            --pattern "$archive" --pattern SHA256SUMS.txt --pattern release.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          built = Path('build/release')
+          published = Path('build/published-assets')
+          report = json.loads((built / 'release.json').read_text())
+          for name in (report['archive'], 'SHA256SUMS.txt', 'release.json'):
+              if (built / name).read_bytes() != (published / name).read_bytes():
+                  raise ValueError('Published release asset differs: ' + name)
+          print('All published assets match the verified commit byte for byte.')
+          PY
+          gh release edit "$RELEASE_TAG" --draft=false --prerelease=false --latest
+          gh release view "$RELEASE_TAG" --json url,tagName,isDraft,isPrerelease,assets
 
   native:
     name: Native PHP and fresh source provenance

@@ -1,49 +1,25 @@
-# Build and inspect a portable candidate
+# Release artifacts
 
-The source repository is the primary evidence. A portable archive makes the
-same frozen inputs, code, documentation and complete result rows available
-without a GitHub checkout. It is not a substitute for scientific review.
+The [v1.0.0 release](https://github.com/zakkeasterbrook/-patoshi-timing-audit/releases/tag/v1.0.0)
+contains the code, frozen inputs, complete numerical evidence and documentation.
+Its archive is a portable copy of the tagged source tree, not an additional
+source of scientific observations.
 
-## Reproduce before packaging
+## Download and verify
 
-Run the commands in the [reviewer guide](reviewer-guide.md), including fresh
-native PHP where available. Record the actual tests, failures and skips. Then
-review intentional changes and explicitly refresh the project-file checksums:
+| Asset | Contents |
+|---|---|
+| `Patoshi_Timing_Audit_v1.0.0.zip` | Complete project under `patoshi-timing-audit/`, plus a top-level `RELEASE_MANIFEST.json` |
+| `SHA256SUMS.txt` | The archive's SHA-256 digest and filename |
+| `release.json` | Artifact type, exact source commit, version, byte count and digest |
 
-```sh
-python3 scripts/update_manifest.py
-python3 scripts/verify_manifest.py
-git diff -- SHA256SUMS.txt
-```
-
-Do not regenerate a checksum to hide an unexplained mismatch, change the pinned
-inputs, or force a reported numerical target. Commit only reviewed changes.
-Packaging requires a **clean, committed Git checkout**:
+First compare the downloaded archive's SHA-256 with the published checksum.
+On a system with `sha256sum`, run beside the downloaded assets:
 
 ```sh
-python3 scripts/build_release.py --version 1.0.0-rc.1
+sha256sum --check SHA256SUMS.txt
 ```
 
-The command verifies exact project-file coverage, compares worktree digests
-with the committed blobs, and archives that exact commit. Uncommitted or
-untracked content cannot be represented as verified committed content. Builds
-write to `build/release/` by default and never modify source or frozen results.
-
-## Artifacts and verification
-
-The generated files are:
-
-- `Patoshi_Timing_Audit_v1.0.0-rc.1.zip`: the complete manifested project in
-  `patoshi-timing-audit/`, plus a top-level `RELEASE_MANIFEST.json`.
-- `SHA256SUMS.txt`: the downloadable archive's SHA-256 and filename.
-- `release.json`: the commit, version, byte count, digest and packaging scope.
-
-The top-level release manifest records the exact commit and every source
-file's size/digest. It lives outside the enclosed source directory so the
-source-file manifest verifies unchanged after extraction. It does not hash
-itself or claim an independent signature.
-
-For the downloaded ZIP, first compare its SHA-256 with the published checksum.
 After extraction, run from `patoshi-timing-audit/`:
 
 ```sh
@@ -52,24 +28,62 @@ python3 reproduce.py
 python3 scripts/check_direct.py
 ```
 
-ZIP entries use sorted paths, stored bytes without compression, fixed regular
-file modes, and fixed 1980-01-01 container timestamps. These choices make the
-archive byte-reproducible for the same committed input and version. Container
-timestamps are format constants; they do not backdate publication. The source
-commit time is retained separately in the release manifest. Tests compare
-independent builds and verify an extracted archive's original source manifest.
+The first command verifies exact source-file coverage and every recorded
+digest. The next two regenerate the numerical evidence and independently
+cross-check the stated rule. Core reproduction uses Python's standard library
+and frozen local data. Fresh native-PHP instructions are in the
+[reviewer guide](reviewer-guide.md).
 
-## What CI establishes
+A matching checksum detects a mismatch against the published artifact. It is
+not an independent signature, scientific endorsement or proof of authorship.
 
-The [workflow](../.github/workflows/verify.yml) configures offline Python
-3.10/3.12/3.14 checks, Windows verification and native PHP. Its candidate job
-depends on successful offline and native jobs, then uploads the complete
-archive/checksum/report as `Patoshi-Timing-Audit-candidate`.
+## The two manifests
 
-Inspect the actual run for the exact commit. Local archive construction alone
-verifies artifact identity and completeness; it does not execute PHP or imply
-that hosted tests passed. A CI artifact is also distinct from a tagged GitHub
-Release. The [publication procedure](../PUBLISHING.md) records the remaining
-release steps, and [verification status](verification.md) identifies unavailable
-inputs and optional online checks. No archive independently establishes miner
-identity or validates a historical classification.
+The archive's top-level `RELEASE_MANIFEST.json` records the exact Git commit
+and each source file's size and digest. It lives outside the enclosed source
+directory so the original project-file manifest can verify unchanged.
+
+Inside `patoshi-timing-audit/`, the repository's `SHA256SUMS.txt` covers the
+complete published project-file inventory. It is distinct from the release
+asset of the same name, which hashes the downloadable ZIP. The generated
+release manifest does not hash itself.
+
+## Rebuilding the same archive
+
+From a clean checkout of `v1.0.0`:
+
+```sh
+python3 scripts/build_release.py --version 1.0.0
+```
+
+The builder verifies the complete source inventory, compares worktree digests
+with committed blobs, and writes the archive, checksum and packaging report
+to `build/release/`. Uncommitted and untracked changes cannot be represented
+as the verified Git tree.
+
+Archive members have sorted paths, stored bytes without compression, fixed
+regular-file modes and fixed 1980-01-01 container timestamps. Those timestamps
+are format constants, not publication dates. The source commit time is
+recorded separately. The same source commit and version produce identical
+archive bytes; tests compare independent builds and verify the extracted
+project's original source manifest.
+
+Changing the version or source commit changes the artifact identity. An
+archive built from another `main` commit is not interchangeable with the
+tagged v1.0.0 asset.
+
+## Release validation
+
+The [workflow](../.github/workflows/verify.yml) checks Linux on Python
+3.10/3.12/3.14, Windows on Python 3.12 and actual native PHP execution. The
+portable-archive job depends on successful offline and native verification.
+Its build artifacts use the name `Patoshi-Timing-Audit-package`.
+
+For a version tag, the release-publishing job runs only after those checks.
+The [workflow results](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/workflows/verify.yml)
+identify the executed commit and job outcomes. The downloadable metadata
+records the exact commit contained in the release.
+
+Archive construction verifies artifact identity and completeness. Scientific
+claims depend on the reproduced calculations and their stated
+[scope](verification.md), not on the existence of a ZIP file.

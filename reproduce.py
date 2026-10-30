@@ -80,7 +80,7 @@ def reproduce(output_dir):
             "followup_summary": "followup/summary.json",
             "disputed_label_sensitivity_status": disputed['status'],
             "disputed_label_sensitivity_summary": "disputed_labels/summary.json",
-            "unverified_followups": followup['not_reproduced_here'],
+            "analysis_scope_exclusions": followup['excluded_analyses'],
             "scope": "Fixed published labels; no independent attribution of miner identity",
         }
         write_text(output_dir / "summary.json",json.dumps(summary, indent=2) + "\n", encoding="utf-8")

@@ -1,37 +1,30 @@
-# Verification status
+# Verification and scope
 
-## Latest inspected candidate — 30 October 2026
+The audit is reproducible from the frozen inputs. Its principal claim is an
+implementation mismatch: the published timing program measures a different
+interval and selects a different set of sequences from the rule described
+in its source and accompanying article.
 
-| Item | Verified state |
-|---|---|
-| Reviewed source commit | [`59d150f9d95c572f539705561f71f1e248ef2a36`](https://github.com/zakkeasterbrook/-patoshi-timing-audit/commit/59d150f9d95c572f539705561f71f1e248ef2a36) |
-| Existing source tag | [`v1.0.0-rc.1`](https://github.com/zakkeasterbrook/-patoshi-timing-audit/tree/v1.0.0-rc.1), pointing to that commit |
-| Hosted verification | **[Passed — Actions run 41086244756](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/runs/41086244756)** for that exact commit |
-| Hosted coverage | Linux on Python 3.10, 3.12 and 3.14; Windows on Python 3.12; fresh native PHP; portable candidate archive |
-| Recorded local acceptance | [68 passed, zero failures or skips](../results/current-verification/quality-pass/run.json), with PHP supplied explicitly |
-| Formal GitHub prerelease | Not published: the verified assets and notes are prepared, but the publication API request was denied; the public Releases page lists no releases |
-| Remaining review/data limits | External human review is pending; the frozen Bitquery CSV is unavailable |
+## Release identity
 
-The reviewed candidate is an immutable source snapshot. Later documentation
-commits on `main` do not move the tag or change which commit that CI run tested.
-For another commit, inspect its own workflow result. The optional manual-trigger
-online header-acquisition job was skipped in this push-triggered run.
+[Version 1.0.0](https://github.com/zakkeasterbrook/-patoshi-timing-audit/releases/tag/v1.0.0)
+is identified by the immutable
+[`v1.0.0` source tag](https://github.com/zakkeasterbrook/-patoshi-timing-audit/tree/v1.0.0).
+The downloadable archive's top-level `RELEASE_MANIFEST.json` records the full
+Git commit and every source-file digest. `release.json` records the archive
+digest, byte count and version.
 
-[Machine-readable status](../results/status.json) identifies this candidate and
-its evidence. The local record identifies source-file hashes; its 68-test run
-preceded the final Windows archive-fixture correction, which the exact-commit
-hosted run covers. Without the PHP environment, eight native-dependent tests
-are skipped; that mode does not establish fresh PHP execution.
+The [release workflow](../.github/workflows/verify.yml) validates the tagged
+source before publishing its assets. It covers Linux on Python 3.10, 3.12 and
+3.14, Windows on Python 3.12, fresh native PHP, and deterministic archive
+construction. The [workflow runs](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/workflows/verify.yml)
+provide job outcomes and execution logs for each commit. The machine-readable
+[evidence index](../results/status.json) links the release to its inputs,
+results and recorded checks.
 
-The latest publication attempt also could not update the repository's About
-description or topics. These API-only finishing steps remain pending. Git
-pushes work; this access failure does not invalidate the passed calculations
-or CI. The pinned archive and exact publication command are documented in
-[PUBLISHING.md](../PUBLISHING.md).
+## Numerical reproduction
 
-## Reproduced findings
-
-Every ordered core CSV row and byte agrees with the frozen evidence:
+Every ordered core CSV row and byte is compared with the frozen evidence:
 
 | Calculation | Cases | Negative | All differences <300 s |
 |---|---:|---:|---:|
@@ -39,73 +32,103 @@ Every ordered core CSV row and byte agrees with the frozen evidence:
 | One assignment repaired | 400 | 10 | 144 |
 | Direct stated rule | 754 | 30 | 276 |
 
-Below-300 totals include negative values, and the samples have different
-denominators. The original emits C-minus-A; corrected modes emit C-minus-B.
+Below-300 totals include negative values. The samples have different
+denominators. The published implementation emits C-minus-A; corrected modes
+emit C-minus-B.
 
 The [fixed-sample diagnostic](../results/reproduced/diagnostics.json) retains
-all 1,881 original cases and changes only the measured interval: **713 are
-below 300 seconds (37.91%), including 121 negatives**. It isolates the interval
-error and is not the fully corrected selection.
+all 1,881 original cases and changes only the measured interval. It gives
+**713 differences below 300 seconds (37.91%), including 121 negatives**.
+This isolates the interval error while retaining legacy selection and
+eligibility; it is not the fully corrected sample.
 
 The separately cited [three-label sensitivity](../results/reproduced/disputed_labels/)
-reproduces **753 cases, 30 negative and 276 below 300 seconds** after removing
-24,504; 35,573; and 35,599. Only child 24,505 leaves the sample. The main list
-remains unchanged; historical attribution criticisms remain source assertions.
+removes 24,504; 35,573; and 35,599 from a copy of the classification list.
+It gives **753 cases, 30 negatives and 276 below 300 seconds**. Only child
+height 24,505 leaves the sample; no cases enter. The main list is unchanged.
+Historical criticisms of those labels remain source assertions.
 
-## What was executed and checked
-
-The [local acceptance logs](../results/current-verification/quality-pass/)
-record fresh Python calculations, a separately written raw-byte check and
-actual PHP 8.4.27 execution with configuration disabled by `-n`. The pinned
-original source, temporary one-assignment repair and direct PHP routine match
-Python byte for byte. This does not reconstruct the author's complete 2022
-Composer/Bitcoin Core environment.
+## Input and header checks
 
 The original source is pinned to commit
 `66ee906b28ca13269d6f71d63f848973a1b747a2`: 125,172 bytes, SHA-256
 `104d0df1854802a2e0a5333fda51ee657bb2b17006a48f820bc446c21993e119`.
-Its 21,953 extracted labels match the bundled list exactly.
+Its 21,953 extracted labels match the bundled list in order.
 
-The offline reproduction validates the 4,000,000-byte input, all 50,000
-headers, genesis, hash linkage, compact targets, proof of work, mainnet
-difficulty rules at all 24 retarget boundaries, and median time past. It
-regenerates complete core, original-label follow-up and cited sensitivity
-rows, requiring the exact frozen reference inventory before publishing outputs.
+The offline calculation validates:
 
-See the [reviewer guide](reviewer-guide.md) for commands and independent
-questions, the [evidence index](evidence-index.md) for field definitions, and
-[artifact contracts](release-artifacts.md) for the portable archive.
-The contextual header-rule unit tests document their one-header hash stand-in;
-genuine full-chain validation always hashes the actual input bytes.
+- The 4,000,000-byte input and its digest: 50,000 serialized mainnet headers.
+- Known genesis, header hashes, byte order and every previous-hash link.
+- Compact targets, proof of work, the mainnet target limit and difficulty rules
+  at all 24 retarget boundaries in scope.
+- Median time past, using the preceding available headers.
+- Label types, ordering, uniqueness, range and canonical-content digest.
+- Complete reference-file inventories and exact regenerated output bytes.
 
-## Historical execution and publication records
+The ten [recorded explorer observations](../provenance/independent_explorer_anchors.json)
+cover five heights against two explorers. Their hashes and headers match the
+frozen input. These are preserved observations, not fresh explorer queries
+performed by the offline command.
 
-All earlier records retain their original dates and scope:
+See [methodology](methodology.md) for the rules and [input provenance](provenance.md)
+for the acquisition evidence.
 
-| Record | What it establishes |
+## Computational cross-checks
+
+The original source, a temporary one-assignment repair, and a separate direct
+PHP routine are executed against a deterministic offline RPC adapter. Every
+emitted core CSV byte and row order must agree with fresh Python output.
+Configuration loading is disabled with PHP's `-n` option.
+
+The retained [local acceptance record](../results/current-verification/quality-pass/run.json)
+reports **68 passed tests with zero failures or skips**, using PHP 8.4.27.
+It identifies the checked source-file hashes. The
+[pre-release hosted run](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/runs/41086244756)
+also covers the subsequent Windows archive-fixture correction. Release
+verification applies the same checks to the final tagged tree.
+
+Without the explicit PHP environment, eight native-dependent tests skip.
+That mode validates the Python workflow but does not establish fresh PHP
+execution. The [reviewer guide](reviewer-guide.md) provides the complete
+native commands.
+
+The independent raw-byte implementation compares every direct-rule row.
+Regression cases cover sequence boundaries, strict timing thresholds,
+malformed inputs, altered headers, native response independence, missing
+evidence and output-file protection. The contextual header-rule unit tests
+document their one-header hash stand-in; genuine full-chain validation always
+hashes the actual input bytes.
+
+## Scope of the evidence
+
+This is header validation and recorded chain anchoring, not transaction or
+script revalidation. Historical receiving-node clocks are not reconstructed.
+Header timestamps do not independently measure discovery or broadcast times.
+
+The supplied classifications are fixed inputs, not identities established by
+this audit. Timing and nonce comparisons are descriptive; they do not
+independently validate a classifier, select a causal clock/mining model, or
+identify Satoshi. Alternative Bitquery classifications are outside this
+release's numerical analysis. The [analysis-scope record](../provenance/analysis_scope.json)
+states the boundaries explicitly.
+
+Separately written implementations and passing tests are computational
+cross-checks. They are not an external human peer-review endorsement or a
+reconstruction of the original author's complete 2022 dependency environment.
+The [prior-art search](prior-art.md) is bounded and does not establish
+worldwide priority.
+
+## Archived evidence
+
+Earlier execution records retain their original dates and scope:
+
+| Record | Scope |
 |---|---|
-| [`current-verification/quality-pass/`](../results/current-verification/quality-pass/) | Local quality-expansion acceptance, with commands and checked source hashes |
-| [Earlier `current-verification/run.json`](../results/current-verification/run.json) | An earlier 36-test acceptance snapshot, not the candidate's complete test count |
-| [Earlier `publication.json`](../results/current-verification/publication.json) | Initial publication and CI for `dcd4a58`; its then-missing three-label evidence and access failures are historical observations |
-| [`local-verification/`](../results/local-verification/) and [`release-verification/`](../results/release-verification/) | Preserved supplied-package records, including PHP 8.3.6 and earlier source/header downloads |
+| [Quality acceptance](../results/current-verification/quality-pass/) | Commands, source hashes and the 68-test local run |
+| [Earlier local run](../results/current-verification/run.json) | A preceding 36-test snapshot |
+| [Earlier publication observation](../results/current-verification/publication.json) | Initial source publication and CI for `dcd4a58` |
+| [Supplied-package records](../results/local-verification/) and [release-verification records](../results/release-verification/) | Earlier package snapshots, including PHP 8.3.6 execution and source/header downloads |
 
-The directory name `current-verification` is retained for link stability. Its
-[index](../results/current-verification/README.md) separates the snapshots;
-folder names alone do not establish freshness, hosted CI or a public release.
-
-## Remaining limits
-
-The frozen Bitquery CSV is unavailable, so its classification sensitivity is
-not presented as reproduced. The [pending-input record](../provenance/pending_inputs.json)
-preserves the source and unverified acquisition target. No external human
-peer review or original-author confirmation is asserted.
-
-Ten [recorded explorer observations](../provenance/independent_explorer_anchors.json)
-match the frozen headers and hashes offline. They are historical observations,
-not new explorer queries. The later local Electrum request received HTTP 403;
-the old successful download record has not been relabeled as a fresh check.
-
-Header validation and recorded chain anchoring do not revalidate transactions,
-scripts or historical receiving-node clocks. Header timestamp differences do
-not independently measure elapsed mining time, establish miner identity or
-settle whether a miner paused. Worldwide priority remains unestablished.
+The historical directory names are retained for stable references. Their
+[index](../results/current-verification/README.md) distinguishes the snapshots;
+a folder name is not a claim about which commit was executed.

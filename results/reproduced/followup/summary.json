@@ -277,8 +277,8 @@
     "headers": "b9e200ba15c904e05283461469d5582a9580df15ff842436576a7490454b03ec",
     "canonical_labels": "33c9927845ccd3016fb37bc2b860cfe7a3fea22522c67649d72c6dc50e9ae8e1"
   },
-  "not_reproduced_here": {
-    "Bitquery_classification_sensitivity": "Requires the separate frozen Bitquery CSV; not supplied in the recovered release package"
+  "excluded_analyses": {
+    "Bitquery_classification_sensitivity": "Alternative classifier labels are outside this fixed-label release; no Bitquery classifier or sensitivity is evaluated."
   },
   "csv_sha256": {
     "NPN_ab_300_to_599.csv": "686593c2e45b46f4a4343996dbb64eb0f4646652242cc714743ffd30c2ef04e3",

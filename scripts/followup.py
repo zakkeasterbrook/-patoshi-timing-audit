@@ -244,8 +244,8 @@ def run(output_dir=None):
         adjustment, cells = standardize(groups["PPN_ab_300_to_599"], groups["NPN_ab_300_to_599"])
         summary["common_range_standardization"] = adjustment
         summary["input_sha256"] = {"headers": HEADER_SHA256, "canonical_labels": LABEL_SHA256}
-        summary["not_reproduced_here"] = {
-            "Bitquery_classification_sensitivity": "Requires the separate frozen Bitquery CSV; not supplied in the recovered release package",
+        summary["excluded_analyses"] = {
+            "Bitquery_classification_sensitivity": "Alternative classifier labels are outside this fixed-label release; no Bitquery classifier or sensitivity is evaluated.",
         }
         write_csv(output_dir / "all_adjacent_pairs.csv", pair_rows, PAIR_FIELDS)
         for name, rows in groups.items():

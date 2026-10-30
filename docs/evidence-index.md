@@ -41,7 +41,11 @@ counterparts are written under `build/`.
 | [`mode_membership.csv`](../results/reproduced/mode_membership.csv) | Union of selected triples with all intervals and inclusion flags for the three modes. A missing mode flag is represented by `0`, not by deleting the case. |
 | [`diagnostics.json`](../results/reproduced/diagnostics.json) | Fixed-sample interval correction, selection decomposition, original negative case, exactly-300 cases, interval identity and final tracker. |
 | [`example_263_265.json`](../results/reproduced/example_263_265.json) | Complete minimal-example headers, hashes, integer/UTC timestamps, labels and computed differences. |
-| [`summary.json`](../results/reproduced/summary.json) | Input digests, validation scope/counts, mode summaries, CSV digests and explicit pending follow-ups. |
+| [`summary.json`](../results/reproduced/summary.json) | Input digests, validation scope/counts, mode summaries, CSV digests and explicit analyses not computed from this input set. |
+
+The core summary's `analysis_scope_exclusions` object identifies analyses
+outside the fixed-label release. It records scope rather than an incomplete
+calculation or a failed numerical check.
 
 The three compact core CSVs have exactly two columns:
 
@@ -125,14 +129,17 @@ Reconstruct the standardized short-gap fraction as
 `sum(ppn_weight * npn_below_300 / npn_cases)`; use `npn_negative` for the
 negative-gap fraction. Multiply by 100 for a percentage. This weights NPN
 cell rates to PPN composition. It is a descriptive calculation, not a causal
-estimate or a significance test. The parent-B era definition is an explicit
-reconstruction because the earlier follow-up script was not supplied.
+estimate or a significance test. The parent-B era definition is the explicit convention of this analysis;
+the complete cells expose how that choice enters the descriptive result.
 
 [`followup/summary.json`](../results/reproduced/followup/summary.json) groups the
 comparison statistics, pair partition, later-period diagnostics, nonce counts,
-standardization, definitions, input/output digests and missing analyses.
+standardization, definitions, input/output digests and analysis-scope declarations.
 Its `below_300_including_negative` field corresponds to core `less_300`;
 `cases` corresponds to core `n`. `median_seconds` is the ordinary sample median.
+Its `excluded_analyses` object supplies the core summary's
+`analysis_scope_exclusions`; alternative Bitquery classifications are outside
+this release, and no result using them is asserted.
 
 ## Disputed-label sensitivity
 
@@ -172,9 +179,9 @@ The revised result is **753 cases, 30 negative and 276 below 300 seconds
 Only child height 24,505 leaves the sample; no cases enter. This measures
 classification sensitivity, not the validity of the historical criticisms.
 
-## Portable candidate identity
+## Release artifact identity
 
-`scripts/build_release.py` accepts a version such as `1.0.0-rc.1` and requires
+`scripts/build_release.py` accepts the release version `1.0.0` and requires
 a clean, committed checkout with exact manifested-file coverage. It reads
 committed blobs, verifies their digests and writes these generated artifacts
 under `build/release/`:
@@ -183,7 +190,7 @@ under `build/release/`:
 |---|---|
 | `Patoshi_Timing_Audit_v<version>.zip` | Complete manifested source tree under `patoshi-timing-audit/`, plus generated `RELEASE_MANIFEST.json`. Members are sorted with fixed 1980-01-01 container timestamps and `ZIP_STORED` compression mode. |
 | `SHA256SUMS.txt` | Archive byte digest and filename. This generated artifact checksum is separate from the repository-root source-file manifest of the same name. |
-| `release.json` | Packaging status, version, exact Git commit, archive name/size/digest, source-file count, generated metadata name and explicit GitHub-release-creation flag. |
+| `release.json` | Packaging status, version, exact Git commit, archive name/size/digest, source-file count, generated metadata name and `artifact_type` (`reproducible_source_archive`). |
 
 Inside the archive, `RELEASE_MANIFEST.json` records `format_version`, project,
 repository, version, exact `git_commit`, source commit time, packaging and
@@ -197,7 +204,7 @@ scientific execution or native-PHP run. The configured CI packaging job depends
 on offline/native verification. Consult the actual run for its execution state;
 an archive or uploaded CI artifact does not establish a tagged GitHub Release.
 
-## Execution records and unverified inputs
+## Execution records and analytical scope
 
 [`results/current-verification/`](../results/current-verification/) contains
 command/runtime logs and observed publication records. Earlier
@@ -206,9 +213,8 @@ archive evidence for their own snapshots; folder names alone do not establish
 fresh execution or a GitHub release. Check exact commits and outcomes in
 [verification status](verification.md).
 
-[`provenance/pending_inputs.json`](../provenance/pending_inputs.json) identifies
-the missing frozen Bitquery CSV. That classification-sensitivity calculation
-is not completed here. Its reported source checksum is an unverified
-acquisition target, not a verified local input.
-Any future high-grade Bitquery analysis must preserve medium/low positives as
-unknown and use explicitly negative source rows as N; genesis is unclassified.
+The [analysis-scope record](../provenance/analysis_scope.json) specifies the
+classification and causal questions that are not established by this release.
+Alternative Bitquery label sets and their classifier are not inputs to these
+calculations; no numerical result using that source is claimed. All main
+results retain the original published labels.

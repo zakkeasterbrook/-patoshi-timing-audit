@@ -1,41 +1,87 @@
 {
-  "record_type": "latest_inspected_candidate_status",
-  "observed_utc": "2026-10-30T16:21:17.192632+00:00",
-  "candidate": {
-    "version": "1.0.0-rc.1",
-    "tag": "v1.0.0-rc.1",
-    "tag_url": "https://github.com/zakkeasterbrook/-patoshi-timing-audit/tree/v1.0.0-rc.1",
-    "commit": "59d150f9d95c572f539705561f71f1e248ef2a36",
-    "scope": "Immutable reviewed source snapshot; later main-branch documentation commits do not move this tag"
+  "schema_version": 1,
+  "record_type": "release_evidence_index",
+  "release": {
+    "version": "1.0.0",
+    "tag": "v1.0.0",
+    "source_url": "https://github.com/zakkeasterbrook/-patoshi-timing-audit/tree/v1.0.0",
+    "release_url": "https://github.com/zakkeasterbrook/-patoshi-timing-audit/releases/tag/v1.0.0",
+    "exact_commit_record": "RELEASE_MANIFEST.json.git_commit in the downloadable archive; also release.json.git_commit",
+    "artifact_type": "reproducible_source_archive",
+    "assets": [
+      "Patoshi_Timing_Audit_v1.0.0.zip",
+      "SHA256SUMS.txt",
+      "release.json"
+    ]
   },
-  "hosted_verification": {
-    "url": "https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/runs/41086244756",
-    "commit": "59d150f9d95c572f539705561f71f1e248ef2a36",
-    "conclusion": "success",
+  "validation": {
+    "workflow": ".github/workflows/verify.yml",
+    "workflow_url": "https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/workflows/verify.yml",
+    "release_gate": "The tagged source must pass offline, native PHP and archive verification before release publication",
     "coverage": [
       "Linux Python 3.10",
       "Linux Python 3.12",
       "Linux Python 3.14",
       "Windows Python 3.12",
       "Fresh native PHP",
-      "Portable candidate archive"
+      "Complete source inventory and archive identity"
     ],
-    "manual_online_header_acquisition": "skipped in this push-triggered run"
-  },
-  "recorded_local_acceptance": {
-    "record": "current-verification/quality-pass/run.json",
-    "tests": {
-      "run": 68,
-      "passed": 68,
-      "failed": 0,
-      "skipped": 0
+    "recorded_local_acceptance": {
+      "record": "current-verification/quality-pass/run.json",
+      "tests": {
+        "run": 68,
+        "passed": 68,
+        "failed": 0,
+        "skipped": 0
+      },
+      "runtime": "PHP 8.4.27 with -n; Python runtime and source-file hashes recorded in the log",
+      "scope": "Recorded computational acceptance; the version-tag workflow identifies checks of the final release tree"
     },
-    "native_php": "8.4.27 with configuration disabled by -n; all core CSV bytes and row order agree with Python",
-    "scope": "Source-hash-identified local run before the final Windows archive-fixture correction; exact-commit hosted verification covers that correction",
-    "without_php_environment": "Eight native-dependent tests skip; this does not establish fresh PHP execution"
+    "pre_release_hosted_evidence": {
+      "commit": "59d150f9d95c572f539705561f71f1e248ef2a36",
+      "url": "https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/runs/41086244756",
+      "conclusion": "success",
+      "scope": "Earlier immutable pre-release snapshot, including the Windows archive-fixture correction"
+    },
+    "native_test_contract": "Eight native-dependent tests skip without an explicit PHP executable and pinned source; a skipped run does not establish fresh native execution",
+    "online_checks": "Recorded explorer anchors are compared offline. The offline command performs no fresh explorer query or historical receiving-clock reconstruction."
+  },
+  "inputs": {
+    "mainnet_heights_inclusive": [
+      0,
+      49999
+    ],
+    "headers": 50000,
+    "header_bytes": 4000000,
+    "header_sha256": "b9e200ba15c904e05283461469d5582a9580df15ff842436576a7490454b03ec",
+    "published_positive_labels": 21953,
+    "upstream_source_commit": "66ee906b28ca13269d6f71d63f848973a1b747a2"
+  },
+  "core_results": {
+    "published": {
+      "cases": 1881,
+      "negative": 1,
+      "below_300_including_negative": 5
+    },
+    "one_assignment_repaired": {
+      "cases": 400,
+      "negative": 10,
+      "below_300_including_negative": 144
+    },
+    "direct_stated_rule": {
+      "cases": 754,
+      "negative": 30,
+      "below_300_including_negative": 276
+    },
+    "fixed_sample_interval_diagnostic": {
+      "cases": 1881,
+      "negative": 121,
+      "below_300_including_negative": 713,
+      "eligibility": "Original legacy selection and eligibility retained"
+    },
+    "definitions": "Below-300 counts include negatives; each calculation has its own selected denominator. The published interval is C-minus-A; corrected intervals are C-minus-B."
   },
   "source_supported_three_label_sensitivity": {
-    "status": "reproduced",
     "source_record": "../provenance/disputed_labels.json",
     "removed_positive_labels": [
       24504,
@@ -51,46 +97,20 @@
     ],
     "added_case_child_heights": []
   },
-  "formal_github_prerelease": {
-    "status": "not_published_api_request_denied",
-    "url": null,
-    "tag_exists": true,
-    "ci_candidate_artifact_exists": true,
-    "release_asset_upload_confirmed": false,
-    "public_releases_page": "https://github.com/zakkeasterbrook/-patoshi-timing-audit/releases",
-    "public_page_observation": "No releases listed",
-    "last_attempt": "gh release create with --verify-tag --prerelease and all three verified assets: API request denied",
-    "prepared_archive": {
-      "name": "Patoshi_Timing_Audit_v1.0.0-rc.1.zip",
-      "git_commit": "59d150f9d95c572f539705561f71f1e248ef2a36",
-      "sha256": "de3aa15ba3144916bc6e6c20c08d857e6a2c58c6f4c9714e01410ff69d315ef8"
-    }
+  "scope": {
+    "record": "../provenance/analysis_scope.json",
+    "classification": "Published labels are fixed inputs; this audit does not independently validate attribution or identify Satoshi",
+    "causal_interpretation": "Descriptive header-time and nonce comparisons do not establish a mining pause or clock mechanism",
+    "other_classification_sources": "Alternative Bitquery label sets and their classifier are outside this release analysis",
+    "review": "Computational cross-checks are not an external human peer-review endorsement",
+    "priority": "The documented bounded search does not establish worldwide priority"
   },
-  "remaining_limits": [
-    "Frozen Bitquery classification CSV unavailable; its sensitivity is not reproduced",
-    "External human review and original-author confirmation pending",
-    "Recorded explorer anchors match offline; no fresh explorer recheck or historical receiving-clock validation claimed",
-    "Worldwide priority not independently established"
-  ],
   "historical_records": [
+    "current-verification/quality-pass/",
     "current-verification/publication.json",
     "current-verification/run.json",
     "local-verification/",
     "release-verification/"
   ],
-  "history_policy": "Historical dates, runtime results, counts and access observations remain unchanged; this record indexes the latest inspected candidate instead of rewriting prior observations",
-  "repository_metadata": {
-    "status": "update_request_denied",
-    "description": "Reproducible correction to the 2022 Patoshi timing test, with frozen Bitcoin headers, complete results, and Python/PHP verification.",
-    "topics_to_add": [
-      "bitcoin",
-      "patoshi",
-      "reproducible-research",
-      "blockchain-analysis",
-      "timestamp-analysis",
-      "python",
-      "php",
-      "research-audit"
-    ]
-  }
+  "history_policy": "Dated observations and raw command logs are preserved for their tested snapshots; they are not rewritten as release results"
 }

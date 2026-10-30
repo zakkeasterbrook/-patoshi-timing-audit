@@ -1,204 +1,167 @@
 # Patoshi Timing Audit
 
-**Zakk Easterbrook · The early-Bitcoin mystery, one mistaken timestamp, and what changes after correction**
+**A 71-second timestamp gap was reported as 630 seconds. That changes a published test of early Bitcoin mining.**
+
+Zakk Easterbrook · [v1.0.0](https://github.com/zakkeasterbrook/-patoshi-timing-audit/releases/tag/v1.0.0)
 
 [![Verify audit](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/workflows/verify.yml)
 
-Bitcoin’s early blocks left a record of numbers, mining fingerprints and clock times. Researchers have studied those records for years, asking whether many early blocks came from one mining operation and whether it could have been connected to Satoshi Nakamoto, the name used by Bitcoin’s creator.
+On 13 January 2009, Bitcoin block 264 recorded the time **00:19:40 UTC**. The next block, 265, recorded **00:20:51**: a difference of **71 seconds**. A timing script published in 2022 reports **630 seconds** for that same following-block observation. It subtracts the timestamp of block 263 instead of block 264.
 
-That is the background to the **Patoshi hypothesis**. This project follows one later timing test back to its source code, finds a concrete mistake, and reproduces what happens when it is corrected.
+The error matters because the script was counting differences below five minutes. This example crosses that threshold entirely because the program starts one block too early.
 
-**The Patoshi idea did not come from Jameson Lopp’s 2022 test. Correcting that test does not, by itself, erase the earlier research.** It changes one particular piece of numerical evidence in that discussion.
+Across the audited data, the published implementation produces **5 differences below five minutes among 1,881 selected cases**. Implementing its stated test gives **276 among 754**. The same historical headers and classifications underlie both results. The calculation—and which cases qualify—changes.
 
-The specific change is large: the published script reports **5 recorded gaps under five minutes among 1,881 cases**. Implementing the stated test gives **276 among 754**. Both calculations use the same underlying headers and labels; they select different samples. The totals include negative timestamp differences, explained below.
+**These counts include negative timestamp differences, and the samples have different denominators.** A block timestamp is supplied by its miner; it is not an independently observed discovery time.
 
-![Overview of the three calculations. The published script has 5 of 1,881 recorded gaps under five minutes; the one-line repair has 144 of 400; the full stated test has 276 of 754.](docs/figures/timing_test_comparison.png)
+![Three reproduced calculations: the published implementation reports 5 of 1,881 differences below five minutes; repairing one timestamp assignment gives 144 of 400; implementing the stated sequence rule gives 276 of 754. Negative values are shown separately within those totals.](docs/figures/timing_test_comparison.png)
 
-**Follow the story:** [The background](#1-the-mystery-came-first) · [The test](#2-the-question-the-timing-test-asked) · [The real example](#3-three-blocks-show-the-mistake) · [Results and line graphs](#5-what-the-line-graphs-show) · [What remains](#7-what-remains-in-the-data) · [Reproduce it](#check-it-yourself)
+This repository documents the source error, reproduces the original output, and separates the effects of correcting its measurement and selection rules. The inputs, every selected case, independent calculations and figure-generation code are included so the finding can be checked from the bytes upward.
 
-## 1. The mystery came first
+## Why this test matters
 
-A Bitcoin **block** is a batch of transactions added to the network’s ordered ledger. **Miners** compete to add the next block. A block’s **height** is simply its position in that sequence.
+The calculation comes from the script linked in Jameson Lopp’s September 2022 article [*Was Satoshi a Greedy Miner?*](https://blog.lopp.net/was-satoshi-a-greedy-miner/). It formed part of a discussion about unusual early-block timing: did a mining operation pause between blocks, or did the recorded timestamps reflect some other behaviour?
 
-Researchers examining the early records noticed patterns in how some blocks appeared to have been produced. Earlier work studied mining-related counters and search values, not just the time written on each block. “Patoshi” became the name associated with a proposed early mining pattern.
+That discussion belongs to the wider **Patoshi hypothesis**—the proposal that many early Bitcoin blocks can be associated with a common mining operation, often discussed in connection with Bitcoin’s pseudonymous creator, Satoshi Nakamoto.
 
-The important distinction is between **seeing a pattern**, **assigning blocks to one mining operation**, and **identifying the person behind it**. Those are three different claims.
+The hypothesis predates Lopp’s test. Sergio Demian Lerner published [early mining-pattern analysis in 2013](https://bitslog.com/2013/04/17/the-well-deserved-fortune-of-satoshi-nakamoto/), followed by [Patoshi and nonce-range research in 2019](https://bitslog.com/2019/04/16/the-return-of-the-deniers-and-the-revenge-of-patoshi/). His [2020 timestamp investigation](https://bitslog.com/2020/06/22/a-new-mystery-in-patoshi-timestamps/) described unusual spacing and discussed possible explanations. Earlier work also examined mining-related counters and search values rather than relying on this one timing statistic.
 
-| When | Part of the story |
-|---|---|
-| **2013** | Sergio Demian Lerner published [early mining-pattern research](https://bitslog.com/2013/04/17/the-well-deserved-fortune-of-satoshi-nakamoto/). |
-| **2019** | His [Patoshi and nonce-range work](https://bitslog.com/2019/04/16/the-return-of-the-deniers-and-the-revenge-of-patoshi/) examined further mining fingerprints. |
-| **2020** | [Timestamp research](https://bitslog.com/2020/06/22/a-new-mystery-in-patoshi-timestamps/) discussed unusual spacing and possible pause or clock explanations. |
-| **2022** | Jameson Lopp’s [“Was Satoshi a Greedy Miner?”](https://blog.lopp.net/was-satoshi-a-greedy-miner/) included the specific timing test audited here. |
-| **2026** | This audit reproduces that script, isolates its error, and separately implements its stated rule. |
+An error in the 2022 script therefore changes one argument within that history. It does not establish that the broader pattern is fictitious, that every classification is sound, or that an attributed miner was Satoshi. Those claims require evidence beyond this calculation.
 
-This repository does **not** rebuild the entire original Patoshi classification method. It takes the published list of labels as a fixed input so that a code correction can be examined without changing which blocks were originally classified.
+The purpose of this audit is narrower and directly testable: determine whether the published program measured the test it described, and show what happens when that test is implemented correctly.
 
-Here, **P** means “in the supplied Patoshi list” and **N** means “outside that list.” Neither label proves who mined a block; N does not prove a different real-world miner.
+## What was supposed to be measured
 
-## 2. The question the timing test asked
+Bitcoin’s ledger is an ordered sequence of **blocks**, each containing transactions. **Miners** compete to add the next block. A block’s **height** is its position in that sequence. Its **header** is a small identifying record containing, among other fields, a timestamp selected by the miner.
 
-One question in the wider discussion was whether unusual timing reflected mining behaviour, such as pauses, or behaviour in the timestamps themselves.
+For this audit, **P** means membership in the exact published Patoshi list; **N** means absence from it. These are classifications, not established identities. An N block is not proof that a different real-world miner produced it.
 
-The 2022 test looked for this specific sequence:
+The stated test examines three consecutive heights:
 
-1. A block in the published group: **A — P**.
-2. Another consecutive block in that group: **B — P**, with its timestamp less than ten minutes after A’s.
-3. The next consecutive block outside the group: **C — N**.
+1. **A:** a block labelled P.
+2. **B:** another P block, with `timestamp(B) − timestamp(A) < 600 seconds`.
+3. **C:** the next block, labelled N.
 
-It then measured the timestamp difference **from B to C**. In this test, a “short” following difference means **strictly under five minutes**, or 300 seconds.
+The intended observation is **`timestamp(C) − timestamp(B)`**. The reported short-gap statistic counts values **strictly below 300 seconds**—five minutes. No nonnegative lower bound is added to either the stated preceding-gap condition or the short-gap count.
 
-The published result looked striking: **only five short differences among 1,881 selected cases**. This is the count the audit investigates.
+Those details matter. A miner-supplied clock can go backward relative to the previous header while the blocks remain in their fixed chain order. A negative timestamp difference is not negative elapsed time, and it must not silently disappear from a reproduction of the published rule.
 
-There is an essential clock warning. Every block has a small identifying record called a **header**, including a timestamp supplied by its miner. It is **not an independent stopwatch reading of when the block was discovered**. Different clocks can even make the next block’s recorded time earlier than the previous block’s time. A negative difference describes those recorded times, not negative elapsed time.
+## The error in three real blocks
 
-## 3. Three blocks show the mistake
+The first 500 blocks already contain an example that can be checked without interpreting an aggregate statistic:
 
-The problem becomes concrete with blocks **263, 264 and 265**, recorded on 13 January 2009.
+| Height | Supplied label | Header timestamp, UTC |
+|---|---|---|
+| 263 — A | P | 2009-01-13 00:10:21 |
+| 264 — B | P | 2009-01-13 00:19:40 |
+| 265 — C | N | 2009-01-13 00:20:51 |
 
-The first two are in the supplied group. The third is outside it.
+A→B is **559 seconds**, or 9 minutes 19 seconds, so the preceding-gap condition passes. B→C is **71 seconds**, or 1 minute 11 seconds. The published output is A→C: **630 seconds**, or 10 minutes 30 seconds.
 
-- **263 → 264:** 559 seconds, or **9 minutes 19 seconds**. This passes the under-ten-minute condition.
-- **264 → 265:** 71 seconds, or **1 minute 11 seconds**. This is the intended measurement.
-- **263 → 265:** 630 seconds, or **10 minutes 30 seconds**. This is what the published program reports.
+![The verified 263–265 example: 559 seconds between the two P blocks, then 71 seconds to the N block. Measuring from the first P block instead produces 630 seconds. Block positions are schematic.](docs/figures/interval_example.png)
 
-**A recorded difference of 71 seconds becomes 630 seconds because the program starts one block too early.**
-
-![Actual header times for blocks 263, 264 and 265. The intended second-to-third interval is 71 seconds; the published first-to-third interval is 630 seconds. Positions are schematic.](docs/figures/interval_example.png)
-
-The source fetches the second block, but then reads the first block’s timestamp into the variable meant for the second.
-
-That has two consequences. It adds the preceding gap to the reported difference. It also makes the intended ten-minute filter automatically pass: the program effectively asks whether a time is less than that same time plus ten minutes.
-
-<details>
-<summary>See the exact one-line source correction</summary>
-
-The [immutable upstream source](https://github.com/jlopp/bitcoin-utils/blob/66ee906b28ca13269d6f71d63f848973a1b747a2/findNonPatoshiDeltasAfterFastPatoshiBlocks.php) contains the wrong-object assignment:
+The [pinned PHP source](https://github.com/jlopp/bitcoin-utils/blob/66ee906b28ca13269d6f71d63f848973a1b747a2/findNonPatoshiDeltasAfterFastPatoshiBlocks.php) fetches B but reads A’s response when assigning B’s time:
 
 ```diff
 -$patoshiBlock2Time = $patoshiBlock1->get('time');
 +$patoshiBlock2Time = $patoshiBlock2->get('time');
 ```
 
-For consecutive A, B, C, the stated rule requires `tB − tA < 600` and measures `tC − tB`. The defective assignment instead makes the filter `tA < tA + 600` and emits `tC − tA`.
+This affects two operations. The intended filter, `tB < tA + 600`, becomes `tA < tA + 600`, which always passes for these integer timestamps. The intended difference, `tC − tB`, becomes `tC − tA` and includes the preceding interval as well.
 
-The rule does not add a nonnegative lower bound to the preceding difference. The audit preserves that detail.
+The [example evidence](results/reproduced/example_263_265.json) includes the integer timestamps, calculated block hashes and actual serialized headers. Run `python3 scripts/demo.py` to reproduce the arithmetic. This demonstrates a defect in a **2022 analysis program**, not a defect in Bitcoin’s 2009 software.
 
-</details>
+## Reproduce first, then correct
 
-You can inspect [the three actual headers, hashes and integer timestamps](results/reproduced/example_263_265.json), or run `python3 scripts/demo.py`.
+The dataset contains **50,000 consecutive mainnet headers**, heights 0–49,999, with recorded timestamps spanning January 2009 to April 2010. The **21,953 published labels remain unchanged** in all three main calculations. Reclassifying the blocks would answer a different question and make it harder to isolate the implementation error.
 
-This is an error in a **2022 analysis program**. The early blocks expose its effect; they do not demonstrate a defect in Bitcoin’s original software.
+The published algorithm is reproduced first, including its timestamp assignment and sequence tracker. It returns the article’s original counts: 1,881 cases, one negative difference and five below five minutes. The table expresses 5/1,881 as 0.27%, to two decimal places.
 
-## 4. Reproduce the original, then separate the corrections
+The one-line repair changes only the assignment shown above. A separate direct implementation scans every consecutive P→P→N triple and applies the stated condition and interval without using the original tracker.
 
-The audit first reproduces the published result. It uses the same **21,953 labels** and a frozen set of **50,000 block headers**, heights 0–49,999, whose recorded timestamps span January 2009 to April 2010.
+| Calculation | Selected cases | Negative | Nonnegative under 5 minutes | At least 5 minutes | All under 5 minutes |
+|---|---:|---:|---:|---:|---:|
+| Published implementation | 1,881 | 1 | 4 | 1,876 | **5 — 0.27%** |
+| One timestamp assignment repaired | 400 | 10 | 134 | 256 | **144 — 36.00%** |
+| Direct stated rule | 754 | 30 | 246 | 478 | **276 — 36.60%** |
 
-That matters: the comparison begins with the original calculation on the original classifications.
+**All-under-five-minute totals include negatives. Each row uses its own denominator.** The original measures A→C; corrected versions measure B→C. None of these samples contains a zero-valued output.
 
-The next step changes only the mistaken timestamp assignment. A third calculation independently scans every consecutive three-block sequence and implements the stated rule directly.
+Fixing the assignment restores the timing filter and removes 1,481 originally selected cases, leaving 400. The tracker has separate selection omissions: it requires more than two stored P heights and discards a potential new run’s first height when resetting. The direct rule includes 354 additional qualifying cases, giving **400 + 354 = 754**. The [technical note](docs/technical-note.md) traces these behaviours and the complete inclusion differences.
 
-| Calculation | What changes | Selected cases | All differences under 5 minutes |
-|---|---|---:|---:|
-| **Published script** | Preserve the original timestamp assignment and sequence tracker. | 1,881 | **5 — 0.27%** |
-| **One-line repair** | Read B’s time correctly, restoring the intended interval and time filter; retain the original tracker. | 400 | **144 — 36.00%** |
-| **Full stated test** | Enumerate every adjacent P→P→N triple, apply the stated filter, and measure B→C. | 754 | **276 — 36.60%** |
+## Reading the line graphs
 
-**The under-five-minute counts include negative values. Each row has its own denominator.** The negative counts are 1, 10 and 30, respectively. Percentages are computed from the counts and shown to two decimal places.
+A single threshold can hide the shape of the data. These lines show the distribution of every selected timestamp difference.
 
-The case counts change for a reason. Repairing the timestamp restores the intended time filter, removing 1,481 legacy-selected cases. The original tracker also skips some sequences permitted by the stated rule. Enumerating the rule directly adds 354 qualifying cases: **400 + 354 = 754**.
+Choose a gap along the bottom axis, move up to a line, then read the percentage on the left. That is the share of the selected cases with a recorded difference **at or below** that value. A line rising earlier contains more short gaps. The horizontal axis is a gap in minutes, not a timeline through Bitcoin’s history.
 
-The [technical note](docs/technical-note.md) documents the tracker behaviour and every inclusion difference. The original classifications remain unchanged throughout.
+![Cumulative distributions of all three calculations, shown in minutes and percentages. Near five minutes, the corrected curves have accumulated about a third of their cases while the original curve remains near zero.](docs/figures/reader_timing_lines.png)
 
-## 5. What the line graphs show
+At the five-minute reference, the corrected curves contain about a third of their selected cases. The original curve remains near zero. The historical headers have not changed; the program selects and measures them differently.
 
-The correction changes more than one example or one total. It changes the distribution of reported gaps.
-
-The graph below puts the recorded gap, in **minutes**, along the bottom. The left side gives the **percentage of selected cases at or below that gap**.
-
-To read it, choose a gap along the bottom, move up to a line, then read the percentage on the left. **A line that rises earlier contains more short recorded gaps.** These lines are distributions, not a timeline of Bitcoin history.
-
-![Three cumulative timing distributions in minutes and percentages. The corrected curves accumulate about a third of their cases around five minutes, while the published curve remains near zero.](docs/figures/reader_timing_lines.png)
-
-At the five-minute reference, the corrected curves have accumulated about a third of their cases. The published curve is still near zero. The historical headers have not changed; the calculations select and measure them differently.
-
-The exact table counts use **strictly under** five minutes. The curves use **at or below** the value on the axis, so an observation exactly at five minutes enters the curve but not the table’s short-gap count. Negative recorded differences remain included.
-
-The displayed window is a zoom. Longer gaps still contribute to every denominator.
+The displayed range is a zoom. Negative differences and gaps beyond the right edge still contribute to the denominators. The curves use **at or below**; the exact short-gap counts use **strictly below** five minutes. Each corrected sample has one observation exactly at 300 seconds, included in its curve at that point but excluded from its short-gap total.
 
 <details>
-<summary>Open the full-range line graphs, including the long tail</summary>
+<summary>Full-range distributions and the long tail</summary>
 
-![Full-range cumulative distributions and a disclosed zoom, generated from every selected row. Units are seconds; negatives and long gaps remain in each sample.](docs/figures/timing_gap_distributions.png)
+![Complete observed distributions and a disclosed zoom, generated from every selected row. The horizontal units here are seconds; all negative and long differences remain included.](docs/figures/timing_gap_distributions.png)
 
-The left panel shows the entire observed range, from −1,407 to 31,007 seconds. The right panel zooms into −300 to 1,800 seconds. Both use all cases in each calculation.
+The full observed range is −1,407 to 31,007 seconds. Both panels use each version’s entire selected sample; the right panel changes only the displayed horizontal range.
 
 </details>
 
-## 6. Is the different sample doing all the work?
+## Hold the sample fixed
 
-There is a direct way to separate the measurement error from the sample changes.
+Changing the selected cases is not the only source of the difference. The measurement error can be isolated while retaining **all 1,881 original cases**, with their original selection and eligibility.
 
-Keep **exactly the same 1,881 cases** selected by the original program. Leave its selection and eligibility untouched. Change only the measured difference from **A→C to B→C**.
+Change only the reported interval from A→C to B→C. The count below five minutes rises from **5 to 713: 37.91%**, including **121 negatives**.
 
-The under-five-minute count changes from **5 to 713 — 37.91%**. The 713 include **121 negative differences**.
+![The same 1,881 cases measured two ways: 5 below five minutes using the published A-to-C interval, and 713 using B-to-C. The legacy selection and eligibility remain unchanged.](docs/figures/same_sample_comparison.png)
 
-![The same 1,881 cases measured two ways. The published interval gives 5 under five minutes; the intended interval gives 713. Selection and eligibility remain unchanged.](docs/figures/same_sample_comparison.png)
+This diagnostic keeps the sample constant; it does not restore the intended timing filter or sequence selection. **276/754 remains the main result for the fully implemented stated test.** The [diagnostic record](results/reproduced/diagnostics.json) and [mode-membership table](results/reproduced/mode_membership.csv) expose the per-case effects.
 
-This is a diagnostic, not a fourth fully corrected version of the advertised test. It isolates the interval error on a fixed sample. **276 out of 754 remains the main result for the fully implemented stated rule.**
+## The structure that remains
 
-The [complete diagnostic record](results/reproduced/diagnostics.json) and [per-case comparison](results/reproduced/mode_membership.csv) let a reader trace the changes without relying on aggregate percentages.
+The corrected following-block test and the earlier observations about spacing between attributed blocks ask different questions. One measures the gap from an in-list block to the next outside-list block after a qualifying P→P pair. The other can examine the spacing between two in-list blocks themselves.
 
-## 7. What remains in the data
+Across the frozen dataset’s **49,999 adjacent pairs**, the supplied groups retain markedly different recorded timing distributions:
 
-Correcting one test does not make every other feature disappear.
+![Cumulative timing distributions for adjacent P-to-P and N-to-N pairs. The supplied groups have different recorded spacing; the plot is not independent validation of their attribution or miner identity.](docs/figures/remaining_timing_structure.png)
 
-The earlier test asked how an **outside-list block follows two in-list blocks**. A separate question is how timestamps differ **between two adjacent in-list blocks themselves**. Those are different pairs and different measurements.
+For pairs whose two blocks are in the supplied group, **139 of 13,053** differences are below five minutes. For pairs whose two blocks are outside it, **8,238 of 19,146** are below five minutes. Negatives are included, each group has its own denominator, and this comparison applies no preceding-gap filter.
 
-Across all 49,999 adjacent pairs in the frozen dataset, the supplied groups still show markedly different recorded spacing:
+These are observations under the published classification. The labels may themselves have used related timing or nonce features, so the separation is **not independent proof that the labels identify one miner**.
 
-![Timing structure in adjacent pairs. P-to-P and N-to-N groups have different cumulative gap distributions. The groups use supplied labels and are not independently validated miner identities.](docs/figures/remaining_timing_structure.png)
+Nonce structure also remains. A nonce is a number varied during mining’s search for a valid block. A previously discussed band of values in one part of that number contains all 21,953 P-labelled blocks, but **5,655 unlisted blocks fall inside it too**. That feature alone does not establish attribution. Earlier ExtraNonce analysis concerns a different value in the mining-reward transaction; this header audit does not reconstruct that classifier. The [follow-up analysis](docs/context.md) provides the exact byte-order checks, comparison groups and classification sensitivities.
 
-For pairs with both blocks in the supplied group, **139 of 13,053** gaps are under five minutes. For pairs with both blocks outside it, **8,238 of 19,146** are under five minutes. These counts include negatives, use different denominators, and apply no preceding-gap filter.
+Nor does a short following gap rule out a pause: other miners can find a block while one miner is inactive. Timestamp differences alone cannot distinguish every mining or clock mechanism. A visible pattern, a reliable attribution to one operation and identification as Satoshi are separate evidential steps.
 
-**This is not independent proof that the classifications are correct.** The labels may themselves use related timing or nonce features. The graph shows structure under the supplied classification; it does not identify the miner.
+## What this audit establishes
 
-Researchers also studied the **nonce**, a number varied during mining’s search for a valid block. In this dataset, a previously discussed band of values in one small part of that number contains all 21,953 blocks marked P—but **5,655 unlisted blocks fall inside it too**. That range alone cannot tell us who mined a block. The [exact nonce-byte check](docs/context.md#the-nonce-structure-remains) is documented separately.
+The source and reproduced outputs support a specific conclusion: **the published near-absence of short following-block timestamp differences does not survive a correct implementation of the stated test**.
 
-Some earlier research used **ExtraNonce**, an extra value in the block’s mining-reward transaction. It is different from the header’s nonce, and this header-only audit does not reconstruct the full ExtraNonce classification method. The [follow-up note](docs/context.md) preserves the nonce checks, comparison groups, historical exclusions and disputed-label sensitivity with their limits.
+The error is directly visible in the code, demonstrable on real headers and substantial both on the original fixed sample and under the corrected selection. It changes that statistic’s contribution to the pause-versus-timestamp discussion. It does not identify Satoshi, independently validate the supplied labels, or settle how the recorded timing pattern arose.
 
-A pause also remains a possible explanation to investigate: **if one miner pauses, other miners can still find the next block quickly**. Short following gaps alone cannot establish whether a pause occurred or distinguish every clock mechanism.
+Verification here is computational. For each version, native PHP and Python agree on every ordered output row. That agreement is not an external peer-review endorsement. The [methodology](docs/methodology.md) defines the validation scope; the [prior-art record](docs/prior-art.md) documents a bounded search rather than a claim of worldwide priority.
 
-## 8. What can we actually conclude?
+## Reproduce the release
 
-| Question | What this audit supports |
-|---|---|
-| Does the published script calculate its stated timing test? | **No.** The source, real-header example and reproduced outputs demonstrate the mismatch. |
-| Does correcting it change the reported scarcity of short following gaps? | **Yes.** The near-absence does not survive a correct implementation of this stated test. |
-| Are there still measurable structures in the early data? | **Yes, under the supplied groups**, with classification and feature-selection caveats. |
-| Does this establish that one miner produced all attributed blocks? | **No.** This audit does not independently validate that attribution. |
-| Does it identify Satoshi? | **No.** Miner identity remains a separate question. |
-
-The conclusion is specific: **one published statistic changes substantially when its stated calculation is implemented correctly**. The identity and behaviour behind the broader Patoshi hypothesis remain separate research questions.
-
-That is why this repository preserves both the correction and the evidence that remains, credits the earlier work, and includes every result row for inspection.
-
-## Check it yourself
-
-The numerical audit needs **Python 3.10+** and its standard library:
+The numerical audit uses **Python 3.10+ and its standard library**. From the project root:
 
 ```sh
 python3 reproduce.py
 ```
 
-It validates the frozen inputs and header chain, regenerates all retained rows, and compares complete evidence. No Bitcoin node, RPC credentials, live explorer or plotting packages are required. Run without Python optimization flags.
+It checks the frozen input digests, known mainnet genesis, header links, proof of work, difficulty rules at all 24 retarget boundaries and median time past. It regenerates every retained row and compares the complete evidence. Header validation does not revalidate transactions or reconstruct historical receiving-node clocks.
 
-The source is pinned, the complete case tables are included, and fresh execution of the original PHP and one-line repair has been compared with Python byte for byte. The [verification page](docs/verification.md) distinguishes local tests, hosted CI, archived observations and publication status.
+The core calculation runs offline without a Bitcoin node, RPC credentials or plotting dependencies. Use Python without optimization flags. Fresh native-PHP verification and independent checks are described in the [reviewer guide](docs/reviewer-guide.md).
+
+**[Download v1.0.0](https://github.com/zakkeasterbrook/-patoshi-timing-audit/releases/tag/v1.0.0)** · [Verification](docs/verification.md) · [Input provenance](docs/provenance.md) · [Complete results](results/reproduced/) · [Evidence schemas](docs/evidence-index.md)
 
 <details>
-<summary>Regenerate the visual explanations</summary>
+<summary>Regenerate the figures</summary>
 
-Plotting is optional and separate from the numerical reproduction:
+The optional plotting dependencies and commands are separate from numerical reproduction:
 
 ```sh
 python3 -m pip install -r requirements-figures.txt
@@ -206,18 +169,8 @@ python3 scripts/plot_results.py
 python3 scripts/story_figures.py
 ```
 
-All scientific figures are generated from the reproduced data. The line graphs retain their full sample sizes even where the displayed horizontal range is zoomed.
+Each scientific figure is generated from reproduced data. Zooming a graph does not remove observations from its sample.
 
 </details>
 
-## Go deeper
-
-- [Plain-English explanation](docs/plain-english.md) and [technical note](docs/technical-note.md).
-- [Reviewer guide](docs/reviewer-guide.md), [evidence index](docs/evidence-index.md) and [methodology](docs/methodology.md).
-- [Input provenance](docs/provenance.md), [prior-art search](docs/prior-art.md) and [complete results](results/reproduced/).
-- [Current verification and publication status](docs/verification.md), [candidate tag](https://github.com/zakkeasterbrook/-patoshi-timing-audit/tree/v1.0.0-rc.1) and [portable archive instructions](docs/release-artifacts.md).
-- [Contributing](CONTRIBUTING.md): report a reproducible discrepancy or submit an outside review.
-
-External human review and original-author confirmation remain pending. The separate frozen Bitquery comparison dataset is unavailable, so that sensitivity is unverified. Header validation does not revalidate transactions or reconstruct historical receiving-node clocks. The documented prior-art search does not establish worldwide priority.
-
-**Credit:** Jameson Lopp for the published article, source and classifications; Sergio Demian Lerner and earlier researchers for the Patoshi work this audit builds on. Newly authored code and documentation use the [MIT license](LICENSE); [third-party scope](THIRD_PARTY.md) and [citation metadata](CITATION.cff) are retained.
+Credit to Jameson Lopp for the published article, source and classifications, and to Sergio Demian Lerner and earlier researchers for the Patoshi work this audit builds on. Newly authored code and documentation use the [MIT license](LICENSE); [third-party scope](THIRD_PARTY.md) and [citation metadata](CITATION.cff) apply. Reproducible corrections and outside assessments are welcome through [CONTRIBUTING.md](CONTRIBUTING.md).
