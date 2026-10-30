@@ -2,6 +2,10 @@
 
 ## Documentation follow-up to v1.0.0-rc.1
 
+- Tell the broader research story for newcomers, separating early Patoshi
+  research from the later timing test, mining attribution and Satoshi's identity.
+- Restore the full-range line graphs and add reader-facing minute/percentage
+  plots explaining both the correction and the timing structure that remains.
 - Lead the README with the visual three-method comparison and explain exactly
   how each calculation differs from Lopp's published script.
 - Add a data-derived same-sample comparison figure and restore the visual
