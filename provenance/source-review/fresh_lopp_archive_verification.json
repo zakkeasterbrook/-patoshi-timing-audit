@@ -1,0 +1,27 @@
+{
+  "file": "lopp_archive_20220916132943.html",
+  "url": "https://web.archive.org/web/20220916132943id_/https://blog.lopp.net/was-satoshi-a-greedy-miner/",
+  "final_url": "https://web.archive.org/web/20220916132943id_/https://blog.lopp.net/was-satoshi-a-greedy-miner/",
+  "status": 200,
+  "redirects": [],
+  "started_utc": "2026-10-30T04:42:42.254634+00:00",
+  "retrieved_utc": "2026-10-30T04:42:43.027734+00:00",
+  "headers": {
+    "server": "envoy",
+    "date": "Fri, 30 Oct 2026 04:42:42 GMT",
+    "content-type": "text/html; charset=utf-8",
+    "content-length": "65191",
+    "cache-control": "max-age=1800,private"
+  },
+  "bytes": 65191,
+  "sha256": "354cbf5937c65bdfe72618aeb7d24abae2923b48308513c12d08deee5957343a",
+  "tls": "Python default SSL certificate and hostname validation enabled",
+  "decoded_bytes": 65191,
+  "decoded_sha256": "354cbf5937c65bdfe72618aeb7d24abae2923b48308513c12d08deee5957343a",
+  "selected_count": 1881,
+  "negative_count": 1,
+  "below300": 5,
+  "printed_percentage": "0.3",
+  "passage_sha256": "9b40e4309bf6ab1436329c93041505040e0471ce6aa7604e2e4f8c94b6f32f88",
+  "passage_characters": 1422
+}

@@ -1,0 +1,35 @@
+{
+  "blocks": [
+    {
+      "height": 263,
+      "block_hash": "00000000803cec62b96ccbb70affe0f05f351ada18d14a16960783aeafe0d8fc",
+      "timestamp": 1231805421,
+      "bits": 486604799,
+      "header_hex": "01000000a8479ee1a435404e1d08818ab5cf48b099201eefe2215f3e2946e662000000002c32b91e02ad893a2d8989b3034a184e9d192a91e71d52ae1008b0f14813362beddb6b49ffff001d052edd40",
+      "label": "P",
+      "timestamp_utc": "2009-01-13T00:10:21+00:00"
+    },
+    {
+      "height": 264,
+      "block_hash": "00000000641f9b99064bda263144a08761757b566357f49e95f516b0b5a4b778",
+      "timestamp": 1231805980,
+      "bits": 486604799,
+      "header_hex": "01000000fcd8e0afae830796164ad118da1a355ff0e0ff0ab7cb6cb962ec3c8000000000260c379a8b783c5122e1754883c09c1d55486bc40c8bf37b2b0166e4242db2af1cde6b49ffff001d2c240f27",
+      "label": "P",
+      "timestamp_utc": "2009-01-13T00:19:40+00:00"
+    },
+    {
+      "height": 265,
+      "block_hash": "000000001cd3ea335cdf6fbffe7fa954f761d16ff19893f04465916a3f5f5dc3",
+      "timestamp": 1231806051,
+      "bits": 486604799,
+      "header_hex": "0100000078b7a4b5b016f5959ef45763567b756187a0443126da4b06999b1f640000000011ab63f31531839ff98e81ea12006a17bacd6322dc380cee12633cfaf7fdbc3c63de6b49ffff001d59ad9300",
+      "label": "N",
+      "timestamp_utc": "2009-01-13T00:20:51+00:00"
+    }
+  ],
+  "preceding_gap_seconds": 559,
+  "intended_following_gap_seconds": 71,
+  "published_gap_seconds": 630,
+  "header_byte_range": "For height h, data/headers_0_49999.bin bytes [80*h, 80*(h+1))."
+}

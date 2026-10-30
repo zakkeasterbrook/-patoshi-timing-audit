@@ -1,0 +1,294 @@
+{
+  "header_count": 50000,
+  "label_count": 21953,
+  "comparisons": {
+    "PPN_ab_below_600": {
+      "cases": 754,
+      "negative": 30,
+      "zero": 0,
+      "positive_below_300": 246,
+      "zero_to_299": 246,
+      "below_300_including_negative": 276,
+      "at_300": 1,
+      "at_least_300": 478,
+      "below_300_percent": 36.60477453580902,
+      "negative_percent": 3.9787798408488064,
+      "median_seconds": 429.5,
+      "minimum_seconds": -218,
+      "maximum_seconds": 30884,
+      "negative_preceding_AB": 0
+    },
+    "NPN_ab_below_600": {
+      "cases": 2780,
+      "negative": 55,
+      "zero": 0,
+      "positive_below_300": 987,
+      "zero_to_299": 987,
+      "below_300_including_negative": 1042,
+      "at_300": 3,
+      "at_least_300": 1738,
+      "below_300_percent": 37.48201438848921,
+      "negative_percent": 1.9784172661870503,
+      "median_seconds": 421.5,
+      "minimum_seconds": -3896,
+      "maximum_seconds": 11175,
+      "negative_preceding_AB": 36
+    },
+    "PPN_ab_300_to_599": {
+      "cases": 727,
+      "negative": 30,
+      "zero": 0,
+      "positive_below_300": 233,
+      "zero_to_299": 233,
+      "below_300_including_negative": 263,
+      "at_300": 1,
+      "at_least_300": 464,
+      "below_300_percent": 36.17606602475929,
+      "negative_percent": 4.126547455295736,
+      "median_seconds": 431,
+      "minimum_seconds": -218,
+      "maximum_seconds": 17108,
+      "negative_preceding_AB": 0
+    },
+    "NPN_ab_300_to_599": {
+      "cases": 1192,
+      "negative": 35,
+      "zero": 0,
+      "positive_below_300": 410,
+      "zero_to_299": 410,
+      "below_300_including_negative": 445,
+      "at_300": 2,
+      "at_least_300": 747,
+      "below_300_percent": 37.33221476510067,
+      "negative_percent": 2.936241610738255,
+      "median_seconds": 436.0,
+      "minimum_seconds": -3896,
+      "maximum_seconds": 6377,
+      "negative_preceding_AB": 0
+    },
+    "PPN_ab_below_600_later_sensitivity": {
+      "cases": 695,
+      "negative": 30,
+      "zero": 0,
+      "positive_below_300": 218,
+      "zero_to_299": 218,
+      "below_300_including_negative": 248,
+      "at_300": 1,
+      "at_least_300": 447,
+      "below_300_percent": 35.68345323741007,
+      "negative_percent": 4.316546762589928,
+      "median_seconds": 436,
+      "minimum_seconds": -218,
+      "maximum_seconds": 17108,
+      "negative_preceding_AB": 0
+    }
+  },
+  "all_adjacent_pairs": {
+    "PP": {
+      "cases": 13053,
+      "negative": 0,
+      "zero": 0,
+      "positive_below_300": 139,
+      "zero_to_299": 139,
+      "below_300_including_negative": 139,
+      "at_300": 0,
+      "at_least_300": 12914,
+      "below_300_percent": 1.0648892974795066,
+      "negative_percent": 0.0,
+      "median_seconds": 973,
+      "minimum_seconds": 12,
+      "maximum_seconds": 90532
+    },
+    "PN": {
+      "cases": 8900,
+      "negative": 398,
+      "zero": 1,
+      "positive_below_300": 2816,
+      "zero_to_299": 2817,
+      "below_300_including_negative": 3215,
+      "at_300": 6,
+      "at_least_300": 5685,
+      "below_300_percent": 36.12359550561798,
+      "negative_percent": 4.47191011235955,
+      "median_seconds": 455.5,
+      "minimum_seconds": -3896,
+      "maximum_seconds": 37536
+    },
+    "NP": {
+      "cases": 8900,
+      "negative": 72,
+      "zero": 0,
+      "positive_below_300": 2425,
+      "zero_to_299": 2425,
+      "below_300_including_negative": 2497,
+      "at_300": 7,
+      "at_least_300": 6403,
+      "below_300_percent": 28.0561797752809,
+      "negative_percent": 0.8089887640449438,
+      "median_seconds": 557.0,
+      "minimum_seconds": -3577,
+      "maximum_seconds": 10491
+    },
+    "NN": {
+      "cases": 19146,
+      "negative": 224,
+      "zero": 12,
+      "positive_below_300": 8002,
+      "zero_to_299": 8014,
+      "below_300_including_negative": 8238,
+      "at_300": 23,
+      "at_least_300": 10908,
+      "below_300_percent": 43.02726418050768,
+      "negative_percent": 1.1699571712106966,
+      "median_seconds": 370.0,
+      "minimum_seconds": -7115,
+      "maximum_seconds": 463160
+    }
+  },
+  "all_PN_pairs": {
+    "cases": 8900,
+    "negative": 398,
+    "zero": 1,
+    "positive_below_300": 2816,
+    "zero_to_299": 2817,
+    "below_300_including_negative": 3215,
+    "at_300": 6,
+    "at_least_300": 5685,
+    "below_300_percent": 36.12359550561798,
+    "negative_percent": 4.47191011235955,
+    "median_seconds": 455.5,
+    "minimum_seconds": -3896,
+    "maximum_seconds": 37536
+  },
+  "later_PP_pairs": {
+    "cases": 12240,
+    "negative": 0,
+    "zero": 0,
+    "positive_below_300": 1,
+    "zero_to_299": 1,
+    "below_300_including_negative": 1,
+    "at_300": 0,
+    "at_least_300": 12239,
+    "below_300_percent": 0.008169934640522876,
+    "negative_percent": 0.0,
+    "median_seconds": 1003.0,
+    "minimum_seconds": 65,
+    "maximum_seconds": 90532,
+    "at_least_312": 12239,
+    "below_312_rows": [
+      {
+        "a": 24503,
+        "b": 24504,
+        "a_timestamp": 1254937399,
+        "b_timestamp": 1254937464,
+        "delta_seconds": 65,
+        "label_pair": "PP",
+        "nonce_byte_a": 21,
+        "nonce_byte_b": 30,
+        "nonce_band_pair": "RR",
+        "later_eligible": true
+      }
+    ]
+  },
+  "nonce": {
+    "serialized_header_byte_offset": 76,
+    "equivalence": "Low byte of the little-endian numeric nonce",
+    "inclusive_band": [
+      [
+        0,
+        9
+      ],
+      [
+        19,
+        58
+      ]
+    ],
+    "listed_inside": 21953,
+    "unlisted_inside": 5655,
+    "unlisted_outside": 22392,
+    "all_inside": 27608,
+    "all_inside_percent": 55.216,
+    "listed_matches_by_serialized_nonce_byte": [
+      21953,
+      4309,
+      4280,
+      4328
+    ],
+    "later_pairs": {
+      "RR": {
+        "cases": 16477,
+        "negative": 93,
+        "zero": 0,
+        "positive_below_300": 1331,
+        "zero_to_299": 1331,
+        "below_300_including_negative": 1424,
+        "at_300": 4,
+        "at_least_300": 15053,
+        "below_300_percent": 8.642349942343873,
+        "negative_percent": 0.5644231352794805,
+        "median_seconds": 887,
+        "minimum_seconds": -3599,
+        "maximum_seconds": 90532
+      },
+      "OO": {
+        "cases": 12124,
+        "negative": 141,
+        "zero": 9,
+        "positive_below_300": 5054,
+        "zero_to_299": 5063,
+        "below_300_including_negative": 5204,
+        "at_300": 19,
+        "at_least_300": 6920,
+        "below_300_percent": 42.923127680633456,
+        "negative_percent": 1.1629825140217749,
+        "median_seconds": 367.0,
+        "minimum_seconds": -7115,
+        "maximum_seconds": 60203
+      }
+    },
+    "interpretation": "Descriptive raw-header structure; no ExtraNonce reconstruction or miner identification"
+  },
+  "definitions": {
+    "P": "Membership in the frozen published list; N is nonmembership",
+    "R": "Raw serialized nonce byte at offset 76 inside 0..9 or 19..58; O is outside",
+    "following_gap": "Header timestamp(C) - header timestamp(B), in seconds",
+    "strict_threshold": "Below 300 includes negative values and excludes exactly 300",
+    "later_sensitivity": "Every participating height >=541 and none in 1400..1916 inclusive",
+    "scope": "Fixed historical labels; header timestamps are not observed elapsed mining times"
+  },
+  "common_range_standardization": {
+    "method": "Direct standardization of NPN cell rates to PPN cell proportions",
+    "preceding_gap_seconds": "300 <= AB < 600",
+    "era_height": "B (the P parent)",
+    "era_width_heights": 10000,
+    "preceding_gap_band_width_seconds": 100,
+    "reference_cases": 727,
+    "comparison_cases": 1192,
+    "represented_cells": 15,
+    "standardized_NPN_below_300_percent": 37.88418925433155,
+    "standardized_NPN_negative_percent": 5.561174904981484,
+    "PPN_below_300_percent": 36.17606602475929,
+    "PPN_negative_percent": 4.126547455295736,
+    "pooled_NPN_below_300_percent": 37.33221476510067,
+    "pooled_NPN_negative_percent": 2.936241610738255,
+    "interpretation": "Exploratory descriptive comparison; not a causal estimate or significance test"
+  },
+  "input_sha256": {
+    "headers": "b9e200ba15c904e05283461469d5582a9580df15ff842436576a7490454b03ec",
+    "canonical_labels": "33c9927845ccd3016fb37bc2b860cfe7a3fea22522c67649d72c6dc50e9ae8e1"
+  },
+  "not_reproduced_here": {
+    "Bitquery_classification_sensitivity": "Requires the separate frozen Bitquery CSV; not supplied in the recovered release package",
+    "three_disputed_label_removal": "Exact three heights and historical source were not supplied; no guessed removals applied"
+  },
+  "csv_sha256": {
+    "NPN_ab_300_to_599.csv": "686593c2e45b46f4a4343996dbb64eb0f4646652242cc714743ffd30c2ef04e3",
+    "NPN_ab_below_600.csv": "3edcaf1d77d90c0c6d1ebd438d7537843eeee55ad4d94af45295ee002c339570",
+    "PPN_ab_300_to_599.csv": "739e8e40257d634c652dc8ae3873f57853e5aa70ffe9c7642f77aba9700ebc7c",
+    "PPN_ab_below_600.csv": "e4f4127e1ace85c488c9015a07b32e4fe55cd0f25e64a63bdd06c8abc43773fa",
+    "PPN_ab_below_600_later_sensitivity.csv": "802d87f714e6cc1c1996559833e886246d487dfb651f0d94515f1c4ebf659ed9",
+    "all_adjacent_pairs.csv": "e61ea493beecc33565d6d95b933faf95ba5e9e64ff07e988a0bbbc662d1a40bd",
+    "common_range_adjustment_cells.csv": "88afef744e9b0ef6de3b509d4bb89c7e67b33ebff449446741d10575fc15b145"
+  },
+  "status": "pass"
+}

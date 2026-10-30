@@ -1,0 +1,304 @@
+[
+  {
+    "repository": "lanewreachoutinc-boop/bitcoin-utils",
+    "branches_api": "https://api.github.com/repos/lanewreachoutinc-boop/bitcoin-utils/branches?per_page=100",
+    "fetched_utc": "2026-10-30T03:43:17.029680+00:00",
+    "branch_count": 1,
+    "link_header": null,
+    "branches": [
+      {
+        "name": "master",
+        "tip": "eb5b7cfe98ea846a30ffd87b04e9a4137cf3bde7",
+        "file_url": "https://raw.githubusercontent.com/lanewreachoutinc-boop/bitcoin-utils/eb5b7cfe98ea846a30ffd87b04e9a4137cf3bde7/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+        "status": 200,
+        "sha256": "104d0df1854802a2e0a5333fda51ee657bb2b17006a48f820bc446c21993e119",
+        "size": 125172,
+        "identical_to_original": true
+      }
+    ]
+  },
+  {
+    "repository": "suthephbuytengchay-ctrl/bitcoin-utils",
+    "branches_api": "https://api.github.com/repos/suthephbuytengchay-ctrl/bitcoin-utils/branches?per_page=100",
+    "fetched_utc": "2026-10-30T03:43:17.030548+00:00",
+    "branch_count": 1,
+    "link_header": null,
+    "branches": [
+      {
+        "name": "master",
+        "tip": "eb5b7cfe98ea846a30ffd87b04e9a4137cf3bde7",
+        "file_url": "https://raw.githubusercontent.com/suthephbuytengchay-ctrl/bitcoin-utils/eb5b7cfe98ea846a30ffd87b04e9a4137cf3bde7/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+        "status": 200,
+        "sha256": "104d0df1854802a2e0a5333fda51ee657bb2b17006a48f820bc446c21993e119",
+        "size": 125172,
+        "identical_to_original": true
+      }
+    ]
+  },
+  {
+    "repository": "jsarenik/bitcoin-utils",
+    "branches_api": "https://api.github.com/repos/jsarenik/bitcoin-utils/branches?per_page=100",
+    "fetched_utc": "2026-10-30T03:43:17.030956+00:00",
+    "branch_count": 1,
+    "link_header": null,
+    "branches": [
+      {
+        "name": "master",
+        "tip": "817b871fe96f2e9b1ba19acca3d008841eec86e0",
+        "file_url": "https://raw.githubusercontent.com/jsarenik/bitcoin-utils/817b871fe96f2e9b1ba19acca3d008841eec86e0/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+        "status": 200,
+        "sha256": "104d0df1854802a2e0a5333fda51ee657bb2b17006a48f820bc446c21993e119",
+        "size": 125172,
+        "identical_to_original": true
+      }
+    ]
+  },
+  {
+    "repository": "22388o/bitcoin-utils",
+    "branches_api": "https://api.github.com/repos/22388o/bitcoin-utils/branches?per_page=100",
+    "fetched_utc": "2026-10-30T03:43:17.031797+00:00",
+    "error": "<HTTPError 404: 'Not Found'>"
+  },
+  {
+    "repository": "Jho0nny29/bitcoin-utils",
+    "branches_api": "https://api.github.com/repos/Jho0nny29/bitcoin-utils/branches?per_page=100",
+    "fetched_utc": "2026-10-30T03:43:17.226948+00:00",
+    "error": "<HTTPError 404: 'Not Found'>"
+  },
+  {
+    "repository": "JohnnyLawDGB/bitcoin-utils",
+    "branches_api": "https://api.github.com/repos/JohnnyLawDGB/bitcoin-utils/branches?per_page=100",
+    "fetched_utc": "2026-10-30T03:43:17.333659+00:00",
+    "branch_count": 1,
+    "link_header": null,
+    "branches": [
+      {
+        "name": "master",
+        "tip": "432ef6958c9da3994e16f9c7302430fd8635c15b",
+        "file_url": "https://raw.githubusercontent.com/JohnnyLawDGB/bitcoin-utils/432ef6958c9da3994e16f9c7302430fd8635c15b/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+        "status": 200,
+        "sha256": "104d0df1854802a2e0a5333fda51ee657bb2b17006a48f820bc446c21993e119",
+        "size": 125172,
+        "identical_to_original": true
+      }
+    ]
+  },
+  {
+    "repository": "ideasincrypto/bitcoin-utils",
+    "branches_api": "https://api.github.com/repos/ideasincrypto/bitcoin-utils/branches?per_page=100",
+    "fetched_utc": "2026-10-30T03:43:17.390959+00:00",
+    "branch_count": 1,
+    "link_header": null,
+    "branches": [
+      {
+        "name": "master",
+        "tip": "2dca7dcb52a3fc1fcf0adc1fb539d7a52ed96c84",
+        "file_url": "https://raw.githubusercontent.com/ideasincrypto/bitcoin-utils/2dca7dcb52a3fc1fcf0adc1fb539d7a52ed96c84/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+        "status": 200,
+        "sha256": "104d0df1854802a2e0a5333fda51ee657bb2b17006a48f820bc446c21993e119",
+        "size": 125172,
+        "identical_to_original": true
+      }
+    ]
+  },
+  {
+    "repository": "FETPO/bitcoin-utils",
+    "branches_api": "https://api.github.com/repos/FETPO/bitcoin-utils/branches?per_page=100",
+    "fetched_utc": "2026-10-30T03:43:17.443198+00:00",
+    "branch_count": 1,
+    "link_header": null,
+    "branches": [
+      {
+        "name": "master",
+        "tip": "37f586324adfec6cf7ebffdacfc1f9cb1a810a78",
+        "file_url": "https://raw.githubusercontent.com/FETPO/bitcoin-utils/37f586324adfec6cf7ebffdacfc1f9cb1a810a78/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+        "status": 200,
+        "sha256": "104d0df1854802a2e0a5333fda51ee657bb2b17006a48f820bc446c21993e119",
+        "size": 125172,
+        "identical_to_original": true
+      }
+    ]
+  },
+  {
+    "repository": "Unsettledroell/bitcoin-utils",
+    "branches_api": "https://api.github.com/repos/Unsettledroell/bitcoin-utils/branches?per_page=100",
+    "fetched_utc": "2026-10-30T03:43:17.452003+00:00",
+    "branch_count": 1,
+    "link_header": null,
+    "branches": [
+      {
+        "name": "master",
+        "tip": "55055b77accf2a3962df0c554a4a7fa0a5f1aa56",
+        "file_url": "https://raw.githubusercontent.com/Unsettledroell/bitcoin-utils/55055b77accf2a3962df0c554a4a7fa0a5f1aa56/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+        "status": 404,
+        "error": "HTTP Error 404: Not Found"
+      }
+    ]
+  },
+  {
+    "repository": "kiz8/bitcoin-utils",
+    "branches_api": "https://api.github.com/repos/kiz8/bitcoin-utils/branches?per_page=100",
+    "fetched_utc": "2026-10-30T03:43:17.680887+00:00",
+    "branch_count": 1,
+    "link_header": null,
+    "branches": [
+      {
+        "name": "master",
+        "tip": "55055b77accf2a3962df0c554a4a7fa0a5f1aa56",
+        "file_url": "https://raw.githubusercontent.com/kiz8/bitcoin-utils/55055b77accf2a3962df0c554a4a7fa0a5f1aa56/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+        "status": 404,
+        "error": "HTTP Error 404: Not Found"
+      }
+    ]
+  },
+  {
+    "repository": "prownsix/bitcoin-utils",
+    "branches_api": "https://api.github.com/repos/prownsix/bitcoin-utils/branches?per_page=100",
+    "fetched_utc": "2026-10-30T03:43:17.682645+00:00",
+    "branch_count": 1,
+    "link_header": null,
+    "branches": [
+      {
+        "name": "master",
+        "tip": "64ad1eb299c5610f7df9e32a1a49e6fe4756862d",
+        "file_url": "https://raw.githubusercontent.com/prownsix/bitcoin-utils/64ad1eb299c5610f7df9e32a1a49e6fe4756862d/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+        "status": 404,
+        "error": "HTTP Error 404: Not Found"
+      }
+    ]
+  },
+  {
+    "repository": "roks0n/bitcoin-utils",
+    "branches_api": "https://api.github.com/repos/roks0n/bitcoin-utils/branches?per_page=100",
+    "fetched_utc": "2026-10-30T03:43:17.727461+00:00",
+    "branch_count": 1,
+    "link_header": null,
+    "branches": [
+      {
+        "name": "master",
+        "tip": "255ee097c00157f52e785e3d0dd2501190ab0b36",
+        "file_url": "https://raw.githubusercontent.com/roks0n/bitcoin-utils/255ee097c00157f52e785e3d0dd2501190ab0b36/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+        "status": 404,
+        "error": "HTTP Error 404: Not Found"
+      }
+    ]
+  },
+  {
+    "repository": "bitcoincore-dev/bitcoin-utils",
+    "branches_api": "https://api.github.com/repos/bitcoincore-dev/bitcoin-utils/branches?per_page=100",
+    "fetched_utc": "2026-10-30T03:43:17.736234+00:00",
+    "branch_count": 1,
+    "link_header": null,
+    "branches": [
+      {
+        "name": "master",
+        "tip": "3cb758ccc2b8300bde6b9ef6c6717270a5fb3246",
+        "file_url": "https://raw.githubusercontent.com/bitcoincore-dev/bitcoin-utils/3cb758ccc2b8300bde6b9ef6c6717270a5fb3246/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+        "status": 200,
+        "sha256": "104d0df1854802a2e0a5333fda51ee657bb2b17006a48f820bc446c21993e119",
+        "size": 125172,
+        "identical_to_original": true
+      }
+    ]
+  },
+  {
+    "repository": "MetoSeeds/bitcoin-utils",
+    "branches_api": "https://api.github.com/repos/MetoSeeds/bitcoin-utils/branches?per_page=100",
+    "fetched_utc": "2026-10-30T03:43:17.939535+00:00",
+    "branch_count": 1,
+    "link_header": null,
+    "branches": [
+      {
+        "name": "master",
+        "tip": "2fdcf8f7daeb9f3a6ff356c6297fe624de3a77ab",
+        "file_url": "https://raw.githubusercontent.com/MetoSeeds/bitcoin-utils/2fdcf8f7daeb9f3a6ff356c6297fe624de3a77ab/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+        "status": 404,
+        "error": "HTTP Error 404: Not Found"
+      }
+    ]
+  },
+  {
+    "repository": "correosdelbosque/bitcoin-utils",
+    "branches_api": "https://api.github.com/repos/correosdelbosque/bitcoin-utils/branches?per_page=100",
+    "fetched_utc": "2026-10-30T03:43:17.960503+00:00",
+    "branch_count": 1,
+    "link_header": null,
+    "branches": [
+      {
+        "name": "master",
+        "tip": "2fdcf8f7daeb9f3a6ff356c6297fe624de3a77ab",
+        "file_url": "https://raw.githubusercontent.com/correosdelbosque/bitcoin-utils/2fdcf8f7daeb9f3a6ff356c6297fe624de3a77ab/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+        "status": 404,
+        "error": "HTTP Error 404: Not Found"
+      }
+    ]
+  },
+  {
+    "repository": "IY/bitcoin-utils",
+    "branches_api": "https://api.github.com/repos/IY/bitcoin-utils/branches?per_page=100",
+    "fetched_utc": "2026-10-30T03:43:18.014160+00:00",
+    "branch_count": 1,
+    "link_header": null,
+    "branches": [
+      {
+        "name": "master",
+        "tip": "2fdcf8f7daeb9f3a6ff356c6297fe624de3a77ab",
+        "file_url": "https://raw.githubusercontent.com/IY/bitcoin-utils/2fdcf8f7daeb9f3a6ff356c6297fe624de3a77ab/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+        "status": 404,
+        "error": "HTTP Error 404: Not Found"
+      }
+    ]
+  },
+  {
+    "repository": "ArtDodger/bitcoin-utils",
+    "branches_api": "https://api.github.com/repos/ArtDodger/bitcoin-utils/branches?per_page=100",
+    "fetched_utc": "2026-10-30T03:43:18.028270+00:00",
+    "branch_count": 1,
+    "link_header": null,
+    "branches": [
+      {
+        "name": "master",
+        "tip": "5228714c92121602000c157abea1812a65840783",
+        "file_url": "https://raw.githubusercontent.com/ArtDodger/bitcoin-utils/5228714c92121602000c157abea1812a65840783/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+        "status": 404,
+        "error": "HTTP Error 404: Not Found"
+      }
+    ]
+  },
+  {
+    "repository": "night-dev896/bitcoin-utils",
+    "branches_api": "https://api.github.com/repos/night-dev896/bitcoin-utils/branches?per_page=100",
+    "fetched_utc": "2026-10-30T03:43:18.198442+00:00",
+    "branch_count": 1,
+    "link_header": null,
+    "branches": [
+      {
+        "name": "master",
+        "tip": "83553472dfde24907de5e1f55ad2e6e3797d60b1",
+        "file_url": "https://raw.githubusercontent.com/night-dev896/bitcoin-utils/83553472dfde24907de5e1f55ad2e6e3797d60b1/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+        "status": 200,
+        "sha256": "104d0df1854802a2e0a5333fda51ee657bb2b17006a48f820bc446c21993e119",
+        "size": 125172,
+        "identical_to_original": true
+      }
+    ]
+  },
+  {
+    "repository": "l2-dev554/bitcoin-utils",
+    "branches_api": "https://api.github.com/repos/l2-dev554/bitcoin-utils/branches?per_page=100",
+    "fetched_utc": "2026-10-30T03:43:18.224329+00:00",
+    "branch_count": 1,
+    "link_header": null,
+    "branches": [
+      {
+        "name": "master",
+        "tip": "3937caa571b27b3d1e9d7c954f7c8b1a886340a6",
+        "file_url": "https://raw.githubusercontent.com/l2-dev554/bitcoin-utils/3937caa571b27b3d1e9d7c954f7c8b1a886340a6/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+        "status": 200,
+        "sha256": "104d0df1854802a2e0a5333fda51ee657bb2b17006a48f820bc446c21993e119",
+        "size": 125172,
+        "identical_to_original": true
+      }
+    ]
+  }
+]

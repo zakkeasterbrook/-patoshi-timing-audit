@@ -1,0 +1,30 @@
+{
+  "source_url": "https://download.electrum.org/blockchain_headers",
+  "retrieved_utc": "2026-10-30T03:42:21.862415+00:00",
+  "requested_range": "bytes=0-3999999",
+  "http_status": 206,
+  "response_headers": {
+    "date": "Fri, 30 Oct 2026 03:42:20 GMT",
+    "content-length": "4000000",
+    "server": "envoy",
+    "last-modified": "Thu, 03 Aug 2017 04:58:15 GMT",
+    "etag": "\"2470d90-555d23a68e7c0\"",
+    "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+    "content-range": "bytes 0-3999999/38210960",
+    "cache-control": "max-age=14400",
+    "cf-cache-status": "MISS",
+    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+    "server-timing": "cfCacheStatus;desc=\"MISS\"",
+    "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=T0KU%2B7rxqoaQGQl%2FwJsp7YfMzbGf%2BQWkXMcLEIrZjALP%2F2ukeJL36S%2BjFqTXcfRst2%2F3Bx27vxILomILlbfAPoE%2F7fDEdPdF%2FoEYFYcHFAeDRG5N5s1y5lsOraPZG42%2BwcGg5fbL%2Fb7CfpBsR8bkj7L%2FPb8%3D\"}]}",
+    "cf-ray": "a52768d3084f72cb-ORD",
+    "alt-svc": "h3=\":443\"; ma=86400",
+    "x-envoy-upstream-service-time": "324",
+    "connection": "close"
+  },
+  "stored_prefix_bytes": 4000000,
+  "stored_header_heights": [
+    0,
+    49999
+  ],
+  "sha256": "b9e200ba15c904e05283461469d5582a9580df15ff842436576a7490454b03ec"
+}

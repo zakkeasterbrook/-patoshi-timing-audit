@@ -1,0 +1,12 @@
+{
+  "artifact_name": "Patoshi_Timing_Audit_v1.0.0_Release.zip",
+  "size_bytes": 3994451,
+  "sha256": "cb9534220c42d988f60ed884e986024655d92f65d28df77a5842e4df28bb4ed7",
+  "manifest_entries_verified_before_changes": 85,
+  "baseline_test_result": {
+    "run": 12,
+    "passed": 7,
+    "skipped_native": 5
+  },
+  "treatment": "Original archive retained unchanged outside checkout; project files imported at root; expected outputs and prior execution/provenance records preserved."
+}

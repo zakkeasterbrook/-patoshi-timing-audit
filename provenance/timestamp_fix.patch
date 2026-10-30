@@ -1,0 +1,5 @@
+--- a/findNonPatoshiDeltasAfterFastPatoshiBlocks.php
++++ b/findNonPatoshiDeltasAfterFastPatoshiBlocks.php
+@@ -30 +30 @@
+-			$patoshiBlock2Time = $patoshiBlock1->get('time');
++			$patoshiBlock2Time = $patoshiBlock2->get('time');

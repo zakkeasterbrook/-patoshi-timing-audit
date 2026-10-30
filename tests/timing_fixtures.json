@@ -1,0 +1,329 @@
+[
+  {
+    "name": "two_P_run",
+    "labels": [
+      1,
+      2,
+      4
+    ],
+    "times": [
+      1000,
+      1100,
+      1200,
+      1300
+    ],
+    "expected": [
+      [
+        3,
+        100
+      ]
+    ],
+    "reason": "Exactly two consecutive P heights must suffice."
+  },
+  {
+    "name": "later_run_head",
+    "labels": [
+      1,
+      2,
+      3,
+      5,
+      6,
+      8
+    ],
+    "times": [
+      1000,
+      1100,
+      1200,
+      1300,
+      1400,
+      1500,
+      1600,
+      1700
+    ],
+    "expected": [
+      [
+        4,
+        100
+      ],
+      [
+        7,
+        100
+      ]
+    ],
+    "reason": "A break at 5 must retain height 5 as the next run head."
+  },
+  {
+    "name": "wrong_interval",
+    "labels": [
+      1,
+      2,
+      3,
+      5
+    ],
+    "times": [
+      800,
+      900,
+      1000,
+      1559,
+      1630
+    ],
+    "expected": [
+      [
+        4,
+        71
+      ]
+    ],
+    "reason": "AB=559; BC=71; AC=630 is the wrong outcome."
+  },
+  {
+    "name": "AB_599",
+    "labels": [
+      1,
+      2,
+      3,
+      5
+    ],
+    "times": [
+      1000,
+      1100,
+      1200,
+      1799,
+      1899
+    ],
+    "expected": [
+      [
+        4,
+        100
+      ]
+    ],
+    "reason": "AB=599 satisfies the strict under-600 filter."
+  },
+  {
+    "name": "AB_600",
+    "labels": [
+      1,
+      2,
+      3,
+      5
+    ],
+    "times": [
+      1000,
+      1100,
+      1200,
+      1800,
+      1900
+    ],
+    "expected": [],
+    "reason": "AB=600 fails the strict under-600 filter."
+  },
+  {
+    "name": "AB_negative",
+    "labels": [
+      1,
+      2,
+      3,
+      5
+    ],
+    "times": [
+      1000,
+      1100,
+      1300,
+      1200,
+      1250
+    ],
+    "expected": [
+      [
+        4,
+        50
+      ]
+    ],
+    "reason": "The stated AB<600 rule has no unadvertised lower bound."
+  },
+  {
+    "name": "AB_zero",
+    "labels": [
+      1,
+      2,
+      3,
+      5
+    ],
+    "times": [
+      1000,
+      1100,
+      1200,
+      1200,
+      1250
+    ],
+    "expected": [
+      [
+        4,
+        50
+      ]
+    ],
+    "reason": "A zero AB gap satisfies the stated rule."
+  },
+  {
+    "name": "BC_negative",
+    "labels": [
+      1,
+      2,
+      3,
+      5
+    ],
+    "times": [
+      1000,
+      1100,
+      1200,
+      1300,
+      1250
+    ],
+    "expected": [
+      [
+        4,
+        -50
+      ]
+    ],
+    "reason": "Negative BC values are retained and also count below 300."
+  },
+  {
+    "name": "BC_zero",
+    "labels": [
+      1,
+      2,
+      3,
+      5
+    ],
+    "times": [
+      1000,
+      1100,
+      1200,
+      1300,
+      1300
+    ],
+    "expected": [
+      [
+        4,
+        0
+      ]
+    ],
+    "reason": "A zero BC value is nonnegative and strictly below 300."
+  },
+  {
+    "name": "BC_299",
+    "labels": [
+      1,
+      2,
+      3,
+      5
+    ],
+    "times": [
+      1000,
+      1100,
+      1200,
+      1300,
+      1599
+    ],
+    "expected": [
+      [
+        4,
+        299
+      ]
+    ],
+    "reason": "BC=299 belongs to the strict below-300 count."
+  },
+  {
+    "name": "BC_300",
+    "labels": [
+      1,
+      2,
+      3,
+      5
+    ],
+    "times": [
+      1000,
+      1100,
+      1200,
+      1300,
+      1600
+    ],
+    "expected": [
+      [
+        4,
+        300
+      ]
+    ],
+    "reason": "BC=300 is selected but not counted below 300."
+  },
+  {
+    "name": "P_child_excluded",
+    "labels": [
+      1,
+      2,
+      3
+    ],
+    "times": [
+      1000,
+      1100,
+      1200,
+      1300
+    ],
+    "expected": [],
+    "reason": "P/P/P is not P/P/N."
+  },
+  {
+    "name": "nonconsecutive_P_excluded",
+    "labels": [
+      1,
+      3,
+      5
+    ],
+    "times": [
+      1000,
+      1100,
+      1200,
+      1300,
+      1400
+    ],
+    "expected": [],
+    "reason": "A and B must be height-adjacent, not merely successive list entries."
+  },
+  {
+    "name": "terminal_run_flush",
+    "labels": [
+      1,
+      2,
+      3
+    ],
+    "times": [
+      1000,
+      1100,
+      1200,
+      1300,
+      1400
+    ],
+    "expected": [
+      [
+        4,
+        100
+      ]
+    ],
+    "reason": "A terminal P run followed by a supplied N child must be tested."
+  },
+  {
+    "name": "child_beyond_prefix",
+    "labels": [
+      1,
+      2,
+      3,
+      5
+    ],
+    "times": [
+      1000,
+      1100,
+      1200,
+      1300
+    ],
+    "expected": [],
+    "reason": "An unavailable C beyond the maximum supplied height is not measured."
+  }
+]

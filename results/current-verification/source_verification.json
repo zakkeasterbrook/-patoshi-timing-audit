@@ -1,0 +1,25 @@
+{
+  "verification_time_utc": "2026-10-30T15:05:04.647473+00:00",
+  "source_url": "https://raw.githubusercontent.com/jlopp/bitcoin-utils/66ee906b28ca13269d6f71d63f848973a1b747a2/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+  "source_commit": "66ee906b28ca13269d6f71d63f848973a1b747a2",
+  "source_size_bytes": 125172,
+  "source_sha256": "104d0df1854802a2e0a5333fda51ee657bb2b17006a48f820bc446c21993e119",
+  "upstream_tree_archive_sha256": "a41b17436237268bfcc5b3274ce5af9f7dfa58e949937e1349ddb223651dc861",
+  "upstream_tree_file_count": 34,
+  "license_files_found": [],
+  "label_count": 21953,
+  "unique_label_count": 21953,
+  "labels_sorted": true,
+  "minimum_label": 3,
+  "maximum_label": 49973,
+  "legacy_candidate_count": 1881,
+  "legacy_tracker_final_state": [],
+  "scope": "Source bytes and label-only selection verified. No timestamp-dependent totals were calculated.",
+  "control_flow": {
+    "wrong_assignment_line": 30,
+    "tracker_minimum_length": 3,
+    "reset_line": 45,
+    "reset_discards_current_height": true,
+    "end_of_list_flush": false
+  }
+}

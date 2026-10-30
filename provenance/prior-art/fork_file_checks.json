@@ -1,0 +1,207 @@
+[
+  {
+    "repository": "lanewreachoutinc-boop/bitcoin-utils",
+    "url": "https://raw.githubusercontent.com/lanewreachoutinc-boop/bitcoin-utils/master/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+    "default_branch": "master",
+    "fork_created_at": "2026-10-04T05:07:42Z",
+    "fork_pushed_at": "2026-02-23T12:19:13Z",
+    "fetched_utc": "2026-10-30T03:41:41.633574+00:00",
+    "status": 200,
+    "sha256": "104d0df1854802a2e0a5333fda51ee657bb2b17006a48f820bc446c21993e119",
+    "size": 125172,
+    "identical_to_original": true,
+    "second_time_assignments": [
+      "$patoshiBlock2Time = $patoshiBlock1->get('time');"
+    ]
+  },
+  {
+    "repository": "suthephbuytengchay-ctrl/bitcoin-utils",
+    "url": "https://raw.githubusercontent.com/suthephbuytengchay-ctrl/bitcoin-utils/master/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+    "default_branch": "master",
+    "fork_created_at": "2026-05-04T20:32:16Z",
+    "fork_pushed_at": "2026-02-23T12:19:13Z",
+    "fetched_utc": "2026-10-30T03:41:41.634447+00:00",
+    "status": 200,
+    "sha256": "104d0df1854802a2e0a5333fda51ee657bb2b17006a48f820bc446c21993e119",
+    "size": 125172,
+    "identical_to_original": true,
+    "second_time_assignments": [
+      "$patoshiBlock2Time = $patoshiBlock1->get('time');"
+    ]
+  },
+  {
+    "repository": "jsarenik/bitcoin-utils",
+    "url": "https://raw.githubusercontent.com/jsarenik/bitcoin-utils/master/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+    "default_branch": "master",
+    "fork_created_at": "2025-02-04T19:15:45Z",
+    "fork_pushed_at": "2025-01-02T00:08:17Z",
+    "fetched_utc": "2026-10-30T03:41:41.634972+00:00",
+    "status": 200,
+    "sha256": "104d0df1854802a2e0a5333fda51ee657bb2b17006a48f820bc446c21993e119",
+    "size": 125172,
+    "identical_to_original": true,
+    "second_time_assignments": [
+      "$patoshiBlock2Time = $patoshiBlock1->get('time');"
+    ]
+  },
+  {
+    "repository": "22388o/bitcoin-utils",
+    "url": "https://raw.githubusercontent.com/22388o/bitcoin-utils/master/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+    "default_branch": "master",
+    "fork_created_at": "2024-08-13T18:37:29Z",
+    "fork_pushed_at": "2024-08-13T11:23:47Z",
+    "fetched_utc": "2026-10-30T03:41:41.635896+00:00",
+    "status": 404,
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "repository": "Jho0nny29/bitcoin-utils",
+    "url": "https://raw.githubusercontent.com/Jho0nny29/bitcoin-utils/master/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+    "default_branch": "master",
+    "fork_created_at": "2023-10-09T16:57:02Z",
+    "fork_pushed_at": "2023-10-09T00:40:14Z",
+    "fetched_utc": "2026-10-30T03:41:41.637310+00:00",
+    "status": 404,
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "repository": "JohnnyLawDGB/bitcoin-utils",
+    "url": "https://raw.githubusercontent.com/JohnnyLawDGB/bitcoin-utils/master/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+    "default_branch": "master",
+    "fork_created_at": "2023-08-06T12:46:25Z",
+    "fork_pushed_at": "2024-10-05T11:28:44Z",
+    "fetched_utc": "2026-10-30T03:41:41.690757+00:00",
+    "status": 200,
+    "sha256": "104d0df1854802a2e0a5333fda51ee657bb2b17006a48f820bc446c21993e119",
+    "size": 125172,
+    "identical_to_original": true,
+    "second_time_assignments": [
+      "$patoshiBlock2Time = $patoshiBlock1->get('time');"
+    ]
+  },
+  {
+    "repository": "ideasincrypto/bitcoin-utils",
+    "url": "https://raw.githubusercontent.com/ideasincrypto/bitcoin-utils/master/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+    "default_branch": "master",
+    "fork_created_at": "2023-06-06T17:51:35Z",
+    "fork_pushed_at": "2024-12-28T13:47:26Z",
+    "fetched_utc": "2026-10-30T03:41:41.697286+00:00",
+    "status": 200,
+    "sha256": "104d0df1854802a2e0a5333fda51ee657bb2b17006a48f820bc446c21993e119",
+    "size": 125172,
+    "identical_to_original": true,
+    "second_time_assignments": [
+      "$patoshiBlock2Time = $patoshiBlock1->get('time');"
+    ]
+  },
+  {
+    "repository": "FETPO/bitcoin-utils",
+    "url": "https://raw.githubusercontent.com/FETPO/bitcoin-utils/master/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+    "default_branch": "master",
+    "fork_created_at": "2023-02-15T00:16:08Z",
+    "fork_pushed_at": "2023-01-12T11:44:45Z",
+    "fetched_utc": "2026-10-30T03:41:41.765916+00:00",
+    "status": 200,
+    "sha256": "104d0df1854802a2e0a5333fda51ee657bb2b17006a48f820bc446c21993e119",
+    "size": 125172,
+    "identical_to_original": true,
+    "second_time_assignments": [
+      "$patoshiBlock2Time = $patoshiBlock1->get('time');"
+    ]
+  },
+  {
+    "repository": "Unsettledroell/bitcoin-utils",
+    "url": "https://raw.githubusercontent.com/Unsettledroell/bitcoin-utils/master/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+    "default_branch": "master",
+    "fork_created_at": "2021-09-14T19:54:29Z",
+    "fork_pushed_at": "2021-07-11T17:09:45Z",
+    "fetched_utc": "2026-10-30T03:41:41.902823+00:00",
+    "status": 404,
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "repository": "kiz8/bitcoin-utils",
+    "url": "https://raw.githubusercontent.com/kiz8/bitcoin-utils/master/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+    "default_branch": "master",
+    "fork_created_at": "2021-09-02T20:03:48Z",
+    "fork_pushed_at": "2021-07-11T17:09:45Z",
+    "fetched_utc": "2026-10-30T03:41:41.917122+00:00",
+    "status": 404,
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "repository": "prownsix/bitcoin-utils",
+    "url": "https://raw.githubusercontent.com/prownsix/bitcoin-utils/master/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+    "default_branch": "master",
+    "fork_created_at": "2021-05-07T03:11:40Z",
+    "fork_pushed_at": "2021-05-05T22:35:59Z",
+    "fetched_utc": "2026-10-30T03:41:41.917969+00:00",
+    "status": 404,
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "repository": "roks0n/bitcoin-utils",
+    "url": "https://raw.githubusercontent.com/roks0n/bitcoin-utils/master/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+    "default_branch": "master",
+    "fork_created_at": "2021-02-20T07:13:51Z",
+    "fork_pushed_at": "2021-02-18T15:17:49Z",
+    "fetched_utc": "2026-10-30T03:41:41.924595+00:00",
+    "status": 404,
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "repository": "bitcoincore-dev/bitcoin-utils",
+    "url": "https://raw.githubusercontent.com/bitcoincore-dev/bitcoin-utils/master/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+    "default_branch": "master",
+    "fork_created_at": "2020-07-15T16:48:14Z",
+    "fork_pushed_at": "2023-07-06T20:43:05Z",
+    "fetched_utc": "2026-10-30T03:41:41.984928+00:00",
+    "status": 200,
+    "sha256": "104d0df1854802a2e0a5333fda51ee657bb2b17006a48f820bc446c21993e119",
+    "size": 125172,
+    "identical_to_original": true,
+    "second_time_assignments": [
+      "$patoshiBlock2Time = $patoshiBlock1->get('time');"
+    ]
+  },
+  {
+    "repository": "MetoSeeds/bitcoin-utils",
+    "url": "https://raw.githubusercontent.com/MetoSeeds/bitcoin-utils/master/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+    "default_branch": "master",
+    "fork_created_at": "2019-05-15T17:00:43Z",
+    "fork_pushed_at": "2014-12-07T18:14:12Z",
+    "fetched_utc": "2026-10-30T03:41:41.991429+00:00",
+    "status": 404,
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "repository": "correosdelbosque/bitcoin-utils",
+    "url": "https://raw.githubusercontent.com/correosdelbosque/bitcoin-utils/master/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+    "default_branch": "master",
+    "fork_created_at": "2017-12-30T18:41:02Z",
+    "fork_pushed_at": "2014-12-07T18:14:12Z",
+    "fetched_utc": "2026-10-30T03:41:42.014738+00:00",
+    "status": 404,
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "repository": "IY/bitcoin-utils",
+    "url": "https://raw.githubusercontent.com/IY/bitcoin-utils/master/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+    "default_branch": "master",
+    "fork_created_at": "2017-12-27T04:42:13Z",
+    "fork_pushed_at": "2014-12-07T18:14:12Z",
+    "fetched_utc": "2026-10-30T03:41:42.030696+00:00",
+    "status": 404,
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "repository": "ArtDodger/bitcoin-utils",
+    "url": "https://raw.githubusercontent.com/ArtDodger/bitcoin-utils/master/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+    "default_branch": "master",
+    "fork_created_at": "2015-07-26T04:56:05Z",
+    "fork_pushed_at": "2015-07-26T05:06:12Z",
+    "fetched_utc": "2026-10-30T03:41:42.033492+00:00",
+    "status": 404,
+    "error": "HTTP Error 404: Not Found"
+  }
+]

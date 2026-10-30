@@ -1,0 +1,11 @@
+{
+  "source_url": "https://raw.githubusercontent.com/jlopp/bitcoin-utils/66ee906b28ca13269d6f71d63f848973a1b747a2/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+  "source_sha256": "104d0df1854802a2e0a5333fda51ee657bb2b17006a48f820bc446c21993e119",
+  "extraction": "Exact PHP numeric array parsed; equality checked against the earlier audit list",
+  "count": 21953,
+  "minimum": 3,
+  "maximum": 49973,
+  "unique_ascending": true,
+  "canonical_compact_json_sha256": "33c9927845ccd3016fb37bc2b860cfe7a3fea22522c67649d72c6dc50e9ae8e1",
+  "interpretation": "Source labels are fixed inputs; miner attribution is not independently validated"
+}

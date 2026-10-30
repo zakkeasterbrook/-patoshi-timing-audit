@@ -1,0 +1,347 @@
+[
+  {
+    "name": "code_exact",
+    "status": "fulfilled",
+    "isError": false,
+    "items": [
+      {
+        "url": "https://github.com/21ideas-org/21ideas.org/blob/f37dc58749f117ea0501a6eb8451cb598138af45/content.en/docs/Theory/protocol/was-satoshi-a-greedy-miner.md",
+        "title": "content.en/docs/Theory/protocol/was-satoshi-a-greedy-miner.md"
+      },
+      {
+        "url": "https://github.com/21ideas-org/21ideas.org/blob/f37dc58749f117ea0501a6eb8451cb598138af45/content.ru/docs/Theory/protocol/was-satoshi-a-greedy-miner.md",
+        "title": "content.ru/docs/Theory/protocol/was-satoshi-a-greedy-miner.md"
+      },
+      {
+        "url": "https://github.com/xuhongxu96/bazel-repos/blob/7c2f8bb78b4e8c80a6b603c706579ec57873fe43/search_repos/trees/jlopp__bitcoin-utils_tree.json",
+        "title": "search_repos/trees/jlopp__bitcoin-utils_tree.json"
+      },
+      {
+        "url": "https://github.com/hmisty/blockcoach/blob/285337076c1e898a480e339a048b4fd91b1355aa/docs/2023/202301/2023-01-14-x-satoshi-greedy.md",
+        "title": "docs/2023/202301/2023-01-14-x-satoshi-greedy.md"
+      }
+    ],
+    "count": 4
+  },
+  {
+    "name": "code_variable",
+    "status": "fulfilled",
+    "isError": false,
+    "items": [
+      {
+        "url": "https://github.com/jlopp/bitcoin-utils/blob/eb5b7cfe98ea846a30ffd87b04e9a4137cf3bde7/findNonPatoshiDeltasAfterFastPatoshiBlocks.php",
+        "title": "findNonPatoshiDeltasAfterFastPatoshiBlocks.php"
+      }
+    ],
+    "count": 1
+  },
+  {
+    "name": "issues_exact",
+    "status": "fulfilled",
+    "isError": false,
+    "items": [],
+    "count": 0
+  },
+  {
+    "name": "issues_broad",
+    "status": "fulfilled",
+    "isError": false,
+    "items": [
+      {
+        "url": "https://github.com/jayzalowitz/near-bit/issues/10",
+        "title": "Patoshi coins: frozen balance floor, staking-only usage, and foundation reward distribution",
+        "date": null
+      },
+      {
+        "url": "https://github.com/jayzalowitz/near-bit/issues/11",
+        "title": "Launch plan: from working prototype to production mainnet",
+        "date": null
+      },
+      {
+        "url": "https://github.com/1btc-news/news-client/issues/28",
+        "title": "Bounty: Satoshi Stash Quantum Monitor (new aibtc.news beat)",
+        "date": null
+      },
+      {
+        "url": "https://github.com/janoside/btc-rpc-explorer/issues/417",
+        "title": "Old legacy mined address and coinbase address history missing",
+        "date": null
+      },
+      {
+        "url": "https://github.com/freeCodeCamp/devdocs/issues/2724",
+        "title": "Documentation versions report for September 2026",
+        "date": null
+      },
+      {
+        "url": "https://github.com/1btc-news/news-client/issues/33",
+        "title": "Major Bounty: Build & Run the Quantum Visualizer + Daily Quantum Beat (250k sats)",
+        "date": null
+      },
+      {
+        "url": "https://github.com/aibtcdev/agent-news/issues/383",
+        "title": "Open Call: Beat Editors for aibtc.news — 250,000 sats / 60 days per beat (12 beats open)",
+        "date": null
+      }
+    ],
+    "count": 7
+  },
+  {
+    "name": "commits_exact",
+    "status": "fulfilled",
+    "isError": false,
+    "items": [],
+    "count": 0
+  },
+  {
+    "name": "commits_fix",
+    "status": "fulfilled",
+    "isError": false,
+    "items": [
+      {
+        "url": "https://github.com/GelatoDan/satoshi-stop-loss/commit/99d3c3054f8fac5f8b9111ed8294b06df811395c",
+        "title": "Fix monitor to paginate all 22k Patoshi addresses from Supabase",
+        "date": "2026-04-07T20:30:51.000+02:00",
+        "sha": "99d3c3054f8fac5f8b9111ed8294b06df811395c"
+      },
+      {
+        "url": "https://github.com/mrv777/omb-gallery/commit/29b325477126c820d7c839cd8214c9c3f350d1f5",
+        "title": "fix(history): correct punk-burn price, block-78 claim, dead citations",
+        "date": "2026-07-27T16:52:15.000-05:00",
+        "sha": "29b325477126c820d7c839cd8214c9c3f350d1f5"
+      },
+      {
+        "url": "https://github.com/w-s-bitcoin/wickedsmartbitcoin/commit/8bbd34309a771d35ee8885a742cea59ff9a47915",
+        "title": "Fix Patoshi measurement preview overlap",
+        "date": "2026-05-28T21:52:16.000-04:00",
+        "sha": "8bbd34309a771d35ee8885a742cea59ff9a47915"
+      },
+      {
+        "url": "https://github.com/w-s-bitcoin/wickedsmartbitcoin/commit/b5305940c590a7701095af912bbd344dfbf0eee1",
+        "title": "Fix Patoshi measurement preview overlap",
+        "date": "2026-05-28T21:51:44.000-04:00",
+        "sha": "b5305940c590a7701095af912bbd344dfbf0eee1"
+      },
+      {
+        "url": "https://github.com/w-s-bitcoin/wickedsmartbitcoin/commit/746dda6bb6f9237ca0164c3ff77ad66398239344",
+        "title": "Fix Patoshi slope preview overlap",
+        "date": "2026-05-28T21:43:48.000-04:00",
+        "sha": "746dda6bb6f9237ca0164c3ff77ad66398239344"
+      },
+      {
+        "url": "https://github.com/w-s-bitcoin/wickedsmartbitcoin/commit/b93520b8045c57d1ade96ed5868d26ad1c80bcf7",
+        "title": "Fix Patoshi slope preview overlap",
+        "date": "2026-05-28T21:43:16.000-04:00",
+        "sha": "b93520b8045c57d1ade96ed5868d26ad1c80bcf7"
+      },
+      {
+        "url": "https://github.com/w-s-bitcoin/wickedsmartbitcoin/commit/6a4bef1871c2e558a31a39b79d5822e8853866ed",
+        "title": "Fix Patoshi date label border styling",
+        "date": "2026-05-26T21:56:21.000-04:00",
+        "sha": "6a4bef1871c2e558a31a39b79d5822e8853866ed"
+      },
+      {
+        "url": "https://github.com/w-s-bitcoin/wickedsmartbitcoin/commit/0ba51703be95ac19254513bd57fb59c0aa180b1d",
+        "title": "Fix Patoshi date label border styling",
+        "date": "2026-05-26T21:55:50.000-04:00",
+        "sha": "0ba51703be95ac19254513bd57fb59c0aa180b1d"
+      },
+      {
+        "url": "https://github.com/w-s-bitcoin/wickedsmartbitcoin/commit/4aaf4e3e336045bcb2a2a0e042df82ad598f0726",
+        "title": "Fix Patoshi iOS date and input focus behavior",
+        "date": "2026-05-26T21:49:11.000-04:00",
+        "sha": "4aaf4e3e336045bcb2a2a0e042df82ad598f0726"
+      },
+      {
+        "url": "https://github.com/w-s-bitcoin/wickedsmartbitcoin/commit/488f140ccc2c87d1a0dc377234434212cd5d4044",
+        "title": "Fix Patoshi iOS date and input focus behavior",
+        "date": "2026-05-26T21:48:37.000-04:00",
+        "sha": "488f140ccc2c87d1a0dc377234434212cd5d4044"
+      },
+      {
+        "url": "https://github.com/w-s-bitcoin/wickedsmartbitcoin/commit/eec5defe8f142bd20aab2cb9d308df7d7b6373a9",
+        "title": "Fix Patoshi mobile inputs and default highlight state",
+        "date": "2026-05-26T21:12:05.000-04:00",
+        "sha": "eec5defe8f142bd20aab2cb9d308df7d7b6373a9"
+      },
+      {
+        "url": "https://github.com/w-s-bitcoin/wickedsmartbitcoin/commit/af784a4d2310d4a6931f89db3131b7139f802451",
+        "title": "Fix Patoshi mobile inputs and default highlight state",
+        "date": "2026-05-26T21:11:36.000-04:00",
+        "sha": "af784a4d2310d4a6931f89db3131b7139f802451"
+      },
+      {
+        "url": "https://github.com/mrv777/omb-gallery/commit/1d8fb98c52ff7102c7459b857234574e800df7e7",
+        "title": "fix: correct sourcing and wording on /history after fact-check",
+        "date": "2026-07-30T22:03:55.000-05:00",
+        "sha": "1d8fb98c52ff7102c7459b857234574e800df7e7"
+      },
+      {
+        "url": "https://github.com/treib-holdings/learnbitcoin-content/commit/35089212863e7de57cd6a501dc020da9a1dad05f",
+        "title": "Use It Once: why reusing a Bitcoin address is dangerous; quantum chapter on the October snapshot",
+        "date": "2026-10-14T09:03:10.000-04:00",
+        "sha": "35089212863e7de57cd6a501dc020da9a1dad05f"
+      },
+      {
+        "url": "https://github.com/w-s-bitcoin/wickedsmartbitcoin/commit/6da94e6bf002931e333237eca54652220b93608f",
+        "title": "Add prior-snapshot label carry-forward to fix Miner label overwrites",
+        "date": "2026-04-07T18:29:46.000-04:00",
+        "sha": "6da94e6bf002931e333237eca54652220b93608f"
+      },
+      {
+        "url": "https://github.com/schjonhaug/canary/commit/de329eb6cb9eedf1073c39d1b5ccd61a8c1523a0",
+        "title": "Fix Satoshi demo wallets by adding P2PK descriptor support",
+        "date": "2026-02-28T06:54:43.000Z",
+        "sha": "de329eb6cb9eedf1073c39d1b5ccd61a8c1523a0"
+      },
+      {
+        "url": "https://github.com/netasset/anonscore/commit/8f40f0f8d7df6bbfd9b4a818659419677af6b267",
+        "title": "Audit remediation: honest claims, exact AI payload, SW + a11y hardening",
+        "date": "2026-07-09T14:49:40.000Z",
+        "sha": "8f40f0f8d7df6bbfd9b4a818659419677af6b267"
+      },
+      {
+        "url": "https://github.com/jayzalowitz/near-bit/commit/94cc013c044acab0e60a0fcd5e315e5c5ca594f1",
+        "title": "feat: Complete Bitcoin Infinity (Sydney chain) — full Bitcoin Core RPC parity over NEAR Protocol",
+        "date": "2026-02-18T02:47:26.000-05:00",
+        "sha": "94cc013c044acab0e60a0fcd5e315e5c5ca594f1"
+      },
+      {
+        "url": "https://github.com/SmartWebstar/pastel/commit/0e1545277220ab5275974e373b37d3b3ac7e8656",
+        "title": "[PSL-106] Add new API to pasteld `storagefee getactionfees <data_size>` (#99)",
+        "date": "2022-01-03T13:27:45.000-05:00",
+        "sha": "0e1545277220ab5275974e373b37d3b3ac7e8656"
+      },
+      {
+        "url": "https://github.com/pastelnetwork/pastel/commit/0e1545277220ab5275974e373b37d3b3ac7e8656",
+        "title": "[PSL-106] Add new API to pasteld `storagefee getactionfees <data_size>` (#99)",
+        "date": "2022-01-03T13:27:45.000-05:00",
+        "sha": "0e1545277220ab5275974e373b37d3b3ac7e8656"
+      },
+      {
+        "url": "https://github.com/schjonhaug/canary/commit/b7cf22e82690588fa3d65d5571af93467d7a8a82",
+        "title": "Watch individual Bitcoin addresses (#209)",
+        "date": "2026-02-28T06:54:37.000Z",
+        "sha": "b7cf22e82690588fa3d65d5571af93467d7a8a82"
+      },
+      {
+        "url": "https://github.com/pastelnetwork/pastel/commit/a67604c9e10c1c00377c9ac4ce51a2efe5fed107",
+        "title": "[PSL-1110][PSL-1113][PSL-1160][PSL-1161][PSL-1162][PSL-1163][PSL-1165][PSL-1166] (#249)",
+        "date": "2024-05-13T19:53:27.000-05:00",
+        "sha": "a67604c9e10c1c00377c9ac4ce51a2efe5fed107"
+      }
+    ],
+    "count": 22
+  },
+  {
+    "name": "commits_timestamp",
+    "status": "fulfilled",
+    "isError": false,
+    "items": [
+      {
+        "url": "https://github.com/MatoTeziTanka/satoshi-stylometry/commit/a48d1d8334bcb073ebaa81df02f704181242e18b",
+        "title": "forensics: Patoshi pattern vs hour-of-day cross-reference",
+        "date": "2026-05-27T06:43:53.000-04:00",
+        "sha": "a48d1d8334bcb073ebaa81df02f704181242e18b"
+      },
+      {
+        "url": "https://github.com/satoshi-onchain/satoshi-onchain/commit/7be762cb368036e026cc5ec361f40c1bda3a157c",
+        "title": "publish the first year's complete payment list, and measure the cluster from the spending side",
+        "date": "2026-08-06T19:04:27.000+05:30",
+        "sha": "7be762cb368036e026cc5ec361f40c1bda3a157c"
+      },
+      {
+        "url": "https://github.com/satoshi-onchain/.github/commit/a92155a8a8f6bfb4adec9c7a6e42f7a494ec71a5",
+        "title": "Add org-default community health files",
+        "date": "2026-09-03T16:49:03.000+05:30",
+        "sha": "a92155a8a8f6bfb4adec9c7a6e42f7a494ec71a5"
+      },
+      {
+        "url": "https://github.com/MatoTeziTanka/satoshi-stylometry/commit/318638eb9f552513372f2b858c24b11db7beb7ae",
+        "title": "forensics: hour-of-day timestamp analysis falsifies UK-resident claim",
+        "date": "2026-05-26T23:14:30.000-04:00",
+        "sha": "318638eb9f552513372f2b858c24b11db7beb7ae"
+      },
+      {
+        "url": "https://github.com/night-dev896/bitcoin-utils/commit/2cb21a35d0bdfb8e12bd3a52e2a24d84a629acaf",
+        "title": "patoshi block timestamp delta script",
+        "date": "2020-08-25T09:13:44.000-04:00",
+        "sha": "2cb21a35d0bdfb8e12bd3a52e2a24d84a629acaf"
+      },
+      {
+        "url": "https://github.com/jlopp/bitcoin-utils/commit/89d915dc5e6625d10f87134effac48c772d58beb",
+        "title": "patoshi block timestamp delta script",
+        "date": "2020-08-25T09:13:44.000-04:00",
+        "sha": "89d915dc5e6625d10f87134effac48c772d58beb"
+      },
+      {
+        "url": "https://github.com/l2-dev554/bitcoin-utils/commit/4e77c3296756bd176ddd5cfa4bf2ff84d4185fdd",
+        "title": "patoshi block timestamp delta script",
+        "date": "2020-08-25T09:13:44.000-04:00",
+        "sha": "4e77c3296756bd176ddd5cfa4bf2ff84d4185fdd"
+      },
+      {
+        "url": "https://github.com/pastelnetwork/pastel/commit/a67604c9e10c1c00377c9ac4ce51a2efe5fed107",
+        "title": "[PSL-1110][PSL-1113][PSL-1160][PSL-1161][PSL-1162][PSL-1163][PSL-1165][PSL-1166] (#249)",
+        "date": "2024-05-13T19:53:27.000-05:00",
+        "sha": "a67604c9e10c1c00377c9ac4ce51a2efe5fed107"
+      }
+    ],
+    "count": 8
+  },
+  {
+    "name": "commits_nonpatoshi",
+    "status": "fulfilled",
+    "isError": false,
+    "items": [
+      {
+        "url": "https://github.com/l2-dev554/bitcoin-utils/commit/c88ffce4cf9b4d18708dcc581f16b7501989683e",
+        "title": "add nonpatoshi block delta script",
+        "date": "2022-09-15T16:49:17.000-04:00",
+        "sha": "c88ffce4cf9b4d18708dcc581f16b7501989683e"
+      },
+      {
+        "url": "https://github.com/jlopp/bitcoin-utils/commit/66ee906b28ca13269d6f71d63f848973a1b747a2",
+        "title": "add nonpatoshi block delta script",
+        "date": "2022-09-15T16:49:17.000-04:00",
+        "sha": "66ee906b28ca13269d6f71d63f848973a1b747a2"
+      },
+      {
+        "url": "https://github.com/night-dev896/bitcoin-utils/commit/13271a0c2102b72b4d8a1a33c9e5c8b4ef820819",
+        "title": "add nonpatoshi block delta script",
+        "date": "2022-09-15T16:49:17.000-04:00",
+        "sha": "13271a0c2102b72b4d8a1a33c9e5c8b4ef820819"
+      }
+    ],
+    "count": 3
+  },
+  {
+    "name": "issues_lopp",
+    "status": "fulfilled",
+    "isError": false,
+    "items": [
+      {
+        "url": "https://github.com/SurmountSystems/gabriel/issues/8",
+        "title": "Patoshi",
+        "date": null
+      },
+      {
+        "url": "https://github.com/1btc-news/news-client/issues/33",
+        "title": "Major Bounty: Build & Run the Quantum Visualizer + Daily Quantum Beat (250k sats)",
+        "date": null
+      },
+      {
+        "url": "https://github.com/arminsabouri/bostonbitdevs/issues/4",
+        "title": "Socratic Seminar 10 Reading List (October)",
+        "date": null
+      }
+    ],
+    "count": 3
+  },
+  {
+    "name": "prs_exact",
+    "status": "fulfilled",
+    "isError": false,
+    "items": [],
+    "count": 0
+  }
+]

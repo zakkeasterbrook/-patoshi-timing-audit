@@ -1,0 +1,71 @@
+{
+  "status": "pass",
+  "header_count": 50000,
+  "height_range_inclusive": [
+    0,
+    49999
+  ],
+  "raw_header_sha256": "b9e200ba15c904e05283461469d5582a9580df15ff842436576a7490454b03ec",
+  "canonical_classification_list_sha256": "33c9927845ccd3016fb37bc2b860cfe7a3fea22522c67649d72c6dc50e9ae8e1",
+  "retarget_boundaries_verified": 24,
+  "recorded_external_anchor_observations_matched": 10,
+  "header_validation": [
+    "known mainnet genesis",
+    "hash linkage",
+    "declared proof of work",
+    "difficulty transitions",
+    "median time past"
+  ],
+  "saved_native_php_outputs_match_every_python_row": true,
+  "csv_sha256": {
+    "original.csv": "8e7fabca367e451126479e523153360340f713c879f5f8748224c2361eaaa97e",
+    "timestamp_only.csv": "8b6aacb51cf9d3b861bb1c3bfbae92d9f677a0b1614d0b7d92b9a032ea0c152f",
+    "literal_rule.csv": "afdfcbe614914e79b6bfa7b7a3ff89ee3d09a7b9ec9e777033d9528fa277430b"
+  },
+  "counts": {
+    "original": {
+      "n": 1881,
+      "negative": 1,
+      "zero": 0,
+      "positive_below_300": 4,
+      "less_300": 5,
+      "zero_to_299": 4,
+      "at_least_300": 1876,
+      "at_300": 0,
+      "min_delta": -1407,
+      "max_delta": 31007
+    },
+    "timestamp_only": {
+      "n": 400,
+      "negative": 10,
+      "zero": 0,
+      "positive_below_300": 134,
+      "less_300": 144,
+      "zero_to_299": 134,
+      "at_least_300": 256,
+      "at_300": 1,
+      "min_delta": -218,
+      "max_delta": 30884
+    },
+    "stated_rule": {
+      "n": 754,
+      "negative": 30,
+      "zero": 0,
+      "positive_below_300": 246,
+      "less_300": 276,
+      "zero_to_299": 246,
+      "at_least_300": 478,
+      "at_300": 1,
+      "min_delta": -218,
+      "max_delta": 30884
+    }
+  },
+  "no_final_flush_effect_on_this_dataset": true,
+  "followup_status": "pass",
+  "followup_summary": "followup/summary.json",
+  "unverified_followups": {
+    "Bitquery_classification_sensitivity": "Requires the separate frozen Bitquery CSV; not supplied in the recovered release package",
+    "three_disputed_label_removal": "Exact three heights and historical source were not supplied; no guessed removals applied"
+  },
+  "scope": "Fixed published labels; no independent attribution of miner identity"
+}

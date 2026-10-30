@@ -1,0 +1,21 @@
+{
+  "commit": "66ee906b28ca13269d6f71d63f848973a1b747a2",
+  "commit_url": "https://github.com/jlopp/bitcoin-utils/commit/66ee906b28ca13269d6f71d63f848973a1b747a2",
+  "author_date": "2022-09-15T20:49:17Z",
+  "committer_date": "2022-09-15T20:49:17Z",
+  "commit_message": "add nonpatoshi block delta script",
+  "github_reports_signature_valid": true,
+  "github_signature_reason": "valid",
+  "github_signature_verified_at": "2024-11-05T22:00:24Z",
+  "signature_independently_verified_locally": false,
+  "source_sha256": "104d0df1854802a2e0a5333fda51ee657bb2b17006a48f820bc446c21993e119",
+  "source_git_blob_sha1": "905ab04b5fece476eda19b4b32a0bd749a0e9327",
+  "wrong_assignment_locations": [
+    30
+  ],
+  "file_length_bytes": 125172,
+  "file_length_lines": 47,
+  "license_api_status": 404,
+  "repository_license_field": null,
+  "github_html_web_tool_error": "DisabledError; direct HTTPS raw/API and Git protocol reads succeeded"
+}

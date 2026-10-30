@@ -1,0 +1,98 @@
+{
+  "status": "pass",
+  "recorded_utc": "2026-10-30T13:42:40.279961+00:00",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.39",
+  "method": "Fresh repository copy; unrelated working directory; isolated Python; native PHP enabled",
+  "commands": [
+    {
+      "command": [
+        "python",
+        "-I",
+        "-B",
+        "reproduce.py"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "da7da7bf6a5c2023627f345a33a3d8bc3f3ef22e6968ab5dfe267403b0c2e20c",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python",
+        "-I",
+        "-B",
+        "scripts/check_direct.py"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "8b42a9dff5efe9ba8e672bf6d9a312165c05e893c0e0c814117bebe8d1e5d0cf",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python",
+        "-I",
+        "-B",
+        "scripts/demo.py"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "5939ed3e484850576876b558aac69b8f8b40d6e3ce37639d8a3275862b4c2212",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python",
+        "-I",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/tmp/patoshi_acceptance_t4oxjvnv/patoshi-timing-audit/tests",
+        "-v"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "test_all_small_label_masks_against_triplet_definition (test_release.ReleaseTests.test_all_small_label_masks_against_triplet_definition) ... ok\ntest_header_mutation_is_rejected (test_release.ReleaseTests.test_header_mutation_is_rejected) ... ok\ntest_optimized_python_rejects_disabled_header_assertions (test_release.ReleaseTests.test_optimized_python_rejects_disabled_header_assertions) ... ok\ntest_direct_php_matches_hand_specified_outcomes (test_timing.NativeSourceSemanticTests.test_direct_php_matches_hand_specified_outcomes) ... ok\ntest_exhausted_prefix_is_reported_explicitly (test_timing.NativeSourceSemanticTests.test_exhausted_prefix_is_reported_explicitly) ... ok\ntest_missing_final_flush_is_a_synthetic_edge_case (test_timing.NativeSourceSemanticTests.test_missing_final_flush_is_a_synthetic_edge_case) ... ok\ntest_python_emulation_matches_actual_php_every_fixture (test_timing.NativeSourceSemanticTests.test_python_emulation_matches_actual_php_every_fixture) ... ok\ntest_run_count_and_discarded_head_are_separate_faults (test_timing.NativeSourceSemanticTests.test_run_count_and_discarded_head_are_separate_faults) ... ok\ntest_each_stated_rule_case_matches_hand_specification (test_timing.SpecifiedRuleTests.test_each_stated_rule_case_matches_hand_specification) ... ok\ntest_emulation_preserves_documented_source_defects (test_timing.SpecifiedRuleTests.test_emulation_preserves_documented_source_defects) ... ok\ntest_output_threshold_boundaries_are_strict (test_timing.SpecifiedRuleTests.test_output_threshold_boundaries_are_strict) ... ok\ntest_prefix_limit_and_final_tracker_are_explicit (test_timing.SpecifiedRuleTests.test_prefix_limit_and_final_tracker_are_explicit) ... ok\n\n----------------------------------------------------------------------\nRan 12 tests in 0.882s\n\nOK\n"
+    },
+    {
+      "command": [
+        "python",
+        "-I",
+        "-B",
+        "scripts/run_native.py",
+        "--php",
+        "/workspace/scratch/cbeb7e916c86/php_runtime/usr/bin/php8.3",
+        "--source",
+        "/workspace/scratch/cbeb7e916c86/patoshi-timing-audit/build/original.php"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "b9fec44d9d091b55cac8a8896b996e75a93fa9de94ee2f2d2a876e4a6ee6fc3f",
+      "stderr": ""
+    }
+  ],
+  "test_methods_passed": 12,
+  "test_methods_skipped": 0,
+  "small_label_clock_combinations": 1530,
+  "hosted_github_ci": "pending",
+  "external_human_review": "pending",
+  "critical_files": {
+    ".github/workflows/verify.yml": "bd1b98c14a6139055ef00ca69a690ef0c0afe81cf30030595682ae98a586b877",
+    "native/literal_rule.php": "12b1a1de5fa3ca9fdef06c0bfce52abfb8fd37fc59794928ccb52f8ea8338a36",
+    "native/run_original.php": "121d07a8dbd8389e86a1435ea763724e71be80973f63b340637cc550df8c4df7",
+    "native/vendor/autoload.php": "579caf46bcba6ef1d0487cbd8439d4dc785adc97a1fd84a9efa9831eaf6cdd9a",
+    "reproduce.py": "14bb0b55af75302c425cc0449e98150a82f28444275ffa676e8721c08f2e0e51",
+    "scripts/check_direct.py": "6699509e0cd2677b17edec12576dae861bf1022f08593794582d81b747ff3833",
+    "scripts/demo.py": "e4bf318ccac1f238e251590cdb4963fc0e32484bfcf1fabe3859cacf79643316",
+    "scripts/fetch_original_source.py": "ad53900a69c5da78b9e15daf4ed726da6da9589d08e69a2df6876936f3d1cad4",
+    "scripts/inputs.py": "65f31371fdf85d1ebd44174056b8ebf49a870069db1408af234ca7d559b038b1",
+    "scripts/plot_results.py": "8a4bffca98a746520d42094fbe8b7ae33d800c7d545251bf5add37703cd5be75",
+    "scripts/release_figures.py": "744e3f68374c3d62a03a883ff94efdbbaa51ff7db79c2bc4a3cfbdf57d59a0b3",
+    "scripts/run_native.py": "0487b5f9b0488a021f6805ab2053725a06625d9b011eb1f089d99bbc48992014",
+    "scripts/timing.py": "927408af4c1e0e3fbef58b3ef7a8c20af789b08b2a41403aa102c55a0c83a878",
+    "scripts/verify_headers.py": "ede2c73f8da31e777889deb535788b24591c1b45f3e26931b8eda3a732c60ed0",
+    "scripts/verify_live_headers.py": "c263323d6a6843653e6295d3bf1a203e8b342b88b345682a0f7aee86f9bbaf02",
+    "scripts/verify_manifest.py": "a52ecd5fe00d4441a0cd013b27d2978301455de381e700421b04047e348eff66",
+    "tests/test_release.py": "b979ddd7d3ab3fd139d044d4e51e2ef75e0970c8fad6ee00ccedf3adb97f47a7",
+    "tests/test_timing.py": "1406e05e49fd10dfe73904e1722139eb1b232558412cc43a98381ead0ad6170a"
+  }
+}

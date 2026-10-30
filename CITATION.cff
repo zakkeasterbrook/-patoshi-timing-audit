@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "Please cite this repository and the exact commit used. A public release date and DOI are not asserted by this candidate."
+type: software
+title: "Patoshi Timing Audit: A Reproducible Correction to the 2022 Timing Test"
+authors:
+  - family-names: Easterbrook
+    given-names: Zakk
+repository-code: "https://github.com/zakkeasterbrook/-patoshi-timing-audit"
+abstract: >-
+  A reproducible audit of a published Bitcoin block-timing test. It reproduces
+  the original PHP output, isolates a wrong timestamp assignment, and implements
+  the stated sequence rule over 50,000 verified block headers with fixed labels.
+  Descriptive timing and nonce comparisons are kept separate from miner identity
+  and causal claims.
+keywords:
+  - Bitcoin
+  - reproducibility
+  - block timestamps
+  - Patoshi
+version: 1.0.0
+license: MIT

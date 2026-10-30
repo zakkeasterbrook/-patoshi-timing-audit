@@ -1,0 +1,33 @@
+{
+  "original_sample_measured_C_minus_B": {
+    "cases": 1881,
+    "negative": 121,
+    "below_300_including_negative": 713
+  },
+  "legacy_preceding_interval_seconds": {
+    "min": 22,
+    "max": 6865
+  },
+  "removed_by_filter": 1481,
+  "added_by_direct_selection": 354,
+  "original_negative_cases": [
+    {
+      "a": 24141,
+      "b": 24142,
+      "c": 24143,
+      "pair_delta": 1485,
+      "child_delta": -2892,
+      "published_delta": -1407
+    }
+  ],
+  "exactly_300_child_heights": {
+    "timestamp_only": [
+      9656
+    ],
+    "stated_rule": [
+      9656
+    ]
+  },
+  "interval_identity_holds_every_original_case": true,
+  "final_legacy_tracker": []
+}

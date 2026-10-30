@@ -1,0 +1,50 @@
+{
+  "title": "Was Satoshi a Greedy Miner?",
+  "meta": [
+    {
+      "property": "og:url",
+      "content": "https://blog.lopp.net/was-satoshi-a-greedy-miner/"
+    },
+    {
+      "property": "article:published_time",
+      "content": "2022-09-16T13:25:07.000Z"
+    },
+    {
+      "property": "article:modified_time",
+      "content": "2026-05-07T11:18:27.000Z"
+    },
+    {
+      "property": "article:tag",
+      "content": "bitcoin"
+    },
+    {
+      "property": "article:tag",
+      "content": "satoshi"
+    },
+    {
+      "property": "article:tag",
+      "content": "mining"
+    },
+    {
+      "property": "article:tag",
+      "content": "history"
+    }
+  ],
+  "article_metadata": [
+    {
+      "headline": "Was Satoshi a Greedy Miner?",
+      "url": "https://blog.lopp.net/was-satoshi-a-greedy-miner/",
+      "datePublished": "2022-09-16T13:25:07.000Z",
+      "dateModified": "2026-05-07T11:18:27.000Z"
+    }
+  ],
+  "selected_count": 1881,
+  "negative_count": 1,
+  "below_300_count": 5,
+  "printed_percentage": "0.3",
+  "passage_characters": 1422,
+  "passage_sha256": "9b40e4309bf6ab1436329c93041505040e0471ce6aa7604e2e4f8c94b6f32f88",
+  "script_links": [
+    "https://github.com/jlopp/bitcoin-utils/blob/master/findNonPatoshiDeltasAfterFastPatoshiBlocks.php?ref=blog.lopp.net"
+  ]
+}

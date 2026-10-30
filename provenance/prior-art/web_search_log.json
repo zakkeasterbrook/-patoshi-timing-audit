@@ -1,0 +1,73 @@
+{
+  "audit_date_eastern": "2026-10-29",
+  "collection_utc": "2026-10-30",
+  "query_count": 23,
+  "limits": "Search results are index-dependent. A negative result is not proof that no earlier report exists; private/deleted/unindexed posts and inaccessible sources are outside coverage.",
+  "batches": [
+    {
+      "engine": "system1",
+      "batch": "turn227",
+      "queries": [
+        "\"findNonPatoshiDeltasAfterFastPatoshiBlocks\" bug",
+        "\"patoshiBlock2Time\" \"patoshiBlock1\" bug",
+        "\"Lopp\" \"Patoshi\" \"timestamp\" \"bug\""
+      ],
+      "finding": "Original code and general timestamp discussions; no earlier report of the specific wrong-block assignment found."
+    },
+    {
+      "engine": "system2",
+      "batch": "turn232",
+      "queries": [
+        "\"findNonPatoshiDeltasAfterFastPatoshiBlocks\"",
+        "\"patoshiBlock2Time\"",
+        "\"Was Satoshi a Greedy Miner\" \"error\"",
+        "\"Lopp\" \"Patoshi\" \"1881\""
+      ],
+      "finding": "Original source, article and mirrors; no specific correction report found."
+    },
+    {
+      "engine": "system1",
+      "batch": "turn233",
+      "queries": [
+        "\"Was Satoshi a Greedy Miner\" \"bug\"",
+        "\"findNonPatoshiDeltasAfterFastPatoshiBlocks.php\" \"fix\"",
+        "\"patoshiBlock2Time\" -\"github.com\"",
+        "\"Patoshi\" \"1,881\" \"error\""
+      ],
+      "finding": "Original source and article/mirrors; no earlier report found."
+    },
+    {
+      "engine": "system2",
+      "batch": "turn236",
+      "queries": [
+        "\"findNonPatoshiDeltasAfterFastPatoshiBlocks\" \"correction\"",
+        "\"patoshiBlock2\" \"get\" \"time\" \"fix\"",
+        "\"Patoshi\" \"Lopp\" \"1,881\" \"bug\"",
+        "\"Patoshi\" \"Lopp\" \"wrong\" \"script\""
+      ],
+      "finding": "Unrelated articles and broad discussions; no earlier report found."
+    },
+    {
+      "engine": "system1",
+      "batch": "turn238",
+      "queries": [
+        "\"Patoshi\" \"Lopp\" \"timestamp\" \"mistake\"",
+        "\"Was Satoshi a Greedy Miner\" criticism",
+        "site:stacker.news \"greedy miner\"",
+        "site:bitcointalk.org \"Lopp\" \"greedy\""
+      ],
+      "finding": "Related BitcoinTalk discussion of other mining/timestamp hypotheses and original article; no report of this script error."
+    },
+    {
+      "engine": "system2",
+      "batch": "turn240",
+      "queries": [
+        "\"Patoshi\" \"Lopp\" \"bug\" site:x.com",
+        "\"findNonPatoshiDeltasAfterFastPatoshiBlocks\" -site:github.com",
+        "\"Patoshi\" \"1881\" correction",
+        "\"Patoshi\" \"copy paste\""
+      ],
+      "finding": "Mostly irrelevant homonyms and general discussion; no earlier report found. X search coverage is limited."
+    }
+  ]
+}

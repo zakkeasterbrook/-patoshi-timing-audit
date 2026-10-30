@@ -1,0 +1,14 @@
+test_direct_php_matches_hand_specified_outcomes (test_timing.NativeSourceSemanticTests.test_direct_php_matches_hand_specified_outcomes) ... ok
+test_exhausted_prefix_is_reported_explicitly (test_timing.NativeSourceSemanticTests.test_exhausted_prefix_is_reported_explicitly) ... ok
+test_missing_final_flush_is_a_synthetic_edge_case (test_timing.NativeSourceSemanticTests.test_missing_final_flush_is_a_synthetic_edge_case) ... ok
+test_python_emulation_matches_actual_php_every_fixture (test_timing.NativeSourceSemanticTests.test_python_emulation_matches_actual_php_every_fixture) ... ok
+test_run_count_and_discarded_head_are_separate_faults (test_timing.NativeSourceSemanticTests.test_run_count_and_discarded_head_are_separate_faults) ... ok
+test_each_stated_rule_case_matches_hand_specification (test_timing.SpecifiedRuleTests.test_each_stated_rule_case_matches_hand_specification) ... ok
+test_emulation_preserves_documented_source_defects (test_timing.SpecifiedRuleTests.test_emulation_preserves_documented_source_defects) ... ok
+test_output_threshold_boundaries_are_strict (test_timing.SpecifiedRuleTests.test_output_threshold_boundaries_are_strict) ... ok
+test_prefix_limit_and_final_tracker_are_explicit (test_timing.SpecifiedRuleTests.test_prefix_limit_and_final_tracker_are_explicit) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.783s
+
+OK

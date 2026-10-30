@@ -1,0 +1,2 @@
+# Optional only; core reproduction and tests use the Python standard library.
+matplotlib==3.10.8

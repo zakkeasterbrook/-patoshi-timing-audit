@@ -1,0 +1,17 @@
+{
+  "status": "not_verified_or_bundled",
+  "bitquery": {
+    "article_url": "https://www.bitquery.io/investigations/satoshi-nakamoto-net-worth",
+    "dataset_url": "https://www.bitquery.io/investigations/satoshi-nakamoto-net-worth/patoshi-audit-dataset.csv",
+    "method_url": "https://www.bitquery.io/investigations/satoshi-nakamoto-net-worth/method-changelog.md",
+    "reported_snapshot_sha256_unverified": "a064e47a0dcaf78fda0f1394a4d16fbfdd56bcd436a1fba94c56bbeecaf030dd",
+    "current_session_download": "HTTP 403; host outside active environment allowlist",
+    "audit_population": "Filter source rows to heights below 50000; genesis is unclassified",
+    "high_grade_negative_definition": "Explicit source negatives only; medium/low positives remain unknown",
+    "limitation": "Using published labels does not rerun or independently validate the classifier"
+  },
+  "three_disputed_labels": {
+    "required": "Exact three heights and historical source citation",
+    "current_status": "Not supplied; no removals guessed or applied"
+  }
+}

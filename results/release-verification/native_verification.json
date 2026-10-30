@@ -1,0 +1,65 @@
+{
+  "status": "pass",
+  "runtime": "PHP 8.3.6 (cli) (built: Oct 19 2026 15:16:58) (NTS)\nCopyright (c) The PHP Group\nZend Engine v4.3.6, Copyright (c) Zend Technologies\n",
+  "upstream_source_sha256": "104d0df1854802a2e0a5333fda51ee657bb2b17006a48f820bc446c21993e119",
+  "method": "Actual PHP CLI with -n and a deterministic offline replacement for three RPC/response operations",
+  "limitation": "Not the complete original 2022 Composer/Bitcoin Core environment",
+  "variants": {
+    "original": {
+      "exit_code": 0,
+      "rows": 1881,
+      "every_output_byte_matches_fresh_python": true,
+      "csv_sha256": "8e7fabca367e451126479e523153360340f713c879f5f8748224c2361eaaa97e",
+      "source_input_sha256": "104d0df1854802a2e0a5333fda51ee657bb2b17006a48f820bc446c21993e119",
+      "entrypoint": "native/run_original.php",
+      "entrypoint_sha256": "121d07a8dbd8389e86a1435ea763724e71be80973f63b340637cc550df8c4df7"
+    },
+    "timestamp_only": {
+      "exit_code": 0,
+      "rows": 400,
+      "every_output_byte_matches_fresh_python": true,
+      "csv_sha256": "8b6aacb51cf9d3b861bb1c3bfbae92d9f677a0b1614d0b7d92b9a032ea0c152f",
+      "source_input_sha256": "bb2df8d3574f84e32367febfaaea9b911f92b197738fab80d46fa9af7f47fd58",
+      "entrypoint": "native/run_original.php",
+      "entrypoint_sha256": "121d07a8dbd8389e86a1435ea763724e71be80973f63b340637cc550df8c4df7"
+    },
+    "stated_rule": {
+      "exit_code": 0,
+      "rows": 754,
+      "every_output_byte_matches_fresh_python": true,
+      "csv_sha256": "afdfcbe614914e79b6bfa7b7a3ff89ee3d09a7b9ec9e777033d9528fa277430b",
+      "source_input_sha256": "104d0df1854802a2e0a5333fda51ee657bb2b17006a48f820bc446c21993e119",
+      "entrypoint": "native/literal_rule.php",
+      "entrypoint_sha256": "12b1a1de5fa3ca9fdef06c0bfce52abfb8fd37fc59794928ccb52f8ea8338a36"
+    }
+  },
+  "counts": {
+    "original": {
+      "n": 1881,
+      "negative": 1,
+      "less_300": 5,
+      "zero_to_299": 4,
+      "at_300": 0,
+      "min_delta": -1407,
+      "max_delta": 31007
+    },
+    "timestamp_only": {
+      "n": 400,
+      "negative": 10,
+      "less_300": 144,
+      "zero_to_299": 134,
+      "at_300": 1,
+      "min_delta": -218,
+      "max_delta": 30884
+    },
+    "stated_rule": {
+      "n": 754,
+      "negative": 30,
+      "less_300": 276,
+      "zero_to_299": 246,
+      "at_300": 1,
+      "min_delta": -218,
+      "max_delta": 30884
+    }
+  }
+}

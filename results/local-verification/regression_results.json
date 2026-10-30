@@ -1,0 +1,19 @@
+{
+  "python_only": {
+    "exit_code": 0,
+    "summary": [
+      "Ran 9 tests in 0.001s",
+      "",
+      "OK (skipped=5)"
+    ]
+  },
+  "with_native": {
+    "exit_code": 0,
+    "summary": [
+      "Ran 9 tests in 0.783s",
+      "",
+      "OK"
+    ],
+    "php_resolution": "shutil.which; absolute path exercised"
+  }
+}

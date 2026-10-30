@@ -1,0 +1,103 @@
+name: Verify audit
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline:
+    name: Offline reproduction (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2025]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+      - name: Verify packaged file checksums
+        run: python scripts/verify_manifest.py
+      - name: Verify headers and reproduce all rows
+        run: python reproduce.py
+      - name: Cross-check the stated rule and context from raw bytes
+        run: python scripts/check_direct.py
+      - name: Test selection and threshold edge cases
+        run: python -m unittest discover -s tests -v
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: offline-${{ matrix.os }}
+          path: |
+            build/summary.json
+            build/direct_check.json
+            build/*.csv
+            build/events.json
+            build/diagnostics.json
+            build/example_263_265.json
+            build/followup/
+          if-no-files-found: error
+
+  native:
+    name: Native PHP and fresh source provenance
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+      - name: Require PHP 8 CLI
+        shell: bash
+        run: |
+          php -n -v
+          php -n -r 'exit(PHP_MAJOR_VERSION === 8 ? 0 : 1);'
+      - name: Fetch and verify the original source
+        run: python scripts/fetch_original_source.py build/original.php
+      - name: Compare every frozen label with the pinned source
+        run: python scripts/verify_source_labels.py --source build/original.php
+      - name: Reproduce in actual PHP and compare every output byte
+        run: python scripts/run_native.py --php php --source build/original.php
+      - name: Exercise the same edge cases in actual PHP
+        env:
+          PATOSHI_TEST_PHP: php
+          PATOSHI_TEST_SOURCE: ${{ github.workspace }}/build/original.php
+        run: python -m unittest discover -s tests -v
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: native-and-provenance
+          path: |
+            build/summary.json
+            build/native_verification.json
+            build/source_label_verification.json
+            build/native/*.csv
+          if-no-files-found: error
+
+  online-provenance:
+    name: Optional fresh header acquisition
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+      - name: Compare a fresh 4 MB prefix with frozen headers
+        run: python scripts/verify_live_headers.py
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: fresh-header-provenance
+          path: build/live_header_verification.json
+          if-no-files-found: error

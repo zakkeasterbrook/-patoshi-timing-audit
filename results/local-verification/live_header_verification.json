@@ -1,0 +1,10 @@
+{
+  "status": "pass",
+  "source_url": "https://download.electrum.org/blockchain_headers",
+  "retrieved_utc": "2026-10-30T04:47:01.113870+00:00",
+  "http_status": 206,
+  "content_range": "bytes 0-3999999/38210960",
+  "bytes": 4000000,
+  "sha256": "b9e200ba15c904e05283461469d5582a9580df15ff842436576a7490454b03ec",
+  "fresh_prefix_equals_bundled_headers": true
+}

@@ -1,0 +1,253 @@
+{
+  "status": "pass",
+  "snapshot_root": "/tmp/patoshi_release_review/curated/curated_snapshot_i20ww0f8/patoshi-timing-audit",
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+    "python_flags": [
+      "-I",
+      "-B"
+    ],
+    "php_binary": "/tmp/patoshi_php_runtime/root/usr/bin/php8.3",
+    "php_binary_sha256": "7f1ac2fe89d267364311651c0e7e6651d32ea006c9a701c0cab68eb2394a67d7",
+    "subprocess_env": {
+      "PATH": "/tmp/patoshi_release_review/curated/curated_snapshot_i20ww0f8/bin:/usr/bin:/bin",
+      "LANG": "C.UTF-8",
+      "LC_ALL": "C.UTF-8",
+      "TMPDIR": "/tmp/patoshi_release_review/curated",
+      "PATOSHI_TEST_PHP": "php",
+      "PATOSHI_TEST_SOURCE": "/tmp/first500_priorart/lopp_initial.php"
+    }
+  },
+  "pinned_source_sha256": "104d0df1854802a2e0a5333fda51ee657bb2b17006a48f820bc446c21993e119",
+  "file_snapshot_count": 60,
+  "commands": {
+    "offline": {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-I",
+        "-B",
+        "/tmp/patoshi_release_review/curated/curated_snapshot_i20ww0f8/patoshi-timing-audit/reproduce.py"
+      ],
+      "cwd": "/tmp/patoshi_release_review/curated",
+      "returncode": 0,
+      "stdout_sha256": "da7da7bf6a5c2023627f345a33a3d8bc3f3ef22e6968ab5dfe267403b0c2e20c",
+      "stderr": ""
+    },
+    "native": {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-I",
+        "-B",
+        "/tmp/patoshi_release_review/curated/curated_snapshot_i20ww0f8/patoshi-timing-audit/scripts/run_native.py",
+        "--php",
+        "php",
+        "--source",
+        "/tmp/first500_priorart/lopp_initial.php"
+      ],
+      "cwd": "/tmp/patoshi_release_review/curated",
+      "returncode": 0,
+      "stdout_sha256": "b9fec44d9d091b55cac8a8896b996e75a93fa9de94ee2f2d2a876e4a6ee6fc3f",
+      "stderr": ""
+    },
+    "unit_tests": {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-I",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/tmp/patoshi_release_review/curated/curated_snapshot_i20ww0f8/patoshi-timing-audit/tests",
+        "-v"
+      ],
+      "cwd": "/tmp/patoshi_release_review/curated",
+      "returncode": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "test_direct_php_matches_hand_specified_outcomes (test_timing.NativeSourceSemanticTests.test_direct_php_matches_hand_specified_outcomes) ... ok\ntest_exhausted_prefix_is_reported_explicitly (test_timing.NativeSourceSemanticTests.test_exhausted_prefix_is_reported_explicitly) ... ok\ntest_missing_final_flush_is_a_synthetic_edge_case (test_timing.NativeSourceSemanticTests.test_missing_final_flush_is_a_synthetic_edge_case) ... ok\ntest_python_emulation_matches_actual_php_every_fixture (test_timing.NativeSourceSemanticTests.test_python_emulation_matches_actual_php_every_fixture) ... ok\ntest_run_count_and_discarded_head_are_separate_faults (test_timing.NativeSourceSemanticTests.test_run_count_and_discarded_head_are_separate_faults) ... ok\ntest_each_stated_rule_case_matches_hand_specification (test_timing.SpecifiedRuleTests.test_each_stated_rule_case_matches_hand_specification) ... ok\ntest_emulation_preserves_documented_source_defects (test_timing.SpecifiedRuleTests.test_emulation_preserves_documented_source_defects) ... ok\ntest_output_threshold_boundaries_are_strict (test_timing.SpecifiedRuleTests.test_output_threshold_boundaries_are_strict) ... ok\ntest_prefix_limit_and_final_tracker_are_explicit (test_timing.SpecifiedRuleTests.test_prefix_limit_and_final_tracker_are_explicit) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 0.746s\n\nOK\n"
+    }
+  },
+  "offline_summary": {
+    "status": "pass",
+    "header_count": 50000,
+    "height_range_inclusive": [
+      0,
+      49999
+    ],
+    "raw_header_sha256": "b9e200ba15c904e05283461469d5582a9580df15ff842436576a7490454b03ec",
+    "canonical_classification_list_sha256": "33c9927845ccd3016fb37bc2b860cfe7a3fea22522c67649d72c6dc50e9ae8e1",
+    "retarget_boundaries_verified": 24,
+    "recorded_external_anchor_observations_matched": 10,
+    "header_validation": [
+      "known mainnet genesis",
+      "hash linkage",
+      "declared proof of work",
+      "difficulty transitions",
+      "median time past"
+    ],
+    "saved_native_php_outputs_match_every_python_row": true,
+    "csv_sha256": {
+      "original.csv": "8e7fabca367e451126479e523153360340f713c879f5f8748224c2361eaaa97e",
+      "timestamp_only.csv": "8b6aacb51cf9d3b861bb1c3bfbae92d9f677a0b1614d0b7d92b9a032ea0c152f",
+      "literal_rule.csv": "afdfcbe614914e79b6bfa7b7a3ff89ee3d09a7b9ec9e777033d9528fa277430b"
+    },
+    "counts": {
+      "original": {
+        "n": 1881,
+        "negative": 1,
+        "less_300": 5,
+        "zero_to_299": 4,
+        "at_300": 0,
+        "min_delta": -1407,
+        "max_delta": 31007
+      },
+      "timestamp_only": {
+        "n": 400,
+        "negative": 10,
+        "less_300": 144,
+        "zero_to_299": 134,
+        "at_300": 1,
+        "min_delta": -218,
+        "max_delta": 30884
+      },
+      "stated_rule": {
+        "n": 754,
+        "negative": 30,
+        "less_300": 276,
+        "zero_to_299": 246,
+        "at_300": 1,
+        "min_delta": -218,
+        "max_delta": 30884
+      }
+    },
+    "no_final_flush_effect_on_this_dataset": true,
+    "scope": "Fixed published labels; no independent attribution of miner identity"
+  },
+  "native_summary": {
+    "status": "pass",
+    "runtime": "PHP 8.3.6 (cli) (built: Oct 19 2026 15:16:58) (NTS)\nCopyright (c) The PHP Group\nZend Engine v4.3.6, Copyright (c) Zend Technologies\n",
+    "upstream_source_sha256": "104d0df1854802a2e0a5333fda51ee657bb2b17006a48f820bc446c21993e119",
+    "method": "Actual PHP CLI with -n and a deterministic offline replacement for three RPC/response operations",
+    "limitation": "Not the complete original 2022 Composer/Bitcoin Core environment",
+    "variants": {
+      "original": {
+        "exit_code": 0,
+        "rows": 1881,
+        "every_output_byte_matches_fresh_python": true,
+        "csv_sha256": "8e7fabca367e451126479e523153360340f713c879f5f8748224c2361eaaa97e",
+        "source_input_sha256": "104d0df1854802a2e0a5333fda51ee657bb2b17006a48f820bc446c21993e119",
+        "entrypoint": "native/run_original.php",
+        "entrypoint_sha256": "121d07a8dbd8389e86a1435ea763724e71be80973f63b340637cc550df8c4df7"
+      },
+      "timestamp_only": {
+        "exit_code": 0,
+        "rows": 400,
+        "every_output_byte_matches_fresh_python": true,
+        "csv_sha256": "8b6aacb51cf9d3b861bb1c3bfbae92d9f677a0b1614d0b7d92b9a032ea0c152f",
+        "source_input_sha256": "bb2df8d3574f84e32367febfaaea9b911f92b197738fab80d46fa9af7f47fd58",
+        "entrypoint": "native/run_original.php",
+        "entrypoint_sha256": "121d07a8dbd8389e86a1435ea763724e71be80973f63b340637cc550df8c4df7"
+      },
+      "stated_rule": {
+        "exit_code": 0,
+        "rows": 754,
+        "every_output_byte_matches_fresh_python": true,
+        "csv_sha256": "afdfcbe614914e79b6bfa7b7a3ff89ee3d09a7b9ec9e777033d9528fa277430b",
+        "source_input_sha256": "104d0df1854802a2e0a5333fda51ee657bb2b17006a48f820bc446c21993e119",
+        "entrypoint": "native/literal_rule.php",
+        "entrypoint_sha256": "12b1a1de5fa3ca9fdef06c0bfce52abfb8fd37fc59794928ccb52f8ea8338a36"
+      }
+    },
+    "counts": {
+      "original": {
+        "n": 1881,
+        "negative": 1,
+        "less_300": 5,
+        "zero_to_299": 4,
+        "at_300": 0,
+        "min_delta": -1407,
+        "max_delta": 31007
+      },
+      "timestamp_only": {
+        "n": 400,
+        "negative": 10,
+        "less_300": 144,
+        "zero_to_299": 134,
+        "at_300": 1,
+        "min_delta": -218,
+        "max_delta": 30884
+      },
+      "stated_rule": {
+        "n": 754,
+        "negative": 30,
+        "less_300": 276,
+        "zero_to_299": 246,
+        "at_300": 1,
+        "min_delta": -218,
+        "max_delta": 30884
+      }
+    }
+  },
+  "nine_tests_passed_with_no_skips": true,
+  "workflow": {
+    "yaml_parsed": true,
+    "on_triggers_valid": true,
+    "job_names": [
+      "offline",
+      "native"
+    ],
+    "actions_match_recorded_pinned_shas": true,
+    "action_references": [
+      "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+      "actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",
+      "actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9"
+    ],
+    "checked_statically_only": true
+  },
+  "line_endings": {
+    "all_checked_text_files_have_no_crlf": true,
+    "gitattributes_forces_lf": true,
+    "binary_headers_excluded_from_text_conversion": true
+  },
+  "limitations": [
+    "Same host, fresh source snapshot and isolated subprocesses, not a separate machine.",
+    "No GitHub Actions run was performed. Workflow reviewed statically.",
+    "Windows execution was not tested. LF policy and byte-output handling inspected only.",
+    "Source pinning and official action release SHAs rely on bundled provenance checked against workflow references."
+  ],
+  "tested_critical_files_still_match_live_repository": true,
+  "critical_file_count": 20,
+  "critical_file_changes_after_snapshot": [],
+  "metadata_only_followup": {
+    "file": "scripts/run_native.py",
+    "previous_sha256": "86d815cc8a5c95116070aea16226ddd1fcb753430be1fad0a84c3596ee685c1d",
+    "tested_sha256": "0487b5f9b0488a021f6805ab2053725a06625d9b011eb1f089d99bbc48992014",
+    "change": "Rename source digest to source_input_sha256 and record actual PHP entrypoint path and SHA256.",
+    "native_command_rerun_passed": true,
+    "prior_nine_fixture_tests_retained": true,
+    "arithmetic_or_fixture_code_changed": false
+  },
+  "tested_critical_file_sha256": {
+    "reproduce.py": "14bb0b55af75302c425cc0449e98150a82f28444275ffa676e8721c08f2e0e51",
+    ".gitattributes": "bf50fb32f45418e732c8e55261ba8d79a636a6bbdb9581c1c8007f62aed57f20",
+    "native/literal_rule.php": "12b1a1de5fa3ca9fdef06c0bfce52abfb8fd37fc59794928ccb52f8ea8338a36",
+    "native/run_original.php": "121d07a8dbd8389e86a1435ea763724e71be80973f63b340637cc550df8c4df7",
+    "tests/test_timing.py": "1406e05e49fd10dfe73904e1722139eb1b232558412cc43a98381ead0ad6170a",
+    "tests/timing_fixtures.json": "7bfb01fac7fbdaef02587222309b7ca3f03643d20ac2f9f7fd1fe0dc2e7e9460",
+    "data/patoshi_heights.json": "77176c48e9a491faa5f5af2f85ec29f2a41584b76f20c82ccaee7094882c401b",
+    "data/headers_0_49999.bin": "b9e200ba15c904e05283461469d5582a9580df15ff842436576a7490454b03ec",
+    "scripts/plot_results.py": "8a4bffca98a746520d42094fbe8b7ae33d800c7d545251bf5add37703cd5be75",
+    "scripts/run_native.py": "0487b5f9b0488a021f6805ab2053725a06625d9b011eb1f089d99bbc48992014",
+    "scripts/fetch_original_source.py": "ad53900a69c5da78b9e15daf4ed726da6da9589d08e69a2df6876936f3d1cad4",
+    "scripts/timing.py": "927408af4c1e0e3fbef58b3ef7a8c20af789b08b2a41403aa102c55a0c83a878",
+    "scripts/verify_live_headers.py": "c263323d6a6843653e6295d3bf1a203e8b342b88b345682a0f7aee86f9bbaf02",
+    "scripts/inputs.py": "65f31371fdf85d1ebd44174056b8ebf49a870069db1408af234ca7d559b038b1",
+    "scripts/verify_headers.py": "ede2c73f8da31e777889deb535788b24591c1b45f3e26931b8eda3a732c60ed0",
+    "native/vendor/autoload.php": "579caf46bcba6ef1d0487cbd8439d4dc785adc97a1fd84a9efa9831eaf6cdd9a",
+    "results/expected/original.csv": "8e7fabca367e451126479e523153360340f713c879f5f8748224c2361eaaa97e",
+    "results/expected/literal_rule.csv": "afdfcbe614914e79b6bfa7b7a3ff89ee3d09a7b9ec9e777033d9528fa277430b",
+    "results/expected/timestamp_only.csv": "8b6aacb51cf9d3b861bb1c3bfbae92d9f677a0b1614d0b7d92b9a032ea0c152f",
+    ".github/workflows/verify.yml": "7ec2592e61261af34eec2538969a4061602f006b357f445283e247c56a8dd300"
+  }
+}
