@@ -22,10 +22,14 @@ class ReleaseArchiveTests(unittest.TestCase):
         self.root.mkdir()
         (self.root / 'README.md').write_bytes(b'A research fixture.\n')
         (self.root / '.gitignore').write_bytes(b'build/\n')
+        # Match the real repository's LF contract even when Git's Windows
+        # autocrlf setting would otherwise transform exported text bytes.
+        (self.root / '.gitattributes').write_bytes(b'* text=auto eol=lf\n')
         manifest = ''.join(sha256((self.root / name).read_bytes()).hexdigest() + '  ' + name + '\n'
-                           for name in ('.gitignore', 'README.md'))
-        (self.root / 'SHA256SUMS.txt').write_text(manifest, encoding='ascii')
+                           for name in ('.gitattributes', '.gitignore', 'README.md'))
+        (self.root / 'SHA256SUMS.txt').write_text(manifest, encoding='ascii', newline='\n')
         self.git('init', '--quiet')
+        self.git('config', 'core.autocrlf', 'true')
         self.git('add', '.')
         self.git('-c', 'user.name=Release fixture', '-c', 'user.email=fixture@example.invalid',
                  'commit', '--quiet', '-m', 'Frozen test tree')
@@ -52,7 +56,7 @@ class ReleaseArchiveTests(unittest.TestCase):
             self.assertTrue(all(item.date_time == (1980, 1, 1, 0, 0, 0) for item in archive.infolist()))
             extracted = Path(self.temporary.name) / 'extracted'
             archive.extractall(extracted)
-            self.assertEqual(set(verify(extracted / 'patoshi-timing-audit')), {'.gitignore', 'README.md'})
+            self.assertEqual(set(verify(extracted / 'patoshi-timing-audit')), {'.gitattributes', '.gitignore', 'README.md'})
 
     def test_dirty_or_untracked_content_cannot_be_packaged_as_a_commit(self):
         (self.root / 'README.md').write_text('Uncommitted edit.\n', encoding='utf-8')
