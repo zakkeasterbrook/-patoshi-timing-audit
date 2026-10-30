@@ -6,11 +6,11 @@ Zakk Easterbrook · [v1.0.0](https://github.com/zakkeasterbrook/-patoshi-timing-
 
 [![Verify audit](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/zakkeasterbrook/-patoshi-timing-audit/actions/workflows/verify.yml)
 
-On 13 January 2009, Bitcoin block 264 recorded the time **00:19:40 UTC**. The next block, 265, recorded **00:20:51**: a difference of **71 seconds**. A timing script published in 2022 reports **630 seconds** for that same following-block observation. It subtracts the timestamp of block 263 instead of block 264.
+On 13 January 2009, Bitcoin block 264 recorded the time **00:19:40 UTC**. The next block, 265, recorded **00:20:51**: a difference of **71 seconds**. A timing script published in 2022 reports **630 seconds** for that same following block observation. It subtracts the timestamp of block 263 instead of block 264.
 
 The error matters because the script was counting differences below five minutes. This example crosses that threshold entirely because the program starts one block too early.
 
-Across the audited data, the published implementation produces **5 differences below five minutes among 1,881 selected cases**. Implementing its stated test gives **276 among 754**. The same historical headers and classifications underlie both results. The calculation—and which cases qualify—changes.
+Across the audited data, the published implementation produces **5 differences below five minutes among 1,881 selected cases**. Implementing its stated test gives **276 among 754**. The same historical headers and classifications underlie both results. The calculation and which cases qualify changes.
 
 **These counts include negative timestamp differences, and the samples have different denominators.** A block timestamp is supplied by its miner; it is not an independently observed discovery time.
 
@@ -34,7 +34,7 @@ The purpose of this audit is narrower and directly testable: determine whether t
 
 Bitcoin’s ledger is an ordered sequence of **blocks**, each containing transactions. **Miners** compete to add the next block. A block’s **height** is its position in that sequence. Its **header** is a small identifying record containing, among other fields, a timestamp selected by the miner.
 
-For this audit, **P** means membership in the exact published Patoshi list; **N** means absence from it. These are classifications, not established identities. An N block is not proof that a different real-world miner produced it.
+For this audit, **P** means membership in the exact published Patoshi list; **N** means absence from it. These are classifications, not established identities. An N block is not proof that a different real world miner produced it.
 
 The stated test examines three consecutive heights:
 
@@ -44,7 +44,7 @@ The stated test examines three consecutive heights:
 
 The intended observation is **`timestamp(C) − timestamp(B)`**. The reported short-gap statistic counts values **strictly below 300 seconds**—five minutes. No nonnegative lower bound is added to either the stated preceding-gap condition or the short-gap count.
 
-Those details matter. A miner-supplied clock can go backward relative to the previous header while the blocks remain in their fixed chain order. A negative timestamp difference is not negative elapsed time, and it must not silently disappear from a reproduction of the published rule.
+Those details matter. A miner supplied clock can go backward relative to the previous header while the blocks remain in their fixed chain order. A negative timestamp difference is not negative elapsed time, and it must not silently disappear from a reproduction of the published rule.
 
 ## The error in three real blocks
 
